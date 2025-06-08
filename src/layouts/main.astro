@@ -2,7 +2,12 @@
 import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
 import SquareLines from "../components/square-lines.astro";
-const { title } = Astro.props;
+const { title, description, keywords } = Astro.props;
+
+// Default meta values
+const metaTitle = title ? (title.includes("Pascal Giessler") ? title : `${title} | Pascal Giessler`) : "Pascal Giessler | Tech Lead & AI Specialist";
+const metaDescription = description || "Pascal Giessler is a Tech Lead and Visionary Business Thinker specializing in Artificial Intelligence and Enterprise Software Engineering, based in Freiburg, Germany.";
+const metaKeywords = keywords || "Pascal Giessler, Tech Lead, AI Specialist, Artificial Intelligence, Enterprise Software Engineering, Cloud Architecture, AWS, Azure, Domain-Driven Design";
 ---
 
 <!doctype html>
@@ -10,7 +15,27 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <meta name="keywords" content={metaKeywords} />
+    <meta name="author" content="Pascal Giessler" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:image" content="/assets/images/photo_pg.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={metaTitle} />
+    <meta property="twitter:description" content={metaDescription} />
+    <meta property="twitter:image" content="/assets/images/photo_pg.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={Astro.url} />
 
     <!-- Used to add dark mode right away, adding here prevents any flicker -->
     <script is:inline>
