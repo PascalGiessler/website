@@ -1,0 +1,46 @@
+---
+import PageHeading from "../components/page-heading.astro";
+import Project from "../components/project.astro";
+import Layout from "../layouts/main.astro";
+
+const links = [
+  {
+    name: "Medium",
+    description: "Read my articles and thoughts on technology, programming, and more.",
+    url: "https://medium.com/@pmgiessler",
+    image: "/assets/images/links/medium.svg"
+  },
+  {
+    name: "Substack",
+    description: "Subscribe to my newsletter for regular updates and in-depth content.",
+    url: "https://pascalgiessler.substack.com/",
+    image: "/assets/images/links/substack.svg"
+  }
+];
+---
+
+<Layout title="Links">
+  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
+    <PageHeading
+      title="Links"
+      description="Find me on various platforms where I share my thoughts and work."
+    />
+
+    <div
+      class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2"
+    >
+      {
+        links.map((link) => {
+          return (
+            <Project
+              name={link.name}
+              description={link.description}
+              image={link.image}
+              url={link.url}
+            />
+          )
+        })
+      }
+    </div>
+  </section>
+</Layout>
