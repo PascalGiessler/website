@@ -1,35 +1,53 @@
 ---
 import projects from "../collections/projects.json";
-import PageHeading from "../components/page-heading.astro";
-import Project from "../components/project.astro";
 import Layout from "../layouts/main.astro";
 ---
 
-<Layout 
-  title="My Projects" 
-  description="Explore Pascal Giessler's portfolio of projects in AI, Cloud Architecture, and Enterprise Software Engineering. See how he applies his expertise to create innovative solutions."
-  keywords="Pascal Giessler, Projects, Portfolio, AI Projects, Cloud Architecture, Enterprise Software, Tech Lead, Software Engineering">
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-    <PageHeading
-      title="Pascal Giessler's Projects"
-      description="Here are some of the current projects I've been working on. I really enjoy creating new projects and coming up with new ideas in AI, Cloud Architecture, and Enterprise Software Engineering. Check back often for updates!"
-    />
+<Layout
+  title="Projects"
+  description="Current projects by Dr. Pascal Giessler: ContentNexus and Principal Stack."
+  keywords="Pascal Giessler, Projects, ContentNexus, Principal Stack, AI, Open Source"
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
-    <div
-      class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2"
-    >
-      {
-        projects.map((project) => {
-          return (
-            <Project
-              name={project.name}
-              description={project.description}
-              image={project.image}
-              url={project.url}
-            />
-          )
-        })
-      }
+    <div class="mb-14">
+      <p class="section-label mb-4 fade-up delay-1">Projects</p>
+      <h1
+        class="fade-up delay-2"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
+      >
+        Building <em style="font-style: italic; color: var(--gold-light);">now</em>
+      </h1>
     </div>
-  </section>
+
+    <div class="fade-up delay-3 grid grid-cols-1 gap-4">
+      {projects.map((project) => (
+        project.url ? (
+          <a
+            href={project.url}
+            target="_blank"
+            class="writing-card"
+            style="text-decoration: none;"
+          >
+            <p class="writing-card-label">{project.status}</p>
+            <h3 class="writing-card-title">{project.name}</h3>
+            <p class="writing-card-desc">{project.description}</p>
+            <p class="mt-4" style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim);">
+              Visit ↗
+            </p>
+          </a>
+        ) : (
+          <div
+            class="writing-card"
+            style="cursor: default;"
+          >
+            <p class="writing-card-label">{project.status}</p>
+            <h3 class="writing-card-title">{project.name}</h3>
+            <p class="writing-card-desc">{project.description}</p>
+          </div>
+        )
+      ))}
+    </div>
+
+  </main>
 </Layout>

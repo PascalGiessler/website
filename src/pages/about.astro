@@ -1,71 +1,218 @@
 ---
 import experiences from "../collections/experiences.json";
 import AboutExperience from "../components/about-experience.astro";
-import PageHeading from "../components/page-heading.astro";
 import Layout from "../layouts/main.astro";
 ---
 
-<Layout 
-  title="About Me" 
-  description="Learn about Pascal Giessler, a Tech Lead and Visionary Business Thinker specializing in AI and Enterprise Software Engineering based in Freiburg, Germany."
-  keywords="Pascal Giessler, About, Biography, Tech Lead, AI Specialist, Enterprise Software Engineering, Cloud Architecture, AWS, Azure, Domain-Driven Design">
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-    <PageHeading
-      title="About Pascal Giessler"
-      description="Hello 👋 I'm a Tech Lead and Visionary Business Thinker based in Freiburg, Germany. I'm passionate about AI, Cloud Architecture, and Enterprise Software Engineering."
-    />
+<Layout
+  title="About"
+  description="Dr. Pascal Giessler is a Principal AI & Cloud Architect, PhD researcher at KIT Karlsruhe, and technical thought leader based in Freiburg, Germany."
+  keywords="Pascal Giessler, About, AI Principal, PhD, Cloud Architect, KIT, MIT, Haufe Akademie, SYNDIKAT7, CTO, Azure"
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
-    <img src="/assets/images/photo_pg.png" class="relative z-30 w-full my-10 rounded-xl" />
-
-    <h2 class="mb-2 text-2xl font-bold dark:text-neutral-200">Short Bio</h2>
-    <p
-      class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg"
-    >
-      I'm a Tech Lead and Visionary Business Thinker, father of a small kid and husband. I specialize in Artificial Intelligence and Enterprise Software Engineering, where I blend deep technical expertise with strategic insight to build scalable, intelligent solutions.
-    </p>
-
-    <h2
-      class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200"
-    >
-      Experience
-    </h2>
-    <div class="px-5 py-10">
-      {
-        experiences.map((experience) => {
-          return (
-            <div class="pb-10 border-l border-gray-200 last:border-l-0 dark:border-neutral-700">
-              <AboutExperience
-                dates={experience.dates}
-                role={experience.role}
-                company={experience.company}
-                description={experience.description}
-                logo={experience.logo}
-              />
-            </div>
-          )
-        })
-      }
+    <!-- ── PAGE HEADING ──────────────────────────────── -->
+    <div class="mb-16">
+      <p class="section-label mb-4 fade-up delay-1">About</p>
+      <h1
+        class="fade-up delay-2 mb-6"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--text);"
+      >
+        Dr. Pascal <em style="font-style: italic; color: var(--gold-light);">Giessler</em>
+      </h1>
+      <span class="gold-rule fade-up delay-3"></span>
     </div>
 
-    <h2 class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200">Let's Connect</h2>
-    <p
-      class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg"
+    <!-- ── PHOTO ─────────────────────────────────────── -->
+    <div class="fade-up delay-3 mb-14 flex justify-start">
+      <div class="relative" style="width: 240px; flex-shrink: 0;">
+        <!-- Corner brackets -->
+        <div class="absolute -top-2.5 -left-2.5 w-6 h-6 pointer-events-none" style="border-top: 2px solid var(--gold); border-left: 2px solid var(--gold);"></div>
+        <div class="absolute -top-2.5 -right-2.5 w-6 h-6 pointer-events-none" style="border-top: 2px solid var(--gold); border-right: 2px solid var(--gold);"></div>
+        <div class="absolute -bottom-2.5 -left-2.5 w-6 h-6 pointer-events-none" style="border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold);"></div>
+        <div class="absolute -bottom-2.5 -right-2.5 w-6 h-6 pointer-events-none" style="border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold);"></div>
+        <img
+          src="/assets/images/photo_pascal_branded.png"
+          alt="Dr. Pascal Giessler"
+          style="display: block; width: 240px; height: 240px; object-fit: cover; object-position: center 10%; box-shadow: 0 0 0 1px var(--border-gold);"
+        />
+      </div>
+    </div>
+
+    <!-- ── BIO ───────────────────────────────────────── -->
+    <div class="fade-up delay-4 mb-14">
+      <h2
+        class="mb-4"
+        style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
+      >
+        Short Bio
+      </h2>
+      <div
+        class="space-y-4 text-base leading-relaxed"
+        style="color: var(--text-2); max-width: 62ch;"
+      >
+        <p>
+          I work at the intersection of applied AI engineering and technical
+          leadership. At Haufe Akademie, I lead strategic initiatives at the
+          frontier of AI: high-risk, research-intensive work where the path
+          is unclear and the stakes are real. As a speaker and strategic advisor, I help management
+          boards of companies across sizes understand their AI opportunity,
+          define their north star, and turn vision into executable strategy.
+          Father, husband, and lifelong learner based in Freiburg.
+        </p>
+        <p>
+          I founded Fabricks, building Smart Factory components that optimized
+          warehouse logistics, supply chains, and internal digitalization for
+          manufacturing clients. I also spent nine years at SYNDIKAT7, growing
+          from Head of Development through Head of R&amp;D to CTO across more
+          than a dozen client industries. That trajectory: building
+          products, scaling teams, making bet-the-company architecture
+          decisions. That is what I write about. Not theory. The real
+          decisions, with the scar tissue to prove it.
+        </p>
+        <p>
+          Alongside industry work, I am an external doctoral candidate at KIT
+          Karlsruhe's WASA research group. I write
+          <a
+            href="https://principalstack.substack.com/"
+            target="_blank"
+            style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
+          >Principal Stack</a>,
+          a weekly newsletter for engineers who think at system scale, and I'm
+          building ContentNexus, an open-source intelligence aggregation system
+          for knowledge workers.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── CREDENTIALS ───────────────────────────────── -->
+    <div class="fade-up delay-5 mb-16">
+      <h2
+        class="mb-5"
+        style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
+      >
+        Credentials
+      </h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="credential">PhD · KIT Karlsruhe</span>
+        <span class="credential">MIT · Innovation Management</span>
+        <span class="credential">MBA · PowerMBA</span>
+        <span class="credential">Azure Solutions Architect Expert</span>
+        <span class="credential">AWS Expert</span>
+        <span class="credential">Founder · Fabricks</span>
+        <span class="credential">CTO · SYNDIKAT7</span>
+        <span class="credential">Technical Leadership Masterclass</span>
+        <span class="credential">Industry Fellow · 42 Wolfsburg</span>
+      </div>
+    </div>
+
+    <!-- ── SPEAKING ───────────────────────────────────── -->
+    <div class="fade-up delay-5 mb-16">
+      <h2
+        class="mb-5"
+        style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
+      >
+        Speaking &amp; Advisory
+      </h2>
+      <p
+        class="mb-6 text-base leading-relaxed"
+        style="color: var(--text-2); max-width: 62ch;"
+      >
+        I speak at conferences, leadership offsites, and executive briefings on AI strategy,
+        engineering leadership, and the organizational change that comes with adopting AI at scale.
+        Topics I cover regularly:
+      </p>
+      <ul
+        class="mb-6 space-y-2 text-sm leading-relaxed"
+        style="color: var(--text-2);"
+      >
+        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>From AI experimentation to production confidence: building an AI-native engineering culture</li>
+        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>The AI Principal role: what changes when AI becomes a first-class concern in engineering</li>
+        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>Making the $37B question: how to evaluate, scope, and justify enterprise AI investment</li>
+        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>Technical leadership at the frontier: decisions under uncertainty in applied AI projects</li>
+      </ul>
+      <a
+        href="mailto:info@pascalgiessler.com"
+        class="btn-outline"
+        style="display: inline-flex;"
+      >
+        Invite me to speak
+      </a>
+    </div>
+
+    <!-- ── EXPERIENCE ────────────────────────────────── -->
+    <div class="fade-up delay-5 mb-16">
+      <h2
+        class="mb-8"
+        style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
+      >
+        Experience
+      </h2>
+
+      <div class="pl-2">
+        {experiences.map((exp) => (
+          <AboutExperience
+            dates={exp.dates}
+            role={exp.role}
+            company={exp.company}
+            description={exp.description}
+          />
+        ))}
+      </div>
+    </div>
+
+    <!-- ── CONNECT ───────────────────────────────────── -->
+    <div
+      class="fade-up delay-6 pt-10 border-t"
+      style="border-color: var(--border);"
     >
-      If you want to stay up to date with my work, connect with me on <a
+      <h2
+        class="mb-4"
+        style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
+      >
+        Let's Connect
+      </h2>
+      <p
+        class="text-base leading-relaxed mb-6"
+        style="color: var(--text-2); max-width: 55ch;"
+      >
+        Subscribe to
+        <a
+          href="https://principalstack.substack.com/"
+          target="_blank"
+          style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
+        >Principal Stack</a>
+        for weekly insights on AI engineering and technical leadership. Follow
+        longer conversations on
+        <a
+          href="https://www.linkedin.com/in/pgiessler/"
+          target="_blank"
+          style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
+        >LinkedIn</a>,
+        read long-form on
+        <a
+          href="https://medium.com/@pmgiessler"
+          target="_blank"
+          style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
+        >Medium</a>,
+        or reach me by
+        <a
+          href="mailto:info@pascalgiessler.com"
+          style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
+        >email</a>.
+      </p>
+
+      <a
         href="https://www.linkedin.com/in/pgiessler/"
         target="_blank"
-        class="text-indigo-600 underline">LinkedIn</a
-      >, follow me on <a
-        href="https://medium.com/@pmgiessler"
-        target="_blank"
-        class="text-indigo-600 underline">Medium</a
-      >, or subscribe to my <a
-        href="https://pascalgiessler.substack.com/"
-        target="_blank"
-        class="text-indigo-600 underline">Substack newsletter</a
-      >. You can also send me an <a href="mailto:contact@pascalgiessler.com" class="text-indigo-600 underline"
-        >email</a
-      > and I'll be sure to get back to you.
-    </p>
-  </section>
+        class="btn-gold"
+      >
+        Connect on LinkedIn
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
+      </a>
+    </div>
+
+  </main>
 </Layout>

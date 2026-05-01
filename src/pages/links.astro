@@ -1,49 +1,67 @@
 ---
-import PageHeading from "../components/page-heading.astro";
-import Project from "../components/project.astro";
 import Layout from "../layouts/main.astro";
 
-const links = [
+const publications = [
   {
-    name: "Medium",
-    description: "Read my articles and thoughts on technology, programming, and more.",
-    url: "https://medium.com/@pmgiessler",
-    image: "/assets/images/links/medium.svg"
+    label: "Substack · Weekly Newsletter",
+    name: "Principal Stack",
+    description: "Weekly for senior engineers and technical leaders navigating AI at scale. Production decisions, architecture tradeoffs, and the judgment calls textbooks don't cover.",
+    url: "https://principalstack.substack.com/",
+    handle: "principalstack.substack.com"
   },
   {
-    name: "Substack",
-    description: "Subscribe to my newsletter for regular updates and in-depth content.",
-    url: "https://pascalgiessler.substack.com/",
-    image: "/assets/images/links/substack.svg"
+    label: "Medium · Articles",
+    name: "Medium",
+    description: "Articles on generative AI strategy, cloud architecture patterns, and technology leadership for senior engineers and CTOs.",
+    url: "https://medium.com/@pmgiessler",
+    handle: "medium.com/@pmgiessler"
+  },
+  {
+    label: "LinkedIn · Thought Leadership",
+    name: "LinkedIn",
+    description: "Regular insights on AI-native engineering, generative AI strategy, and the technical decisions that separate good architecture from great architecture.",
+    url: "https://www.linkedin.com/in/pgiessler/",
+    handle: "linkedin.com/in/pgiessler"
   }
 ];
 ---
 
-<Layout 
-  title="Links" 
-  description="Connect with Pascal Giessler on Medium and Substack to read his insights on AI, Cloud Architecture, and Enterprise Software Engineering."
-  keywords="Pascal Giessler, Medium, Substack, AI, Cloud Architecture, Enterprise Software Engineering, Tech Lead">
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-    <PageHeading
-      title="Pascal Giessler's Links"
-      description="Find me on various platforms where I share my thoughts and work on AI, Cloud Architecture, and Enterprise Software Engineering."
-    />
+<Layout
+  title="Writing & Publications"
+  description="Dr. Pascal Giessler writes on AI-native engineering, cloud architecture, and technical leadership on Substack, Medium, and LinkedIn."
+  keywords="Pascal Giessler, Writing, Substack, Medium, LinkedIn, AI, Cloud Architecture"
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
-    <div
-      class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2"
-    >
-      {
-        links.map((link) => {
-          return (
-            <Project
-              name={link.name}
-              description={link.description}
-              image={link.image}
-              url={link.url}
-            />
-          )
-        })
-      }
+    <div class="mb-14">
+      <p class="section-label mb-4 fade-up delay-1">Writing &amp; Publications</p>
+      <h1
+        class="fade-up delay-2"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
+      >
+        Where I <em style="font-style: italic; color: var(--gold-light);">publish</em>
+      </h1>
     </div>
-  </section>
+
+    <div class="fade-up delay-3 grid grid-cols-1 gap-4">
+      {publications.map((pub) => (
+        <a
+          href={pub.url}
+          target="_blank"
+          class="writing-card"
+        >
+          <p class="writing-card-label">{pub.label}</p>
+          <h3 class="writing-card-title">{pub.name}</h3>
+          <p class="writing-card-desc">{pub.description}</p>
+          <p
+            class="mt-4"
+            style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim);"
+          >
+            {pub.handle} ↗
+          </p>
+        </a>
+      ))}
+    </div>
+
+  </main>
 </Layout>

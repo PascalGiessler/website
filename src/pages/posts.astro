@@ -1,18 +1,27 @@
 ---
-import PageHeading from "../components/page-heading.astro";
 import PostsLoop from "../components/posts-loop.astro";
 import Layout from "../layouts/main.astro";
 ---
 
-<Layout title="My Writing">
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-    <PageHeading
-      title="My Writing"
-      description="Dive into my musings on life and tech in my latest posts; a blend of introspection and innovation. Keep an eye out for fresh insights and updates!"
-    />
+<Layout
+  title="Writing"
+  description="Technical articles and insights by Dr. Pascal Giessler on AI engineering, cloud architecture, and distributed systems."
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
-    <div class="z-50 flex flex-col items-stretch w-full gap-5 my-8">
-      <PostsLoop count="999999999" />
+    <div class="mb-12">
+      <p class="section-label mb-4 fade-up delay-1">Writing</p>
+      <h1
+        class="fade-up delay-2"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
+      >
+        Articles &amp; <em style="font-style: italic; color: var(--gold-light);">essays</em>
+      </h1>
     </div>
-  </section>
+
+    <div class="fade-up delay-3">
+      <PostsLoop />
+    </div>
+
+  </main>
 </Layout>
