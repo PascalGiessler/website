@@ -1,16 +1,37 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
+import PostLayout from "../../layouts/post.astro";
 
-export async function getStaticPaths() {
-	const postEntries = await getCollection("post");
-	return postEntries.map((entry) => ({
-		params: { slug: entry.slug },
-		props: { entry },
-	}));
+function parseDate(dateStr: string) {
+  const [month, day, year] = dateStr.split(" ");
+  return new Date(`${month} ${parseInt(day)}, ${year}`);
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+export async function getStaticPaths() {
+  const allPosts = await getCollection("post");
+  const sorted = allPosts
+    .map((p) => {
+      const [month, day, year] = p.data.dateFormatted.split(" ");
+      return { ...p, _date: new Date(`${month} ${parseInt(day)}, ${year}`) };
+    })
+    .sort((a, b) => b._date.getTime() - a._date.getTime());
+
+  return sorted.map((entry, index) => ({
+    params: { slug: entry.id.replace(/\.md$/, '') },
+    props: {
+      entry,
+      prev: index < sorted.length - 1 ? { title: sorted[index + 1].data.title, slug: sorted[index + 1].id.replace(/\.md$/, '') } : null,
+      next: index > 0 ? { title: sorted[index - 1].data.title, slug: sorted[index - 1].id.replace(/\.md$/, '') } : null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const wordCount = (entry.body ?? '').split(/\s+/).filter(Boolean).length;
+const readingTime = Math.max(1, Math.round(wordCount / 200));
 ---
 
-<Content />
+<PostLayout frontmatter={{...entry.data, readingTime}} prev={prev} next={next}>
+  <Content />
+</PostLayout>
