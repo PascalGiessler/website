@@ -1,0 +1,75 @@
+---
+// Lightweight Substack subscribe CTA. POSTs straight to Substack's subscribe
+// endpoint — the user is redirected to Substack's confirm screen on submit.
+// No iframe, no third-party JS, no tracking until the user opts in.
+---
+
+<aside
+  class="mt-16 px-6 lg:px-7 py-7 lg:py-8 border rounded-sm"
+  style="border-color: var(--border-gold); background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);"
+>
+  <p
+    class="mb-3"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dim);"
+  >
+    The Principal Stack · Newsletter
+  </p>
+  <h3
+    class="mb-3"
+    style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 400; line-height: 1.2; color: var(--text);"
+  >
+    Get the next essay in your inbox.
+  </h3>
+  <p
+    class="mb-5 text-sm leading-relaxed"
+    style="color: var(--text-2); max-width: 52ch;"
+  >
+    Weekly notes on AI engineering, technical leadership, and the architecture decisions that age well.
+    No fluff. Unsubscribe anytime.
+  </p>
+
+  <form
+    action="https://principalstack.substack.com/api/v1/free?nojs=true"
+    method="POST"
+    class="flex flex-col sm:flex-row gap-3"
+  >
+    <label class="flex-1 relative">
+      <span class="sr-only">Email address</span>
+      <input
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        placeholder="you@example.com"
+        class="w-full px-4 py-2.5 text-sm"
+        style="background: var(--bg); color: var(--text); border: 1px solid var(--border-gold); border-radius: 2px; font-family: 'Outfit', system-ui, sans-serif;"
+      />
+    </label>
+    <button type="submit" class="btn-gold" style="white-space: nowrap;">
+      Subscribe
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+      </svg>
+    </button>
+    <input type="hidden" name="first_url" value="https://www.pascal-giessler.de" />
+    <input type="hidden" name="first_referrer" value="https://www.pascal-giessler.de" />
+    <input type="hidden" name="current_url" value="https://www.pascal-giessler.de" />
+    <input type="hidden" name="current_referrer" value="https://www.pascal-giessler.de" />
+    <input type="hidden" name="referral_code" value="" />
+    <input type="hidden" name="source" value="subscribe_page" />
+  </form>
+
+  <p
+    class="mt-4 text-xs"
+    style="color: var(--text-3);"
+  >
+    Or read on
+    <a
+      href="https://principalstack.substack.com/"
+      target="_blank"
+      rel="noopener"
+      style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
+    >Substack</a>
+    directly.
+  </p>
+</aside>

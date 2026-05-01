@@ -1,65 +1,120 @@
 ---
+import "../assets/css/main.css";
+import "@fontsource/cormorant/300.css";
+import "@fontsource/cormorant/400.css";
+import "@fontsource/cormorant/500.css";
+import "@fontsource/cormorant/300-italic.css";
+import "@fontsource/cormorant/400-italic.css";
+import "@fontsource/outfit/300.css";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/500.css";
+import "@fontsource/outfit/600.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
 import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
-import SquareLines from "../components/square-lines.astro";
-const { title, description, keywords } = Astro.props;
+const { title, description, keywords, ogType, articlePublishedTime } = Astro.props;
+const resolvedOgType = ogType || "website";
 
-// Default meta values
-const metaTitle = title ? (title.includes("Pascal Giessler") ? title : `${title} | Pascal Giessler`) : "Pascal Giessler | Tech Lead & AI Specialist";
-const metaDescription = description || "Pascal Giessler is a Tech Lead and Visionary Business Thinker specializing in Artificial Intelligence and Enterprise Software Engineering, based in Freiburg, Germany.";
-const metaKeywords = keywords || "Pascal Giessler, Tech Lead, AI Specialist, Artificial Intelligence, Enterprise Software Engineering, Cloud Architecture, AWS, Azure, Domain-Driven Design";
+const metaTitle = title ? (title.includes("Pascal Giessler") ? title : `${title} | Pascal Giessler`) : "Pascal Giessler | AI Principal & Cloud Architect";
+const metaDescription = description || "Dr. Pascal Giessler ist KI Principal, Cloud-Architekt, Promovierter Informatiker und technischer Vordenker aus Freiburg, Deutschland. Hilft Engineering-Leitern bei der KI-Transformation.";
+const metaKeywords = keywords || "Pascal Giessler, AI Principal, KI Principal, Cloud Architect, KI Architekt, Generative AI, Generative KI, KI Strategie, Machine Learning, PhD, KIT Karlsruhe, Haufe Akademie, Azure Solutions Architect, Enterprise Architecture, Unternehmensarchitektur, Technical Leadership, Technische Führung, Freiburg, Baden-Württemberg, Deutschland, Germany, AI Engineering, LLM, RAG, Distributed Systems, Principal Stack";
+const canonicalUrl = Astro.url.href;
+const ogImage = "https://www.pascal-giessler.de/assets/images/photo_pascal_branded.png";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Dr. Pascal Giessler",
+  "url": "https://www.pascal-giessler.de",
+  "image": ogImage,
+  "sameAs": [
+    "https://www.linkedin.com/in/pgiessler/",
+    "https://principalstack.substack.com/",
+    "https://medium.com/@pmgiessler"
+  ],
+  "jobTitle": "AI Principal & Tech Lead",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Haufe Akademie"
+  },
+  "alumniOf": [
+    { "@type": "EducationalOrganization", "name": "Karlsruhe Institute of Technology (KIT)" }
+  ],
+  "hasCredential": [
+    { "@type": "EducationalOccupationalCredential", "name": "Technology & Innovation", "credentialCategory": "certificate", "recognizedBy": { "@type": "EducationalOrganization", "name": "Massachusetts Institute of Technology (MIT)" } },
+    { "@type": "EducationalOccupationalCredential", "name": "MBA", "credentialCategory": "degree", "recognizedBy": { "@type": "EducationalOrganization", "name": "PowerMBA" } },
+    { "@type": "EducationalOccupationalCredential", "name": "Azure Solutions Architect Expert", "credentialCategory": "certification", "recognizedBy": { "@type": "Organization", "name": "Microsoft" } }
+  ],
+  "description": "Dr. Pascal Giessler is a German AI Principal, cloud architect, PhD researcher, and technical thought leader based in Freiburg, Germany.",
+  "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Cloud Architecture", "Technical Leadership", "Distributed Systems", "LLMs", "Generative AI", "Azure", "AWS", "KI-Strategie", "Unternehmensarchitektur"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Freiburg im Breisgau",
+    "addressRegion": "Baden-Württemberg",
+    "addressCountry": "DE"
+  }
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{metaTitle}</title>
     <meta name="description" content={metaDescription} />
     <meta name="keywords" content={metaKeywords} />
-    <meta name="author" content="Pascal Giessler" />
+    <meta name="author" content="Dr. Pascal Giessler" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:type" content={resolvedOgType} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={metaTitle} />
     <meta property="og:description" content={metaDescription} />
-    <meta property="og:image" content="/assets/images/photo_pg.png" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta property="og:site_name" content="Pascal Giessler" />
+    {articlePublishedTime && (
+      <>
+        <meta property="article:published_time" content={articlePublishedTime} />
+        <meta property="article:author" content="https://www.pascal-giessler.de" />
+      </>
+    )}
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={metaTitle} />
     <meta property="twitter:description" content={metaDescription} />
-    <meta property="twitter:image" content="/assets/images/photo_pg.png" />
+    <meta property="twitter:image" content={ogImage} />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href={Astro.url} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={canonicalUrl} />
+    <link rel="alternate" hreflang="de" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="alternate" type="application/rss+xml" title="Dr. Pascal Giessler · Writing" href="/rss.xml" />
 
-    <!-- Used to add dark mode right away, adding here prevents any flicker -->
+    <link rel="preload" as="image" href="/assets/images/photo_pascal_branded.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
     <script is:inline>
       if (typeof Storage !== 'undefined') {
-        if (
-          localStorage.getItem('dark_mode') &&
-          localStorage.getItem('dark_mode') == 'true'
-        ) {
-          document.documentElement.classList.add('dark')
+        const stored = localStorage.getItem('dark_mode');
+        if (stored === 'false') {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
         }
       }
     </script>
 
-    <style>
-      .prose img {
-        border-radius: 20px;
-      }
-    </style>
-    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
-    <script src="../assets/css/main.css"></script>
+    <slot name="head" />
     <Fragment set:html={import.meta.env.HEADER_INJECT} />
   </head>
-  <body class="antialiased bg-white dark:bg-neutral-950">
-    <SquareLines />
+  <body class="antialiased">
     <Header />
     <slot />
     <Footer />
