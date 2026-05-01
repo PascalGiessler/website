@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.pascal-giessler.de/sitemap-index.xml
+Sitemap: https://pascal-giessler.de/sitemap-index.xml

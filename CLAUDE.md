@@ -1,7 +1,7 @@
 # CLAUDE.md — pascal-giessler.de
 
 ## Project
-Personal portfolio website for Dr. Pascal Giessler. Built with Astro + Tailwind CSS. Hosted on GitHub Pages (static output, no server-side). Site URL: https://www.pascal-giessler.de
+Personal portfolio website for Dr. Pascal Giessler. Built with Astro + Tailwind CSS. Hosted on GitHub Pages (static output, no server-side). Site URL: https://pascal-giessler.de (apex canonical; www auto-redirects).
 
 ## Brand Context
 See PRODUCT.md and DESIGN.md at the project root. Brand profile source of truth is at `/Users/pascalgiessler/Developer/02_Personal/04_LinkedinBrand/brand-profile.md`.
