@@ -20,13 +20,13 @@ const metaTitle = title ? (title.includes("Pascal Giessler") ? title : `${title}
 const metaDescription = description || "Dr. Pascal Giessler ist KI Principal, Cloud-Architekt, Promovierter Informatiker und technischer Vordenker aus Freiburg, Deutschland. Hilft Engineering-Leitern bei der KI-Transformation.";
 const metaKeywords = keywords || "Pascal Giessler, AI Principal, KI Principal, Cloud Architect, KI Architekt, Generative AI, Generative KI, KI Strategie, Machine Learning, PhD, KIT Karlsruhe, Haufe Akademie, Azure Solutions Architect, Enterprise Architecture, Unternehmensarchitektur, Technical Leadership, Technische Führung, Freiburg, Baden-Württemberg, Deutschland, Germany, AI Engineering, LLM, RAG, Distributed Systems, Principal Stack";
 const canonicalUrl = Astro.url.href;
-const ogImage = "https://www.pascal-giessler.de/assets/images/photo_pascal_branded.png";
+const ogImage = "https://pascal-giessler.de/assets/images/photo_pascal_branded.png";
 
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Dr. Pascal Giessler",
-  "url": "https://www.pascal-giessler.de",
+  "url": "https://pascal-giessler.de",
   "image": ogImage,
   "sameAs": [
     "https://www.linkedin.com/in/pgiessler/",
@@ -46,7 +46,7 @@ const personSchema = {
     { "@type": "EducationalOccupationalCredential", "name": "MBA", "credentialCategory": "degree", "recognizedBy": { "@type": "EducationalOrganization", "name": "PowerMBA" } },
     { "@type": "EducationalOccupationalCredential", "name": "Azure Solutions Architect Expert", "credentialCategory": "certification", "recognizedBy": { "@type": "Organization", "name": "Microsoft" } }
   ],
-  "description": "Dr. Pascal Giessler is a German AI Principal, cloud architect, PhD researcher, and technical thought leader based in Freiburg, Germany.",
+  "description": "Dr. Pascal Giessler is a German AI Principal, cloud architect, PhD and external lecturer at KIT Karlsruhe, and technical thought leader based in Freiburg, Germany.",
   "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Cloud Architecture", "Technical Leadership", "Distributed Systems", "LLMs", "Generative AI", "Azure", "AWS", "KI-Strategie", "Unternehmensarchitektur"],
   "address": {
     "@type": "PostalAddress",
@@ -78,7 +78,7 @@ const personSchema = {
     {articlePublishedTime && (
       <>
         <meta property="article:published_time" content={articlePublishedTime} />
-        <meta property="article:author" content="https://www.pascal-giessler.de" />
+        <meta property="article:author" content="https://pascal-giessler.de" />
       </>
     )}
 
