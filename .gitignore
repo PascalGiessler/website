@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+.gstack/
+
+# substack sync drafts (review and copy to src/content/post/ to publish)
+drafts/
+
+# dev artifacts
+screenshot-*.png
+.playwright-mcp/
