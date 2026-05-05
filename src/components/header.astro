@@ -1,6 +1,12 @@
 ---
 import menus from "../collections/menu.json";
 import Logo from "../components/logo.astro";
+import LanguageSwitcher from "../components/language-switcher.astro";
+import { getLangFromUrl, useTranslations, type UIKey } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const localizedMenu = menus[lang];
 ---
 
 <div class="relative w-full h-20 opacity-0 pointer-events-none"></div>
@@ -77,16 +83,19 @@ import Logo from "../components/logo.astro";
         </div>
 
         {
-          menus.map((menu) => (
+          localizedMenu.map((menu) => (
             <a
               href={menu.url}
               class="relative flex items-center justify-center w-full px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out sm:py-0 sm:mb-0 md:w-auto"
               style="color: var(--text-2); font-family: 'Outfit', system-ui, sans-serif; font-size: 0.875rem; letter-spacing: 0.02em;"
             >
-              {menu.name}
+              {t(`nav.${menu.key}` as UIKey)}
             </a>
           ))
         }
+        <div class="flex items-center justify-center w-full sm:w-auto py-2 sm:py-0 sm:pl-3">
+          <LanguageSwitcher />
+        </div>
       </div>
 
       <div

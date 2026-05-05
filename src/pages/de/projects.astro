@@ -1,22 +1,22 @@
 ---
-import projects from "../collections/projects.json";
-import Layout from "../layouts/main.astro";
+import projects from "../../collections/projects.json";
+import Layout from "../../layouts/main.astro";
 ---
 
 <Layout
-  title="Projects"
-  description="Current projects by Dr. Pascal Giessler: ContentNexus and Principal Stack."
-  keywords="Pascal Giessler, Projects, ContentNexus, Principal Stack, AI, Open Source"
+  title="Projekte"
+  description="Aktuelle Projekte von Dr. Pascal Giessler: ContentNexus und Principal Stack."
+  keywords="Pascal Giessler, Projekte, ContentNexus, Principal Stack, KI, Open Source"
 >
   <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
     <div class="mb-14">
-      <p class="section-label mb-4 fade-up delay-1">Projects</p>
+      <p class="section-label mb-4 fade-up delay-1">Projekte</p>
       <h1
         class="fade-up delay-2"
         style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
       >
-        Building <em style="font-style: italic; color: var(--gold-light);">now</em>
+        Was gerade <em style="font-style: italic; color: var(--gold-light);">entsteht</em>
       </h1>
     </div>
 
@@ -29,11 +29,11 @@ import Layout from "../layouts/main.astro";
             class="writing-card"
             style="text-decoration: none;"
           >
-            <p class="writing-card-label">{project.en.status}</p>
+            <p class="writing-card-label">{project.de.status}</p>
             <h3 class="writing-card-title">{project.name}</h3>
-            <p class="writing-card-desc">{project.en.description}</p>
+            <p class="writing-card-desc">{project.de.description}</p>
             <p class="mt-4" style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim);">
-              Visit ↗
+              Besuchen ↗
             </p>
           </a>
         ) : (
@@ -41,9 +41,9 @@ import Layout from "../layouts/main.astro";
             class="writing-card"
             style="cursor: default;"
           >
-            <p class="writing-card-label">{project.en.status}</p>
+            <p class="writing-card-label">{project.de.status}</p>
             <h3 class="writing-card-title">{project.name}</h3>
-            <p class="writing-card-desc">{project.en.description}</p>
+            <p class="writing-card-desc">{project.de.description}</p>
           </div>
         )
       ))}

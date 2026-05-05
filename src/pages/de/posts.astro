@@ -1,0 +1,27 @@
+---
+import PostsLoop from "../../components/posts-loop.astro";
+import Layout from "../../layouts/main.astro";
+---
+
+<Layout
+  title="Schreiben"
+  description="Technische Artikel und Einblicke von Dr. Pascal Giessler zu KI-Engineering, Cloud-Architektur und verteilten Systemen."
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
+
+    <div class="mb-12">
+      <p class="section-label mb-4 fade-up delay-1">Schreiben</p>
+      <h1
+        class="fade-up delay-2"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
+      >
+        Artikel &amp; <em style="font-style: italic; color: var(--gold-light);">Essays</em>
+      </h1>
+    </div>
+
+    <div class="fade-up delay-3">
+      <PostsLoop />
+    </div>
+
+  </main>
+</Layout>

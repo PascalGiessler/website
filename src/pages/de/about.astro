@@ -1,19 +1,19 @@
 ---
-import experiences from "../collections/experiences.json";
-import AboutExperience from "../components/about-experience.astro";
-import Layout from "../layouts/main.astro";
+import experiences from "../../collections/experiences.json";
+import AboutExperience from "../../components/about-experience.astro";
+import Layout from "../../layouts/main.astro";
 ---
 
 <Layout
-  title="About"
-  description="Dr. Pascal Giessler is a Principal AI & Cloud Architect, PhD and external lecturer at KIT Karlsruhe, and technical thought leader based in Freiburg, Germany."
-  keywords="Pascal Giessler, About, AI Principal, PhD, Cloud Architect, KIT, MIT, Haufe Akademie, SYNDIKAT7, CTO, Azure"
+  title="Über mich"
+  description="Dr. Pascal Giessler ist Principal AI & Cloud Architekt, promovierter Informatiker und externer Dozent am KIT Karlsruhe, technischer Vordenker aus Freiburg."
+  keywords="Pascal Giessler, Über mich, KI Principal, PhD, Cloud Architekt, KIT, MIT, Haufe Akademie, SYNDIKAT7, CTO, Azure"
 >
   <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
     <!-- ── PAGE HEADING ──────────────────────────────── -->
     <div class="mb-16">
-      <p class="section-label mb-4 fade-up delay-1">About</p>
+      <p class="section-label mb-4 fade-up delay-1">Über mich</p>
       <h1
         class="fade-up delay-2 mb-6"
         style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--text);"
@@ -26,7 +26,6 @@ import Layout from "../layouts/main.astro";
     <!-- ── PHOTO ─────────────────────────────────────── -->
     <div class="fade-up delay-3 mb-14 flex justify-start">
       <div class="relative" style="width: 240px; flex-shrink: 0;">
-        <!-- Corner brackets -->
         <div class="absolute -top-2.5 -left-2.5 w-6 h-6 pointer-events-none" style="border-top: 2px solid var(--gold); border-left: 2px solid var(--gold);"></div>
         <div class="absolute -top-2.5 -right-2.5 w-6 h-6 pointer-events-none" style="border-top: 2px solid var(--gold); border-right: 2px solid var(--gold);"></div>
         <div class="absolute -bottom-2.5 -left-2.5 w-6 h-6 pointer-events-none" style="border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold);"></div>
@@ -45,42 +44,44 @@ import Layout from "../layouts/main.astro";
         class="mb-4"
         style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
       >
-        Short Bio
+        Kurzbiografie
       </h2>
       <div
         class="space-y-4 text-base leading-relaxed"
         style="color: var(--text-2); max-width: 62ch;"
       >
         <p>
-          I work at the intersection of applied AI engineering and technical
-          leadership. At Haufe Akademie, I lead strategic initiatives at the
-          frontier of AI: high-risk, research-intensive work where the path
-          is unclear and the stakes are real. As a speaker and strategic advisor, I help management
-          boards of companies across sizes understand their AI opportunity,
-          define their north star, and turn vision into executable strategy.
-          Father, husband, and lifelong learner based in Freiburg.
+          Ich arbeite an der Schnittstelle von angewandtem KI-Engineering und
+          technischer Führung. Bei der Haufe Akademie verantworte ich
+          strategische Initiativen an der Frontlinie der KI: hochriskante,
+          forschungsintensive Arbeit, bei der der Weg unklar und der Einsatz
+          real ist. Als Speaker und strategischer Berater unterstütze ich
+          Geschäftsführungen unterschiedlicher Unternehmensgrößen dabei, ihre
+          KI-Chance zu verstehen, ihren Nordstern zu definieren und Vision in
+          umsetzbare Strategie zu übersetzen. Vater, Ehemann und lebenslang
+          Lernender, zu Hause in Freiburg.
         </p>
         <p>
-          I founded Fabricks, building Smart Factory components that optimized
-          warehouse logistics, supply chains, and internal digitalization for
-          manufacturing clients. I also spent nine years at SYNDIKAT7, growing
-          from Head of Development through Head of R&amp;D to CTO across more
-          than a dozen client industries. That trajectory: building
-          products, scaling teams, making bet-the-company architecture
-          decisions. That is what I write about. Not theory. The real
-          decisions, with the scar tissue to prove it.
+          Ich habe Fabricks gegründet, das Smart-Factory-Komponenten
+          entwickelte, um Lagerlogistik, Lieferketten und interne
+          Digitalisierung für Industriekunden zu optimieren. Davor neun Jahre
+          bei SYNDIKAT7, vom Head of Development über Head of R&amp;D zum CTO,
+          quer durch mehr als ein Dutzend Kundenbranchen. Diese Linie:
+          Produkte bauen, Teams skalieren, bet-the-company-Architekturen
+          entscheiden. Darüber schreibe ich. Keine Theorie, sondern die echten
+          Entscheidungen, mit den Narben dazu.
         </p>
         <p>
-          Alongside industry work, I hold a PhD from KIT Karlsruhe and serve as
-          an external lecturer at its WASA research group. I write
+          Parallel zur Industriearbeit habe ich am KIT Karlsruhe promoviert
+          und bin externer Dozent in der WASA-Forschungsgruppe. Ich schreibe
           <a
             href="https://principalstack.substack.com/"
             target="_blank"
             style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
           >Principal Stack</a>,
-          a weekly newsletter for engineers who think at system scale, and I'm
-          building ContentNexus, an open-source intelligence aggregation system
-          for knowledge workers.
+          einen wöchentlichen Newsletter für Engineers, die im Systemmaßstab
+          denken, und entwickle ContentNexus, ein Open-Source-System für
+          Intelligence-Aggregation für Wissensarbeiter.
         </p>
       </div>
     </div>
@@ -91,7 +92,7 @@ import Layout from "../layouts/main.astro";
         class="mb-5"
         style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
       >
-        Credentials
+        Qualifikationen
       </h2>
       <div class="flex flex-wrap gap-2">
         <span class="credential">PhD · KIT Karlsruhe</span>
@@ -99,7 +100,7 @@ import Layout from "../layouts/main.astro";
         <span class="credential">MBA · PowerMBA</span>
         <span class="credential">Azure Solutions Architect Expert</span>
         <span class="credential">AWS Expert</span>
-        <span class="credential">Founder · Fabricks</span>
+        <span class="credential">Gründer · Fabricks</span>
         <span class="credential">CTO · SYNDIKAT7</span>
         <span class="credential">Technical Leadership Masterclass</span>
         <span class="credential">Industry Fellow · 42 Wolfsburg</span>
@@ -112,31 +113,32 @@ import Layout from "../layouts/main.astro";
         class="mb-5"
         style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
       >
-        Speaking &amp; Advisory
+        Vorträge &amp; Beratung
       </h2>
       <p
         class="mb-6 text-base leading-relaxed"
         style="color: var(--text-2); max-width: 62ch;"
       >
-        I speak at conferences, leadership offsites, and executive briefings on AI strategy,
-        engineering leadership, and the organizational change that comes with adopting AI at scale.
-        Topics I cover regularly:
+        Ich spreche auf Konferenzen, Führungs-Offsites und Executive-Briefings
+        zu KI-Strategie, Engineering-Führung und dem organisatorischen Wandel,
+        der mit der Einführung von KI im Unternehmensmaßstab einhergeht.
+        Themen, die ich regelmäßig abdecke:
       </p>
       <ul
         class="mb-6 space-y-2 text-sm leading-relaxed"
         style="color: var(--text-2);"
       >
-        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>From AI experimentation to production confidence: building an AI-native engineering culture</li>
-        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>The AI Principal role: what changes when AI becomes a first-class concern in engineering</li>
-        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>Making the $37B question: how to evaluate, scope, and justify enterprise AI investment</li>
-        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>Technical leadership at the frontier: decisions under uncertainty in applied AI projects</li>
+        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>Vom KI-Experiment zur produktiven Reife: Aufbau einer KI-nativen Engineering-Kultur</li>
+        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>Die Rolle des KI Principal: Was sich ändert, wenn KI im Engineering zur Kernanforderung wird</li>
+        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>Die 37-Milliarden-Dollar-Frage: Wie KI-Investitionen im Unternehmen bewertet, eingegrenzt und begründet werden</li>
+        <li style="display: flex; gap: 0.75rem;"><span style="color: var(--gold-dim); flex-shrink: 0;">→</span>Technische Führung an der Frontlinie: Entscheidungen unter Unsicherheit in angewandten KI-Projekten</li>
       </ul>
       <a
         href="mailto:info@pascal-giessler.de"
         class="btn-outline"
         style="display: inline-flex;"
       >
-        Invite me to speak
+        Als Speaker einladen
       </a>
     </div>
 
@@ -146,16 +148,16 @@ import Layout from "../layouts/main.astro";
         class="mb-8"
         style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
       >
-        Experience
+        Werdegang
       </h2>
 
       <div class="pl-2">
         {experiences.map((exp) => (
           <AboutExperience
             dates={exp.dates}
-            role={exp.en.role}
+            role={exp.de.role}
             company={exp.company}
-            description={exp.en.description}
+            description={exp.de.description}
           />
         ))}
       </div>
@@ -170,36 +172,36 @@ import Layout from "../layouts/main.astro";
         class="mb-4"
         style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em;"
       >
-        Let's Connect
+        Kontakt
       </h2>
       <p
         class="text-base leading-relaxed mb-6"
         style="color: var(--text-2); max-width: 55ch;"
       >
-        Subscribe to
+        Abonnieren Sie
         <a
           href="https://principalstack.substack.com/"
           target="_blank"
           style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
         >Principal Stack</a>
-        for weekly insights on AI engineering and technical leadership. Follow
-        longer conversations on
+        für wöchentliche Einblicke zu KI-Engineering und technischer Führung.
+        Längere Diskussionen führe ich auf
         <a
           href="https://www.linkedin.com/in/pgiessler/"
           target="_blank"
           style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
         >LinkedIn</a>,
-        read long-form on
+        längere Texte erscheinen auf
         <a
           href="https://medium.com/@pmgiessler"
           target="_blank"
           style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
         >Medium</a>,
-        or reach me by
+        oder schreiben Sie mir per
         <a
           href="mailto:info@pascal-giessler.de"
           style="color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;"
-        >email</a>.
+        >E-Mail</a>.
       </p>
 
       <a
@@ -207,7 +209,7 @@ import Layout from "../layouts/main.astro";
         target="_blank"
         class="btn-gold"
       >
-        Connect on LinkedIn
+        Auf LinkedIn vernetzen
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
         </svg>

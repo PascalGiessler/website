@@ -13,13 +13,21 @@ import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
 import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
+import { getLangFromUrl, getLocalizedPath, useTranslations } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const { title, description, keywords, ogType, articlePublishedTime } = Astro.props;
 const resolvedOgType = ogType || "website";
 
-const metaTitle = title ? (title.includes("Pascal Giessler") ? title : `${title} | Pascal Giessler`) : "Pascal Giessler | AI Principal & Cloud Architect";
-const metaDescription = description || "Dr. Pascal Giessler ist KI Principal, Cloud-Architekt, Promovierter Informatiker und technischer Vordenker aus Freiburg, Deutschland. Hilft Engineering-Leitern bei der KI-Transformation.";
+const metaTitle = title ? (title.includes("Pascal Giessler") ? title : `${title} | Pascal Giessler`) : t("meta.siteTitle");
+const metaDescription = description || t("meta.defaultDescription");
 const metaKeywords = keywords || "Pascal Giessler, AI Principal, KI Principal, Cloud Architect, KI Architekt, Generative AI, Generative KI, KI Strategie, Machine Learning, PhD, KIT Karlsruhe, Haufe Akademie, Azure Solutions Architect, Enterprise Architecture, Unternehmensarchitektur, Technical Leadership, Technische Führung, Freiburg, Baden-Württemberg, Deutschland, Germany, AI Engineering, LLM, RAG, Distributed Systems, Principal Stack";
 const canonicalUrl = Astro.url.href;
+const siteOrigin = Astro.site ? Astro.site.origin : "https://pascal-giessler.de";
+const enHref = new URL(getLocalizedPath(Astro.url.pathname, "en"), siteOrigin).href;
+const deHref = new URL(getLocalizedPath(Astro.url.pathname, "de"), siteOrigin).href;
 const ogImage = "https://pascal-giessler.de/assets/images/photo_pascal_branded.png";
 
 const personSchema = {
@@ -58,7 +66,7 @@ const personSchema = {
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang={t("lang.htmlAttr")} class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -72,8 +80,8 @@ const personSchema = {
     <meta property="og:title" content={metaTitle} />
     <meta property="og:description" content={metaDescription} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="de_DE" />
-    <meta property="og:locale:alternate" content="en_GB" />
+    <meta property="og:locale" content={t("meta.ogLocale")} />
+    <meta property="og:locale:alternate" content={t("meta.ogLocaleAlternate")} />
     <meta property="og:site_name" content="Pascal Giessler" />
     {articlePublishedTime && (
       <>
@@ -89,9 +97,9 @@ const personSchema = {
     <meta property="twitter:image" content={ogImage} />
 
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="en" href={canonicalUrl} />
-    <link rel="alternate" hreflang="de" href={canonicalUrl} />
-    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="de" href={deHref} />
+    <link rel="alternate" hreflang="x-default" href={enHref} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="alternate" type="application/rss+xml" title="Dr. Pascal Giessler · Writing" href="/rss.xml" />

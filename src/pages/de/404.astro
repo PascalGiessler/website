@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/main.astro";
+---
+
+<Layout
+  title="404 · Seite nicht gefunden"
+  description="Die gesuchte Seite existiert nicht auf pascal-giessler.de."
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36 min-h-[60vh] flex flex-col justify-center">
+    <p class="section-label mb-4 fade-up delay-1">Fehler · 404</p>
+
+    <h1
+      class="fade-up delay-2 mb-6"
+      style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
+    >
+      Diese Seite <em style="font-style: italic; color: var(--gold-light);">existiert nicht</em>.
+    </h1>
+
+    <span class="gold-rule fade-up delay-3 mb-7"></span>
+
+    <p
+      class="fade-up delay-3 mb-10 text-base leading-relaxed"
+      style="color: var(--text-2); max-width: 55ch;"
+    >
+      Der Link, dem Sie gefolgt sind, ist defekt oder die Seite wurde verschoben. Versuchen Sie eine der folgenden Alternativen.
+    </p>
+
+    <div class="fade-up delay-4 flex flex-wrap gap-3">
+      <a href="/de/" class="btn-gold">
+        Startseite
+      </a>
+      <a href="/de/posts" class="btn-outline">
+        Schreiben
+      </a>
+      <a href="/de/about" class="btn-outline">
+        Über mich
+      </a>
+    </div>
+  </main>
+</Layout>

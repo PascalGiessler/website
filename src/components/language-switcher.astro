@@ -1,0 +1,43 @@
+---
+import { getLangFromUrl, getLocalizedPath, type Lang } from "../i18n/ui";
+
+const currentLang = getLangFromUrl(Astro.url);
+const otherLang: Lang = currentLang === "en" ? "de" : "en";
+const alternatePath = getLocalizedPath(Astro.url.pathname, otherLang);
+const otherLabel = otherLang.toUpperCase();
+const currentLabel = currentLang.toUpperCase();
+---
+
+<div class="lang-switcher" aria-label="Language">
+  <span class="lang-current" aria-current="true">{currentLabel}</span>
+  <span class="lang-divider" aria-hidden="true">/</span>
+  <a href={alternatePath} class="lang-other" hreflang={otherLang} aria-label={`Switch to ${otherLang === "de" ? "Deutsch" : "English"}`}>
+    {otherLabel}
+  </a>
+</div>
+
+<style>
+  .lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+  }
+  .lang-current {
+    color: var(--gold-light);
+  }
+  .lang-divider {
+    color: var(--border-gold);
+  }
+  .lang-other {
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+  }
+  .lang-other:hover {
+    color: var(--gold-light);
+  }
+</style>

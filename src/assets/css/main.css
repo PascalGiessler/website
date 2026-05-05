@@ -139,6 +139,17 @@ body::before {
   border-top: 1px solid var(--border);
 }
 
+/* ── POST LANGUAGE BADGE ───────────────────────────── */
+.post-lang-badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  color: var(--gold-light);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+}
+
 /* ── CREDENTIAL CHIP ───────────────────────────────── */
 .credential {
   display: inline-flex;

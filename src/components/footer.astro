@@ -1,4 +1,9 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const impressumHref = lang === "de" ? "/de/impressum" : "/impressum";
 ---
 
 <footer
@@ -50,12 +55,12 @@
       <span style="color: var(--border);">·</span>
 
       <a
-        href="/impressum"
+        href={impressumHref}
         style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); text-decoration: none; transition: color 0.2s ease-out;"
         onmouseover="this.style.color='var(--text-2)'"
         onmouseout="this.style.color='var(--text-3)'"
       >
-        Impressum
+        {t("footer.impressum")}
       </a>
     </div>
 

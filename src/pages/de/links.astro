@@ -1,0 +1,67 @@
+---
+import Layout from "../../layouts/main.astro";
+
+const publications = [
+  {
+    label: "Substack · Wöchentlicher Newsletter",
+    name: "Principal Stack",
+    description: "Wöchentlich für erfahrene Engineers und technische Führungskräfte, die KI im Unternehmensmaßstab steuern. Produktionsentscheidungen, Architektur-Trade-offs und die Urteilsfragen, die in Lehrbüchern nicht stehen.",
+    url: "https://principalstack.substack.com/",
+    handle: "principalstack.substack.com"
+  },
+  {
+    label: "Medium · Artikel",
+    name: "Medium",
+    description: "Artikel zu generativer KI-Strategie, Cloud-Architektur-Mustern und Technologieführung für erfahrene Engineers und CTOs.",
+    url: "https://medium.com/@pmgiessler",
+    handle: "medium.com/@pmgiessler"
+  },
+  {
+    label: "LinkedIn · Thought Leadership",
+    name: "LinkedIn",
+    description: "Regelmäßige Beiträge zu KI-nativem Engineering, generativer KI-Strategie und den technischen Entscheidungen, die gute von herausragender Architektur trennen.",
+    url: "https://www.linkedin.com/in/pgiessler/",
+    handle: "linkedin.com/in/pgiessler"
+  }
+];
+---
+
+<Layout
+  title="Schreiben &amp; Publikationen"
+  description="Dr. Pascal Giessler schreibt zu KI-nativem Engineering, Cloud-Architektur und technischer Führung auf Substack, Medium und LinkedIn."
+  keywords="Pascal Giessler, Schreiben, Substack, Medium, LinkedIn, KI, Cloud-Architektur"
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
+
+    <div class="mb-14">
+      <p class="section-label mb-4 fade-up delay-1">Schreiben &amp; Publikationen</p>
+      <h1
+        class="fade-up delay-2"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
+      >
+        Wo ich <em style="font-style: italic; color: var(--gold-light);">veröffentliche</em>
+      </h1>
+    </div>
+
+    <div class="fade-up delay-3 grid grid-cols-1 gap-4">
+      {publications.map((pub) => (
+        <a
+          href={pub.url}
+          target="_blank"
+          class="writing-card"
+        >
+          <p class="writing-card-label">{pub.label}</p>
+          <h3 class="writing-card-title">{pub.name}</h3>
+          <p class="writing-card-desc">{pub.description}</p>
+          <p
+            class="mt-4"
+            style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim);"
+          >
+            {pub.handle} ↗
+          </p>
+        </a>
+      ))}
+    </div>
+
+  </main>
+</Layout>

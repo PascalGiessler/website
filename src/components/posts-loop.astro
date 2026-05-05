@@ -25,6 +25,7 @@ const postsLoop = (count ? sortedPosts.slice(0, count) : sortedPosts).map((post)
   ...(post.data || {}),
   readingTime: readingMinutes(post.body),
   link: `/post/${post.id.replace(/\.md$/, '')}`,
+  lang: post.data.lang || 'en',
 }));
 ---
 
@@ -64,6 +65,7 @@ const postsLoop = (count ? sortedPosts.slice(0, count) : sortedPosts).map((post)
         class="mt-3 flex items-center gap-3"
         style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--text-3);"
       >
+        <span class="post-lang-badge">{post.lang.toUpperCase()}</span>
         <span>{post.dateFormatted}</span>
         <span style="color: var(--border-gold);">·</span>
         <span>{post.readingTime} min read</span>

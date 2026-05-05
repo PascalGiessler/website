@@ -1,14 +1,12 @@
-[
-	{
-		"name": "About",
-		"url": "/about"
-	},
-	{
-		"name": "Writing",
-		"url": "/posts"
-	},
-	{
-		"name": "Publications",
-		"url": "/links"
-	}
-]
+{
+	"en": [
+		{ "key": "about", "url": "/about" },
+		{ "key": "writing", "url": "/posts" },
+		{ "key": "publications", "url": "/links" }
+	],
+	"de": [
+		{ "key": "about", "url": "/de/about" },
+		{ "key": "writing", "url": "/de/posts" },
+		{ "key": "publications", "url": "/de/links" }
+	]
+}

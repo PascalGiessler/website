@@ -1,26 +1,50 @@
 [
 	{
 		"name": "ContentNexus",
-		"status": "Stealth · v0.7",
-		"description": "Intelligence aggregation for knowledge workers. Tracks the researchers, analysts, and operators shaping your field, then writes a five-minute morning briefing. Ranked by signal, not by noise. Open source, self-hosted, no API keys.",
-		"url": null
+		"url": null,
+		"en": {
+			"status": "Stealth · v0.7",
+			"description": "Intelligence aggregation for knowledge workers. Tracks the researchers, analysts, and operators shaping your field, then writes a five-minute morning briefing. Ranked by signal, not by noise. Open source, self-hosted, no API keys."
+		},
+		"de": {
+			"status": "Stealth · v0.7",
+			"description": "Intelligence-Aggregation für Wissensarbeiter. Verfolgt die Forschenden, Analysten und Praktiker, die Ihr Feld prägen, und erstellt daraus ein Fünf-Minuten-Briefing am Morgen. Sortiert nach Signal, nicht nach Lärm. Open Source, selbst gehostet, keine API-Schlüssel."
+		}
 	},
 	{
 		"name": "Project Ember",
-		"status": "Stealth",
-		"description": "Details to follow at launch.",
-		"url": null
+		"url": null,
+		"en": {
+			"status": "Stealth",
+			"description": "Details to follow at launch."
+		},
+		"de": {
+			"status": "Stealth",
+			"description": "Details folgen zum Start."
+		}
 	},
 	{
 		"name": "Project Meridian",
-		"status": "Stealth",
-		"description": "Details to follow at launch.",
-		"url": null
+		"url": null,
+		"en": {
+			"status": "Stealth",
+			"description": "Details to follow at launch."
+		},
+		"de": {
+			"status": "Stealth",
+			"description": "Details folgen zum Start."
+		}
 	},
 	{
 		"name": "Principal Stack",
-		"status": "Live · Weekly",
-		"description": "A weekly newsletter for senior engineers and technical leaders navigating AI at scale. Production decisions, architecture tradeoffs, and the judgment calls that textbooks don't cover.",
-		"url": "https://principalstack.substack.com/"
+		"url": "https://principalstack.substack.com/",
+		"en": {
+			"status": "Live · Weekly",
+			"description": "A weekly newsletter for senior engineers and technical leaders navigating AI at scale. Production decisions, architecture tradeoffs, and the judgment calls that textbooks don't cover."
+		},
+		"de": {
+			"status": "Live · Wöchentlich",
+			"description": "Ein wöchentlicher Newsletter für erfahrene Engineers und technische Führungskräfte, die KI im Unternehmensmaßstab steuern. Produktionsentscheidungen, Architektur-Trade-offs und die Urteilsfragen, die in Lehrbüchern nicht stehen."
+		}
 	}
 ]
