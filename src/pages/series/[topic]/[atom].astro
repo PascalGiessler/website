@@ -5,7 +5,13 @@ import AtomLayout from "../../../layouts/atom.astro";
 import { slugFromFilename, parseAtomBody } from "../../../lib/series.mjs";
 
 export async function getStaticPaths() {
-  const allAtoms = await getCollection("atom");
+  const rawAtoms = await getCollection("atom");
+  // Only render atoms that have a usable LinkedIn URL (the publish gate).
+  // Atoms without a URL stay on disk so future re-syncs can populate them.
+  const allAtoms = rawAtoms.filter((a) => {
+    const u = a.data.linkedin_url;
+    return typeof u === "string" && u !== "" && u !== "TODO";
+  });
   const allSeries = await getCollection("series");
   const allPosts = await getCollection("post");
 

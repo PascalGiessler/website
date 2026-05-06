@@ -506,6 +506,17 @@ html.dark {
   color: var(--gold-light);
 }
 
+/* Lang badge inside the series title needs to NOT inherit the Cormorant 2.2rem h2 size. */
+.series-section__title .post-lang-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  vertical-align: middle;
+  margin-left: 14px;
+  position: relative;
+  top: -4px;
+}
+
 .series-section__thesis {
   font-size: 0.85rem;
   color: var(--text-2);

@@ -27,6 +27,10 @@ const topicSlug = series.id.replace(/\/_series$/, "");
 const allAtoms = await getCollection("atom");
 const atoms = allAtoms
   .filter((a) => a.id.startsWith(`${topicSlug}/`))
+  .filter((a) => {
+    const url = a.data.linkedin_url;
+    return typeof url === "string" && url !== "" && url !== "TODO";
+  })
   .sort((a, b) => a.data.position - b.data.position);
 
 // Render title with the italic word(s) wrapped in <em>. Match-from-end for safety.
@@ -46,7 +50,7 @@ const monthYear = publishedDate.toLocaleString(lang === "de" ? "de-DE" : "en-US"
   <header class="series-section__head">
     <p class="series-section__label">
       <span class="series-section__label-strong">{seriesLabel} {positionStr}</span>
-      &nbsp;·&nbsp; {series.data.atom_count} {atomLabel} &nbsp;·&nbsp; {monthYear}
+      &nbsp;·&nbsp; {atoms.length} {atomLabel} &nbsp;·&nbsp; {monthYear}
     </p>
     <h2 class="series-section__title">
       {titleHead}

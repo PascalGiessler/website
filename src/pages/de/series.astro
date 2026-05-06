@@ -9,7 +9,19 @@ const t = useTranslations(lang);
 
 const allSeries = await getCollection("series");
 const allPosts = await getCollection("post");
-const sorted = allSeries.sort((a, b) => a.data.position - b.data.position);
+const allAtoms = await getCollection("atom");
+
+// A series only renders if at least one of its atoms has a usable LinkedIn URL.
+function hasUrl(atom: typeof allAtoms[number]) {
+  const u = atom.data.linkedin_url;
+  return typeof u === "string" && u !== "" && u !== "TODO";
+}
+const renderableTopics = new Set(
+  allAtoms.filter(hasUrl).map((a) => a.id.slice(0, a.id.indexOf("/")))
+);
+const sorted = allSeries
+  .filter((s) => renderableTopics.has(s.id.replace(/\/_series$/, "")))
+  .sort((a, b) => a.data.position - b.data.position);
 
 function synthesisLinkFor(seriesEntry: typeof sorted[number]) {
   const slug = seriesEntry.data.synthesis_post;
