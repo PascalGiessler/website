@@ -9,6 +9,7 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"check": "biome check --apply-unsafe .",
+		"test:scripts": "node --test scripts/*.test.mjs",
 		"sync:substack": "node scripts/sync-substack.mjs"
 	},
 	"devDependencies": {
