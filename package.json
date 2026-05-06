@@ -10,7 +10,9 @@
 		"astro": "astro",
 		"check": "biome check --apply-unsafe .",
 		"test:scripts": "node --test scripts/*.test.mjs",
-		"sync:substack": "node scripts/sync-substack.mjs"
+		"sync:substack": "node scripts/sync-substack.mjs",
+		"series:list-pending": "node scripts/sync-series.mjs list-pending",
+		"series:add": "node scripts/sync-series.mjs add"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.9",

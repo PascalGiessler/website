@@ -31,3 +31,5 @@ drafts/
 screenshot-*.png
 .playwright-mcp/
 .superpowers/
+
+scripts/series-config.json
