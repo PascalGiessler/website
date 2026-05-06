@@ -1,5 +1,5 @@
 ---
-linkedin_url: TODO
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:share:7455632705481818112
 title: "The Evidence: Your Codebase Right Now"
 style: thought-leadership
 series: "ai-cognitive-debt"

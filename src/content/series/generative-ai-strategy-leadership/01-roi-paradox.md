@@ -1,5 +1,5 @@
 ---
-linkedin_url: TODO
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:share:7448022542381912065
 title: "The $37 Billion EBIT Paradox"
 style: thought-leadership
 series: "generative-ai-strategy-leadership"

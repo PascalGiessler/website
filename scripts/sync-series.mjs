@@ -15,10 +15,41 @@ import {
 } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 import {
   stripLinkedInSections,
   parseAtomFrontmatter,
 } from "../src/lib/series.mjs";
+
+/**
+ * Extract the LinkedIn post URL from a single analytics .xlsx file.
+ * The xlsx is a zip archive; we read xl/sharedStrings.xml via the system
+ * `unzip` binary (available on macOS/Linux) and grep for the linkedin URL.
+ */
+function extractLinkedInUrl(xlsxPath) {
+  try {
+    const xml = execFileSync("unzip", ["-p", xlsxPath, "xl/sharedStrings.xml"], {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+    const m = xml.match(/<t[^>]*>(https:\/\/www\.linkedin\.com\/[^<]+)<\/t>/);
+    return m ? m[1] : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Look up the analytics xlsx for a given atom prefix and extract the URL.
+ * Returns null if not found or extraction fails.
+ */
+function urlForAtomPrefix(brandRoot, topic, prefix) {
+  const dir = join(brandRoot, "topics", topic, "linkedin", "analytics");
+  if (!existsSync(dir)) return null;
+  const match = readdirSync(dir).find((f) => f.startsWith(`${prefix}-`) && f.endsWith(".xlsx"));
+  if (!match) return null;
+  return extractLinkedInUrl(join(dir, match));
+}
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CONFIG_PATH = join(ROOT, "scripts", "series-config.json");
@@ -189,11 +220,23 @@ async function addTopic(topic, { force }) {
       }
     }
 
-    // Ensure linkedin_url placeholder exists in frontmatter
+    // Resolve linkedin_url: prefer the URL embedded in the matching analytics
+    // xlsx; fall back to TODO so the layout's footer line is gracefully omitted
+    // (the existing _series.md / atom may already have a URL — preserve it).
     const fm = parseAtomFrontmatter(stripped);
     let final = stripped;
-    if (!("linkedin_url" in fm)) {
-      final = stripped.replace(/^---\n/, "---\nlinkedin_url: TODO\n");
+    const existingUrl = typeof fm.linkedin_url === "string" ? fm.linkedin_url : null;
+    const extractedUrl = prefix ? urlForAtomPrefix(brandRoot, topic, prefix) : null;
+    const resolvedUrl = (existingUrl && existingUrl !== "TODO" && existingUrl !== "")
+      ? existingUrl
+      : (extractedUrl || "TODO");
+
+    if (existingUrl !== null) {
+      // Replace the existing line in-place
+      final = stripped.replace(/^linkedin_url:.*$/m, `linkedin_url: ${resolvedUrl}`);
+    } else {
+      // No existing field — prepend it
+      final = stripped.replace(/^---\n/, `---\nlinkedin_url: ${resolvedUrl}\n`);
     }
 
     writeFileSync(targetPath, final, "utf8");

@@ -1,5 +1,5 @@
 ---
-linkedin_url: TODO
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:share:7455221189662265344
 title: "The Hidden Cost Nobody Put in the Business Case"
 style: thought-leadership
 series: "ai-cognitive-debt"

@@ -1,5 +1,5 @@
 ---
-linkedin_url: TODO
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:share:7452242383208931328
 title: "Governance Speeds Up Deployment"
 style: thought-leadership
 series: "generative-ai-strategy-leadership"

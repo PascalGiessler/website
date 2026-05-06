@@ -1,5 +1,5 @@
 ---
-linkedin_url: TODO
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:share:7454779092576559104
 title: "The AI Productivity Paradox"
 style: thought-leadership
 series: "ai-cognitive-debt"

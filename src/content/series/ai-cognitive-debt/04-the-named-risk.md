@@ -1,5 +1,5 @@
 ---
-linkedin_url: TODO
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:share:7457338579476779008
 title: "Thoughtworks Named It. Now You Need to Explain It to Your Organization."
 style: thought-leadership
 series: "ai-cognitive-debt"
