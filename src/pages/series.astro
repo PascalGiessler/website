@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/main.astro";
+import SeriesSection from "../components/series-section.astro";
+import { getCollection } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allSeries = await getCollection("series");
+const allPosts = await getCollection("post");
+const sorted = allSeries.sort((a, b) => a.data.position - b.data.position);
+
+function synthesisLinkFor(seriesEntry: typeof sorted[number]) {
+  const slug = seriesEntry.data.synthesis_post;
+  if (!slug || slug === "TODO") return null;
+  const post = allPosts.find((p) => p.id.replace(/\.md$/, "") === slug);
+  if (!post) return null;
+  return { href: `/post/${slug}`, title: post.data.title };
+}
+---
+
+<Layout
+  title={t("series.eyebrow")}
+  description={t("series.heroBody")}
+>
+  <main class="relative z-10 max-w-[1080px] mx-auto px-8 pt-28 pb-32 lg:pt-36">
+
+    <div class="mb-14 pb-12 border-b" style="border-color: var(--border);">
+      <p class="section-label mb-3 fade-up delay-1">{t("series.eyebrow")}</p>
+      <h1
+        class="fade-up delay-2"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5.5vw, 3.4rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--text); margin-bottom: 18px;"
+      >
+        {t("series.heroTitle")} <em style="font-style: italic; color: var(--gold-light);">{t("series.heroTitleAccent")}</em>{t("series.heroTitleTail")}
+      </h1>
+      <p
+        class="fade-up delay-3 text-base leading-relaxed"
+        style="color: var(--text-2); max-width: 56ch;"
+      >
+        {t("series.heroBody")}
+      </p>
+    </div>
+
+    <div class="fade-up delay-4">
+      {sorted.map((s) => (
+        <SeriesSection
+          series={s}
+          synthesisLink={synthesisLinkFor(s)}
+          lang={lang}
+        />
+      ))}
+    </div>
+
+  </main>
+</Layout>

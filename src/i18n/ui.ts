@@ -18,6 +18,18 @@ export const ui = {
     'nav.about': 'About',
     'nav.writing': 'Writing',
     'nav.publications': 'Publications',
+    'nav.series': 'Series',
+    'series.eyebrow': 'Series',
+    'series.heroTitle': 'Three',
+    'series.heroTitleAccent': 'arcs',
+    'series.heroTitleTail': ', told in atoms.',
+    'series.heroBody': "Each series is a connected sequence of short LinkedIn posts, written across two weeks. They make an argument together that no single post can make alone. The long-form synthesis of each lives on Writing.",
+    'atom.linkedinAttribution': 'Originally on LinkedIn',
+    'atom.linkedinCta': 'Read & reply →',
+    'atom.backToSeries': '← Back to series',
+    'atom.nextAtom': 'Next atom',
+    'atom.synthesis': 'Synthesis',
+    'atom.allAtoms': (n: number) => `All ${n} atoms`,
 
     'switcher.label': 'Language',
     'switcher.toEnglish': 'English',
@@ -43,6 +55,18 @@ export const ui = {
     'nav.about': 'Über mich',
     'nav.writing': 'Schreiben',
     'nav.publications': 'Publikationen',
+    'nav.series': 'Serien',
+    'series.eyebrow': 'Serien',
+    'series.heroTitle': 'Drei',
+    'series.heroTitleAccent': 'Bögen',
+    'series.heroTitleTail': ', erzählt in Atomen.',
+    'series.heroBody': "Jede Serie ist eine zusammenhängende Folge kurzer LinkedIn-Beiträge, geschrieben über zwei Wochen. Gemeinsam tragen sie ein Argument, das kein einzelner Beitrag tragen kann. Die ausführliche Synthese jeder Serie steht unter Schreiben.",
+    'atom.linkedinAttribution': 'Ursprünglich auf LinkedIn',
+    'atom.linkedinCta': 'Lesen & antworten →',
+    'atom.backToSeries': '← Zur Serie',
+    'atom.nextAtom': 'Nächstes Atom',
+    'atom.synthesis': 'Synthese',
+    'atom.allAtoms': (n: number) => `Alle ${n} Atome`,
 
     'switcher.label': 'Sprache',
     'switcher.toEnglish': 'English',
@@ -69,8 +93,9 @@ export function getLangFromUrl(url: URL): Lang {
 }
 
 export function useTranslations(lang: Lang) {
-  return function t(key: UIKey): string {
-    return ui[lang][key] ?? ui[defaultLang][key];
+  return function t(key: UIKey, ...args: unknown[]): string {
+    const v = ui[lang][key] ?? ui[defaultLang][key];
+    return typeof v === "function" ? (v as (...a: unknown[]) => string)(...args) : (v as string);
   };
 }
 
