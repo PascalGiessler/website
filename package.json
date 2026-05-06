@@ -29,6 +29,7 @@
 		"@fontsource/cormorant": "^5.2.8",
 		"@fontsource/jetbrains-mono": "^5.2.8",
 		"@fontsource/outfit": "^5.2.8",
-		"@tailwindcss/vite": "^4.2.4"
+		"@tailwindcss/vite": "^4.2.4",
+		"marked": "^14"
 	}
 }

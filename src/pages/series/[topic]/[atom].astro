@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import { marked } from "marked";
+import AtomLayout from "../../../layouts/atom.astro";
+import { slugFromFilename, parseAtomBody } from "../../../lib/series.mjs";
+
+export async function getStaticPaths() {
+  const allAtoms = await getCollection("atom");
+  const allSeries = await getCollection("series");
+  const allPosts = await getCollection("post");
+
+  const seriesByTopic = new Map(
+    allSeries.map((s) => [s.id.replace(/\/_series$/, ""), s])
+  );
+
+  // Group atoms by topic, sorted by position
+  const atomsByTopic = new Map();
+  for (const a of allAtoms) {
+    const slash = a.id.indexOf("/");
+    const topic = a.id.slice(0, slash);
+    if (!atomsByTopic.has(topic)) atomsByTopic.set(topic, []);
+    atomsByTopic.get(topic).push(a);
+  }
+  for (const list of atomsByTopic.values()) list.sort((x, y) => x.data.position - y.data.position);
+
+  const paths = [];
+
+  for (const [topic, atoms] of atomsByTopic) {
+    const series = seriesByTopic.get(topic);
+    if (!series) continue;
+
+    for (let i = 0; i < atoms.length; i++) {
+      const a = atoms[i];
+      const filename = a.id.slice(a.id.indexOf("/") + 1) + ".md";
+      const atomSlug = slugFromFilename(filename);
+      const prev = i > 0 ? atoms[i - 1] : null;
+      const next = i < atoms.length - 1 ? atoms[i + 1] : null;
+      const prevSlug = prev ? slugFromFilename(prev.id.slice(prev.id.indexOf("/") + 1) + ".md") : null;
+      const nextSlug = next ? slugFromFilename(next.id.slice(next.id.indexOf("/") + 1) + ".md") : null;
+
+      const synthSlug = series.data.synthesis_post && series.data.synthesis_post !== "TODO" ? series.data.synthesis_post : null;
+      const synthPost = synthSlug ? allPosts.find((p) => p.id.replace(/\.md$/, "") === synthSlug) : null;
+
+      paths.push({
+        params: { topic, atom: atomSlug },
+        props: {
+          atom: a,
+          series,
+          prev: prev && prevSlug ? { href: `/series/${topic}/${prevSlug}`, title: prev.data.title, position: prev.data.position } : null,
+          next: next && nextSlug ? { href: `/series/${topic}/${nextSlug}`, title: next.data.title, position: next.data.position } : null,
+          synthesisHref: synthPost ? `/post/${synthSlug}` : null,
+          synthesisTitle: synthPost ? synthPost.data.title : null,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { atom, series, prev, next, synthesisHref, synthesisTitle } = Astro.props;
+const { hook, body, cta } = parseAtomBody(atom.body ?? "");
+
+// Render BODY + CTA as prose. HOOK is rendered as the hero pull-quote in the layout.
+const slotMd = [body, cta].filter(Boolean).join("\n\n");
+const articleHtml = marked.parse(slotMd);
+---
+
+<AtomLayout
+  atom={atom}
+  series={series}
+  hookText={hook}
+  prev={prev}
+  next={next}
+  synthesisHref={synthesisHref}
+  synthesisTitle={synthesisTitle}
+>
+  <Fragment set:html={articleHtml} />
+</AtomLayout>
