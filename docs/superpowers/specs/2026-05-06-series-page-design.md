@@ -262,7 +262,13 @@ The first three series are added by hand during the initial implementation. Afte
 
 ### Detection: what counts as "published"
 
-A series is publishable if `<brand-repo>/topics/<topic>/linkedin/analytics/` exists and contains at least one file (the `.xlsx` analytics export or `analytics-summary.md`). An empty `analytics/` directory does NOT qualify — the existence of measured data is the signal.
+Two-layer rule, decided during implementation after surfacing real-world brand-repo state:
+
+**Topic-level (default):** A series is publishable if `<brand-repo>/topics/<topic>/linkedin/analytics/` exists and contains at least one file. Empty analytics folder → not publishable.
+
+**Atom-level (default):** Within a publishable topic, only atoms whose number prefix matches an analytics file (`analytics/<NN>-<*>.xlsx`) sync. This filters out unpublished drafts that exist in the brand repo's `linkedin/scripts/` but were never posted.
+
+**Override (`force_publish`):** Both rules are bypassed when `--force` is passed to `pnpm series:add`, OR when the existing `_series.md` has `force_publish: true` in frontmatter (which the script writes when `--force` is used, so the choice persists across re-syncs). Use this for series that ARE published on LinkedIn but lack measured analytics yet (e.g., a series posted yesterday).
 
 The brand-repo path is configured once in `scripts/series-config.json` (or via the `BRAND_REPO_PATH` env var):
 
