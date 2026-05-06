@@ -30,3 +30,4 @@ drafts/
 # dev artifacts
 screenshot-*.png
 .playwright-mcp/
+.superpowers/
