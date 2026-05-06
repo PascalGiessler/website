@@ -22,8 +22,9 @@ Future series with analytics folders should appear automatically without manual 
 
 - `/series` — index page (English, default locale)
 - `/de/series` — index page (German)
-- `/series/[topic]/[atom-slug]` — individual atom page
-- `/de/series/[topic]/[atom-slug]` — German atom page
+- `/series/[topic]/[atom-slug]` — individual atom page (single URL space, NOT mirrored to `/de/series/`)
+
+**Note (decided during implementation):** atom URLs are not mirrored per locale. This matches the existing `/post/[slug]` convention: one canonical URL per piece of content, language indicated by an in-page badge. Adding a `/de/series/` mirror would be inconsistent with how posts work and double the route complexity for no reader benefit. Index pages (`/series` ↔ `/de/series`) are still mirrored, matching `/posts` ↔ `/de/posts`.
 
 ### Navigation
 
