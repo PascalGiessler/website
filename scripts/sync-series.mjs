@@ -32,7 +32,18 @@ function loadConfig() {
     console.error(`Missing ${CONFIG_PATH}. Create it with { "brand_repo_path": "..." } or set BRAND_REPO_PATH.`);
     process.exit(1);
   }
-  return JSON.parse(readFileSync(CONFIG_PATH, "utf8"));
+  let config;
+  try {
+    config = JSON.parse(readFileSync(CONFIG_PATH, "utf8"));
+  } catch (e) {
+    console.error(`Failed to parse ${CONFIG_PATH}: ${e.message}`);
+    process.exit(1);
+  }
+  if (!config.brand_repo_path || typeof config.brand_repo_path !== "string") {
+    console.error(`Missing or invalid "brand_repo_path" in ${CONFIG_PATH}.`);
+    process.exit(1);
+  }
+  return config;
 }
 
 function topicHasAnalytics(brandRoot, topic) {
