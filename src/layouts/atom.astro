@@ -1,0 +1,117 @@
+---
+import Layout from "./main.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/ui";
+
+interface Props {
+  atom: {
+    data: {
+      title: string;
+      position: number;
+      linkedin_url?: string;
+      series: string;
+    };
+  };
+  series: {
+    data: {
+      title: string;
+      atom_count: number;
+      synthesis_post?: string;
+    };
+  };
+  hookText: string;
+  prev: { href: string; title: string; position: number } | null;
+  next: { href: string; title: string; position: number } | null;
+  synthesisHref: string | null;
+  synthesisTitle: string | null;
+}
+
+const { atom, series, hookText, prev, next, synthesisHref, synthesisTitle } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const positionStr = String(atom.data.position).padStart(2, "0");
+const totalStr = String(series.data.atom_count).padStart(2, "0");
+const ofLabel = lang === "de" ? "VON" : "OF";
+const atomLabel = "ATOM";
+const seriesIndexHref = lang === "de" ? "/de/series" : "/series";
+
+// Italicize the last word of the title
+const words = atom.data.title.trim().split(/\s+/);
+const lastWord = words.pop() ?? "";
+const titleHead = words.join(" ");
+
+const linkedinUrl = atom.data.linkedin_url && atom.data.linkedin_url !== "TODO" ? atom.data.linkedin_url : null;
+---
+
+<Layout title={atom.data.title} description={hookText.split("\n")[0] ?? atom.data.title}>
+  <main class="relative z-30 max-w-3xl mx-auto pb-24" style="padding-top: 7rem;">
+
+    <div class="px-6 pb-10 mb-10 border-b lg:px-0" style="border-color: var(--border);">
+      <p class="atom-page__crumb">
+        <a href={seriesIndexHref}>{t("series.eyebrow")}</a> &nbsp;/&nbsp; <a href={`${seriesIndexHref}#${atom.data.series}`}>{series.data.title}</a>
+      </p>
+      <p class="atom-page__pos">{atomLabel} {positionStr} {ofLabel} {totalStr}</p>
+      <h1 class="atom-page__title">
+        {titleHead}{titleHead && " "}<em>{lastWord}</em>
+      </h1>
+      <p class="atom-page__hero-hook">{hookText}</p>
+    </div>
+
+    <article
+      class="px-6 lg:px-0 prose prose-invert prose-sm lg:prose-base max-w-none"
+      style="
+        --tw-prose-body: var(--text);
+        --tw-prose-headings: var(--text);
+        --tw-prose-links: var(--gold-light);
+        --tw-prose-bold: var(--text);
+        --tw-prose-quotes: var(--text-2);
+        --tw-prose-hr: var(--border);
+      "
+    >
+      <slot />
+    </article>
+
+    <div class="atom-page__footer px-6 lg:px-0">
+      {linkedinUrl && (
+        <p class="atom-page__attribution">
+          {t("atom.linkedinAttribution")} &middot;
+          <a href={linkedinUrl} target="_blank" rel="noopener">{t("atom.linkedinCta")}</a>
+        </p>
+      )}
+      {synthesisHref && synthesisTitle && (
+        <p class="atom-page__attribution">
+          {t("series.eyebrow")} &middot; <a href={`${seriesIndexHref}#${atom.data.series}`}>{series.data.title}</a>
+          &nbsp;&middot;&nbsp;
+          {t("atom.synthesis")} &middot; <a href={synthesisHref}>{synthesisTitle}</a>
+        </p>
+      )}
+
+      {(prev || next) && (
+        <nav class="atom-page__nav grid grid-cols-2 gap-4" aria-label="Atom navigation">
+          <div>
+            {prev ? (
+              <a href={prev.href} class="atom-page__step group">
+                <p class="atom-page__step-label">{String(prev.position).padStart(2, "0")} &larr;</p>
+                <p class="atom-page__step-title">{prev.title}</p>
+              </a>
+            ) : (
+              <a href={seriesIndexHref} class="atom-page__step group">
+                <p class="atom-page__step-label">{t("atom.backToSeries")}</p>
+                <p class="atom-page__step-title">{t("atom.allAtoms", series.data.atom_count)}</p>
+              </a>
+            )}
+          </div>
+          <div class="text-right">
+            {next && (
+              <a href={next.href} class="atom-page__step group">
+                <p class="atom-page__step-label">{t("atom.nextAtom")} &middot; {String(next.position).padStart(2, "0")} &rarr;</p>
+                <p class="atom-page__step-title">{next.title}</p>
+              </a>
+            )}
+          </div>
+        </nav>
+      )}
+    </div>
+
+  </main>
+</Layout>
