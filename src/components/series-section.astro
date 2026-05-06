@@ -1,0 +1,67 @@
+---
+import SeriesTile from "./series-tile.astro";
+import { getCollection } from "astro:content";
+
+interface Props {
+  series: {
+    id: string;
+    data: {
+      title: string;
+      italic_word: string;
+      position: number;
+      language: "en" | "de";
+      published_at: string;
+      atom_count: number;
+      thesis: string;
+      synthesis_post?: string;
+    };
+  };
+  /** Resolved synthesis post entry (or null) for the cross-link. */
+  synthesisLink?: { href: string; title: string } | null;
+  lang: "en" | "de";
+}
+
+const { series, synthesisLink, lang } = Astro.props;
+const topicSlug = series.id.replace(/\/_series$/, "");
+
+const allAtoms = await getCollection("atom");
+const atoms = allAtoms
+  .filter((a) => a.id.startsWith(`${topicSlug}/`))
+  .sort((a, b) => a.data.position - b.data.position);
+
+// Render title with the italic word(s) wrapped in <em>. Match-from-end for safety.
+const { title, italic_word } = series.data;
+const escapedItalic = italic_word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const titleHead = title.replace(new RegExp(`\\s*${escapedItalic}\\s*$`), "");
+
+const positionStr = String(series.data.position).padStart(2, "0");
+const seriesLabel = lang === "de" ? "SERIE" : "SERIES";
+const atomLabel = lang === "de" ? "ATOME" : "ATOMS";
+const synthLabel = lang === "de" ? "SYNTHESE" : "SYNTHESIS";
+const publishedDate = new Date(series.data.published_at);
+const monthYear = publishedDate.toLocaleString(lang === "de" ? "de-DE" : "en-US", { month: "short", year: "numeric" }).toUpperCase();
+---
+
+<section class="series-section">
+  <header class="series-section__head">
+    <p class="series-section__label">
+      <span class="series-section__label-strong">{seriesLabel} {positionStr}</span>
+      &nbsp;·&nbsp; {series.data.atom_count} {atomLabel} &nbsp;·&nbsp; {monthYear}
+    </p>
+    <h2 class="series-section__title">
+      {titleHead}
+      <em>{italic_word}</em>
+      {series.data.language !== lang && <span class="post-lang-badge">{series.data.language.toUpperCase()}</span>}
+    </h2>
+    <p class="series-section__thesis">{series.data.thesis}</p>
+    {synthesisLink && (
+      <a class="series-section__synthesis" href={synthesisLink.href}>
+        {synthLabel} · {synthesisLink.title} →
+      </a>
+    )}
+  </header>
+
+  <div class={`series-section__row series-section__row--${atoms.length}`}>
+    {atoms.map((atom) => <SeriesTile entry={atom} />)}
+  </div>
+</section>
