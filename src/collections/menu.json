@@ -2,11 +2,13 @@
 	"en": [
 		{ "key": "about", "url": "/about" },
 		{ "key": "writing", "url": "/posts" },
+		{ "key": "series", "url": "/series" },
 		{ "key": "publications", "url": "/links" }
 	],
 	"de": [
 		{ "key": "about", "url": "/de/about" },
 		{ "key": "writing", "url": "/de/posts" },
+		{ "key": "series", "url": "/de/series" },
 		{ "key": "publications", "url": "/de/links" }
 	]
 }
