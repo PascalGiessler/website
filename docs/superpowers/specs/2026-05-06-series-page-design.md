@@ -185,7 +185,7 @@ synthesis_post: "the-invisible-bill-ai-cognitive-debt"   # filename in src/conte
 
 The existing atom files in `04_LinkedinBrand/topics/<topic>/linkedin/scripts/` already have `title`, `series`, `position`. New required field: nothing — we parse the existing structure (HOOK section as the tile hook, full body for the atom page).
 
-Atom files are **copied** (not symlinked) from the brand repo into `src/content/series/<topic>/` at sync time. A small script `scripts/sync-series.mjs` (out of scope for this spec, but referenced) handles the copy + filters to topics that have an `analytics/` folder. For the first build it's fine to copy by hand.
+Atom files are **copied** (not symlinked) from the brand repo into `src/content/series/<topic>/` at sync time. The recurring sync workflow is defined in §9 (script + skill + manual fallback). The first three series may be added by hand during initial implementation; subsequent series go through the script.
 
 ### How the route knows what's published
 
@@ -255,22 +255,101 @@ SERIES · AI COGNITIVE DEBT · SYNTHESIS · THE INVISIBLE BILL →
 - ✅ Never animates layout properties — all motion is opacity/transform/color
 - ✅ `prefers-reduced-motion` honored
 
-## 9. Out of scope (intentional)
+## 9. Adding new series over time (recurring workflow)
+
+The first three series are added by hand during the initial implementation. After that, every new series Pascal publishes on LinkedIn (signaled by the `linkedin/analytics/` folder appearing in `04_LinkedinBrand/topics/<topic>/`) needs to land on the site. This section defines the recurring workflow: a script, a skill, and a manual fallback.
+
+### Detection: what counts as "published"
+
+A series is publishable if `<brand-repo>/topics/<topic>/linkedin/analytics/` exists and contains at least one file (the `.xlsx` analytics export or `analytics-summary.md`). An empty `analytics/` directory does NOT qualify — the existence of measured data is the signal.
+
+The brand-repo path is configured once in `scripts/series-config.json` (or via the `BRAND_REPO_PATH` env var):
+
+```json
+{
+  "brand_repo_path": "/Users/pascalgiessler/Developer/02_Personal/04_LinkedinBrand"
+}
+```
+
+### Helper command: list pending
+
+```
+pnpm series:list-pending
+```
+
+Walks the brand repo, finds topics with populated `analytics/` folders, compares against `src/content/series/`, prints what is published-but-not-on-site:
+
+```
+ai-engineering-culture     3 atoms     EN     not on /series
+claude-code                8 atoms     EN     not on /series
+```
+
+### Sync command
+
+```
+pnpm series:add <topic-slug>
+```
+
+The script (`scripts/sync-series.mjs`):
+
+1. **Validates** the topic has a populated `analytics/` folder (refuses if not — protects against premature publishing).
+2. **Reads** `<brand-repo>/topics/<topic>/linkedin/scripts/[0-9]+-*.md` (filters to numbered atom files; ignores `series.md`).
+3. **Strips** non-website sections from each atom: `## HASHTAGS`, `## FIRST COMMENT`, `## ENGAGEMENT STRATEGY`, `## Visual`. Preserves `## HOOK`, `## BODY`, `## CTA`, frontmatter, and the title.
+4. **Writes** atoms to `src/content/series/<topic>/`. Atom files are **overwritten** if they exist (so brand-repo edits propagate), but a sentinel comment is preserved if the user has hand-edited an atom (see "manual edits" below).
+5. **Generates** a starter `_series.md` from the topic's `narrative-arc.md` (extracts Kernthese / one-line argument as the thesis). If `narrative-arc.md` is absent, writes a `_series.md` with `thesis: TODO` and warns.
+6. **Preserves** `_series.md` if it already exists (site-specific fields like `synthesis_post`, `italic_word`, `position` must not be overwritten by sync).
+7. **Prompts interactively** for missing required fields: `italic_word`, `position` (next available), `synthesis_post` slug. Skips if all are present.
+8. **Reports** which atoms are missing `linkedin_url` in their frontmatter — this field cannot be inferred and must be added manually. The script writes a placeholder `linkedin_url: TODO` so the build does not fail; the atom page footer omits the LinkedIn link until the URL is populated.
+
+### Manual edits
+
+If an atom is hand-edited on the site (typo fix, light edit), the sync script protects it via a sentinel: when reading the existing `src/content/series/<topic>/<atom>.md`, if it contains `<!-- site-edited -->` anywhere, the script prompts before overwriting and writes a `.bak` of the existing file. Default behaviour without the sentinel: silent overwrite (the brand repo is the source of truth).
+
+### Skill: `series-add`
+
+A Claude Code skill at `.claude/skills/series-add/SKILL.md` (project-local, since it depends on this site's content collection structure).
+
+```yaml
+---
+name: series-add
+description: Use when the user wants to add a published LinkedIn series to /series on the website. Triggers on phrases like "add the [topic] series to the site", "publish [topic] on /series", "sync new series", "the [topic] series is ready". Reads brand-repo analytics state, runs pnpm series:add, walks the user through the missing fields conversationally, verifies the build, and reminds them to populate linkedin_url per atom.
+---
+```
+
+The skill body is a step-by-step procedure:
+
+1. Check brand-repo path is configured. If not, configure once.
+2. Run `pnpm series:list-pending` to confirm what's available.
+3. If the user named a specific topic, validate it appears in the pending list. Otherwise let the user pick.
+4. Run `pnpm series:add <topic>`.
+5. For each interactive prompt the script issues, ask the user conversationally and feed the answer back. Specifically: confirm the italic word (suggest the last word of the title; let user override), suggest the next position number, suggest a `synthesis_post` slug if a matching essay exists in `src/content/post/`, otherwise leave blank.
+6. After the script finishes, list atoms with `linkedin_url: TODO` and ask the user to paste the LinkedIn URLs one at a time — write each into the atom's frontmatter.
+7. Run `pnpm build` and report whether the new section renders.
+8. If a matching synthesis essay exists in `/posts`, remind the user to add a "See the source series →" link in the synthesis (out of scope for this skill — it's the inverse direction).
+
+The skill is the user-facing primitive ("add the new series"); the script is the mechanical helper. They work together but each is usable on its own.
+
+### Manual fallback (no script, no skill)
+
+If the script breaks or someone wants to do this by hand, this spec section is the authoritative checklist. The steps map 1:1 to what the script does.
+
+## 10. Out of scope (intentional)
 
 - **Cross-linking back from /posts syntheses to /series**: shipping the source series link inside each existing essay is a separate, lower-priority change. The /series page does not depend on it.
-- **Sync script `scripts/sync-series.mjs`**: copying atoms from `04_LinkedinBrand/topics/` into `src/content/series/` is treated as a one-time manual operation for the first three series. Automation can come later.
 - **Series-level analytics**: the brand repo has analytics summaries; they are deliberately not surfaced anywhere in the public site. If a future page wants to show "what landed," it gets its own spec.
 - **Atom search / filtering / tags**: no taxonomy UI. Three series fit on one screen; UI for filtering 30+ atoms is a problem for when 30+ atoms exist.
 - **OG images per atom**: site already has a generic OG strategy; per-atom OG is a polish item, not core.
 - **RSS for series**: not added in this spec. The existing `rss.xml.js` covers /posts only.
+- **Auto-publishing**: the script does not run on a schedule, does not watch the brand repo. Adding a series is always an explicit user action — protects against accidentally publishing drafts.
 
-## 10. Open questions left for implementation plan
+## 11. Open questions left for implementation plan
 
 - Does Astro's content collections handle the dual-locale routing cleanly with the existing `/de` setup, or does each language need its own collection? *(Implementation plan to verify against current `/de` post handling.)*
-- How is the atom's `linkedin_url` populated? Manual, one-time, in atom frontmatter at sync time.
 - What's the responsive breakpoint where 5-up collapses? Recommend: `lg:` 5-col, `md:` 2-col, default 1-col. Verify against existing breakpoints in `index.astro`.
+- Does the skill live in `.claude/skills/` (project-local, recommended) or `~/.claude/skills/` (user-global)? Recommended project-local because the skill references this repo's content collection structure and `pnpm` scripts. Implementation plan to confirm.
+- Should `pnpm series:list-pending` also flag series whose `analytics/` data has been updated since last sync (in case Pascal wants to refresh hooks)? Recommend no for now — analytics changes don't change the atom content, and atom edits propagate via `pnpm series:add <topic>` re-run.
 
 ---
 
 **Approval:** brainstorm session approved by Pascal on 2026-05-06.
-**Next step:** invoke `superpowers:writing-plans` to produce an implementation plan against this spec.
+**Next step:** invoke `superpowers:writing-plans` to produce an implementation plan covering: (1) the /series page + atom routes + content collection, (2) `scripts/sync-series.mjs` + `pnpm series:list-pending` + `pnpm series:add`, (3) the `series-add` skill at `.claude/skills/series-add/SKILL.md`.
