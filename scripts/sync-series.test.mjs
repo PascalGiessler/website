@@ -1,6 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { stripLinkedInSections, slugFromFilename, parseAtomFrontmatter } from "../src/lib/series.mjs";
+import {
+  stripLinkedInSections,
+  slugFromFilename,
+  parseAtomFrontmatter,
+  topicFromId,
+  parseAtomBody,
+} from "../src/lib/series.mjs";
 
 test("stripLinkedInSections removes HASHTAGS, FIRST COMMENT, ENGAGEMENT STRATEGY, Visual", () => {
   const input = `---
@@ -101,4 +107,85 @@ Body.
   assert.equal(fm.title, "The Paradox");
   assert.equal(fm.position, 1);
   assert.equal(fm.series, "ai-cognitive-debt");
+});
+
+test("stripLinkedInSections preserves H2 inside fenced code blocks", () => {
+  const input = `---
+title: X
+---
+
+## HOOK
+
+The hook.
+
+## BODY
+
+Real body talking about syntax:
+
+\`\`\`markdown
+## HASHTAGS
+should not be stripped
+\`\`\`
+
+End of body.
+
+## HASHTAGS
+
+Real hashtags to strip.
+`;
+  const out = stripLinkedInSections(input);
+  // The H2 inside the code block must survive
+  assert.match(out, /## HASHTAGS\nshould not be stripped/);
+  // The real ## HASHTAGS (after BODY) must be removed
+  assert.doesNotMatch(out, /Real hashtags to strip/);
+});
+
+test("topicFromId splits topic and atom slug", () => {
+  assert.deepEqual(
+    topicFromId("ai-cognitive-debt/01-the-paradox"),
+    { topic: "ai-cognitive-debt", atom: "the-paradox" }
+  );
+});
+
+test("topicFromId throws on id without topic directory", () => {
+  assert.throws(() => topicFromId("01-the-paradox"), /must include topic/);
+});
+
+test("parseAtomBody splits HOOK BODY CTA", () => {
+  const md = `---
+title: X
+---
+
+## HOOK
+
+Hook line one.
+Hook line two.
+
+## BODY
+
+Body paragraph.
+
+## CTA
+
+The CTA question.
+`;
+  const { hook, body, cta } = parseAtomBody(md);
+  assert.equal(hook, "Hook line one.\nHook line two.");
+  assert.equal(body, "Body paragraph.");
+  assert.equal(cta, "The CTA question.");
+});
+
+test("parseAtomBody returns empty strings for missing sections", () => {
+  const md = `---
+title: X
+---
+
+## HOOK
+
+Just the hook.
+`;
+  const { hook, body, cta } = parseAtomBody(md);
+  assert.equal(hook, "Just the hook.");
+  assert.equal(body, "");
+  assert.equal(cta, "");
 });

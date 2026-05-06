@@ -14,18 +14,27 @@ export function stripLinkedInSections(md) {
   const lines = md.split("\n");
   const out = [];
   let skipping = false;
+  let inCodeBlock = false;
 
   for (const line of lines) {
-    const h2 = line.match(/^##\s+(.+?)\s*$/);
-    if (h2) {
-      const heading = h2[1].trim();
-      skipping = STRIP_HEADINGS.has(heading);
-      if (skipping) continue;
+    if (/^```/.test(line)) {
+      inCodeBlock = !inCodeBlock;
+      if (!skipping) out.push(line);
+      continue;
     }
+
+    if (!inCodeBlock) {
+      const h2 = line.match(/^##\s+(.+?)\s*$/);
+      if (h2) {
+        const heading = h2[1].trim();
+        skipping = STRIP_HEADINGS.has(heading);
+        if (skipping) continue;
+      }
+    }
+
     if (!skipping) out.push(line);
   }
 
-  // Trim trailing blank lines from removal
   while (out.length && out[out.length - 1] === "") out.pop();
   return out.join("\n") + "\n";
 }
@@ -56,8 +65,13 @@ export function topicFromId(id) {
 
 /**
  * Parse an atom's frontmatter into a plain object.
- * Minimal YAML parser — handles only the formats the brand repo uses
- * (string, number, quoted-string, single-line lists).
+ *
+ * INTENTIONALLY MINIMAL: this helper is for the sync script only, which reads
+ * single-line scalar fields (position, linkedin_url, title, series). It does
+ * NOT handle multi-line YAML (|, >), nested objects, or complex types.
+ * Astro's content-collection zod schema handles full YAML parsing for the
+ * site's runtime; this helper exists only because the sync script runs
+ * outside Astro and must read frontmatter without spinning up a full parser.
  */
 export function parseAtomFrontmatter(md) {
   const m = md.match(/^---\n([\s\S]*?)\n---/);
