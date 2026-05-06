@@ -1,5 +1,5 @@
 ---
-linkedin_url: https://www.linkedin.com/feed/update/urn:li:share:7449705658729320448
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:share:7450430432086663168
 title: "Your Infrastructure Wasn't Built for This"
 style: thought-leadership
 series: "generative-ai-strategy-leadership"
