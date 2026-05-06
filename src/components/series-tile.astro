@@ -1,0 +1,29 @@
+---
+import { parseAtomBody, slugFromFilename } from "../lib/series.mjs";
+
+interface Props {
+  entry: {
+    id: string;
+    body?: string;
+    data: { title: string; position: number; series: string };
+  };
+}
+
+const { entry } = Astro.props;
+const { topic, atomSlug } = (() => {
+  const idx = entry.id.indexOf("/");
+  return {
+    topic: entry.id.slice(0, idx),
+    atomSlug: slugFromFilename(entry.id.slice(idx + 1) + ".md"),
+  };
+})();
+const { hook } = parseAtomBody(entry.body ?? "");
+const positionStr = String(entry.data.position).padStart(2, "0");
+const arrowText = entry.data.title.toUpperCase();
+---
+
+<a class="series-tile" href={`/series/${topic}/${atomSlug}`}>
+  <span class="series-tile__pos">{positionStr}</span>
+  <span class="series-tile__hook">{hook}</span>
+  <span class="series-tile__arrow">{arrowText} →</span>
+</a>

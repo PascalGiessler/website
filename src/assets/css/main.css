@@ -393,3 +393,84 @@ html.dark {
   background-color: oklch(0.09 0.008 58 / 0.85);
   border-bottom-color: var(--border) !important;
 }
+
+/* ── SERIES TILE ───────────────────────────────────── */
+.series-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 200px;
+  padding: 18px 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 220ms ease-out, background 220ms ease-out;
+}
+
+.series-tile__pos {
+  position: relative;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  transition: padding-left 280ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms ease-out;
+}
+
+.series-tile__pos::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  transform: translate(-12px, -50%) scale(0);
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.series-tile__hook {
+  font-size: 0.78rem;
+  color: var(--text);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.series-tile__arrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  margin-top: auto;
+  transition: transform 220ms ease-out, color 220ms ease-out;
+  display: inline-block;
+}
+
+.series-tile:hover {
+  border-color: var(--border-gold);
+  background: var(--surface-2);
+}
+.series-tile:hover .series-tile__pos { padding-left: 12px; color: var(--gold); }
+.series-tile:hover .series-tile__pos::before { transform: translate(0, -50%) scale(1); }
+.series-tile:hover .series-tile__arrow {
+  transform: translateX(6px);
+  color: var(--gold-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .series-tile,
+  .series-tile__pos,
+  .series-tile__pos::before,
+  .series-tile__arrow {
+    transition: none !important;
+  }
+  .series-tile:hover .series-tile__pos { padding-left: 0; }
+  .series-tile:hover .series-tile__pos::before { transform: translate(-12px, -50%) scale(0); }
+  .series-tile:hover .series-tile__arrow { transform: none; }
+}
