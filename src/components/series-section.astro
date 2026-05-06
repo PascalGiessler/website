@@ -42,7 +42,7 @@ const publishedDate = new Date(series.data.published_at);
 const monthYear = publishedDate.toLocaleString(lang === "de" ? "de-DE" : "en-US", { month: "short", year: "numeric" }).toUpperCase();
 ---
 
-<section class="series-section">
+<section class="series-section" id={topicSlug}>
   <header class="series-section__head">
     <p class="series-section__label">
       <span class="series-section__label-strong">{seriesLabel} {positionStr}</span>

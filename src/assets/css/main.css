@@ -536,11 +536,14 @@ html.dark {
   display: grid;
   gap: 12px;
 }
-.series-section__row--3 { grid-template-columns: 1fr; }
-.series-section__row--4 { grid-template-columns: 1fr; }
+.series-section__row--1,
+.series-section__row--2,
+.series-section__row--3,
+.series-section__row--4,
 .series-section__row--5 { grid-template-columns: 1fr; }
 
 @media (min-width: 640px) {
+  .series-section__row--2,
   .series-section__row--3,
   .series-section__row--4,
   .series-section__row--5 { grid-template-columns: repeat(2, 1fr); }
