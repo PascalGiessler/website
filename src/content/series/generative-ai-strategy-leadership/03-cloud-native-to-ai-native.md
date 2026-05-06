@@ -44,20 +44,3 @@ The CTOs treating this as an infrastructure upgrade will be explaining cost over
 ## CTA
 
 How are you handling GPU capacity right now — cloud APIs, own hardware, or some messy middle ground? Curious what's actually working.
-
-## Sources
-<!-- Internal reference — not part of the published post -->
-- #14 CIO.com — From Cloud-Native to AI-Native (CPU-to-GPU gravity shift)
-- #15 Jimmy Song — AI 2026: Infrastructure, Agents, and the Next Cloud-Native Shift
-- #21 Gartner — AI-Optimized IaaS ($9.2B → $20.6B inference spending, $37.5B total)
-
-## Engagement Strategy
-
-**First Comment**: "Gartner puts total AI IaaS at $37.5B for 2026. The part that matters: inference is growing 2.2x year-over-year while training growth is flattening. For platform teams, this means AI cost shifts from 'one-time investment' to 'ongoing operational expense.' Plan your capacity models accordingly."
-
-**Reply Framework**:
-- If someone asks about GPU orchestration specifics: share architectural perspective without vendor advocacy
-- If someone is cloud-only: ask about their inference bill trajectory, usually opens the conversation
-- If someone mentions edge deployment: engage — it's underexplored and relevant
-
-**Best Posting Time**: Tuesday 7:30-8:30 AM CET

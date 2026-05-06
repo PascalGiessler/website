@@ -189,3 +189,75 @@ Just the hook.
   assert.equal(body, "");
   assert.equal(cta, "");
 });
+
+test("stripLinkedInSections removes Title-Case Engagement Strategy and Sources", () => {
+  const input = `---
+title: X
+---
+
+## HOOK
+Hook.
+
+## BODY
+Body.
+
+## CTA
+CTA.
+
+## Sources
+- Source 1
+
+## Engagement Strategy
+Strategy text.
+`;
+  const out = stripLinkedInSections(input);
+  assert.match(out, /## HOOK/);
+  assert.match(out, /## BODY/);
+  assert.match(out, /## CTA/);
+  assert.doesNotMatch(out, /## Sources/);
+  assert.doesNotMatch(out, /## Engagement Strategy/);
+});
+
+test("stripLinkedInSections removes 'Notiz' prefixed headings (DE)", () => {
+  const input = `---
+title: X
+---
+
+## Hook
+Hook.
+
+## Body
+Body.
+
+## Close
+Close.
+
+## Notiz für die Serie
+Internal note.
+`;
+  const out = stripLinkedInSections(input);
+  assert.match(out, /## Hook/);
+  assert.match(out, /## Body/);
+  assert.match(out, /## Close/);
+  assert.doesNotMatch(out, /## Notiz/);
+});
+
+test("parseAtomBody falls back to Close when CTA is missing (DE atoms)", () => {
+  const md = `---
+title: X
+---
+
+## Hook
+The hook line.
+
+## Body
+Body paragraph.
+
+## Close
+The German closing question?
+`;
+  const { hook, body, cta } = parseAtomBody(md);
+  assert.equal(hook, "The hook line.");
+  assert.equal(body, "Body paragraph.");
+  assert.equal(cta, "The German closing question?");
+});

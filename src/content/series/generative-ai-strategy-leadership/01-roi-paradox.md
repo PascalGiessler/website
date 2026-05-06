@@ -44,19 +44,3 @@ The companies winning aren't spending more. They're spending on different things
 ## CTA
 
 What's the actual barrier to AI ROI in your org — the real one, not the one in the board deck?
-
-## Sources
-<!-- Internal reference — not part of the published post -->
-- #2 Menlo Ventures — 2025 State of GenAI in the Enterprise ($37B spend)
-- #3 Wharton/GBK — 2025 AI Adoption Report ($3.70 vs $10.30 ROI, 80%+ no EBIT impact)
-
-## Engagement Strategy
-
-**First Comment**: "The Wharton study surveyed enterprises across industries. The $10.30 vs $3.70 gap isn't about who picked the better model — it's about who redesigned their operating model. Happy to share specifics from what I've seen work."
-
-**Reply Framework**:
-- If someone shares a barrier: ask "Is that the official barrier or the real one?" — creates depth
-- If someone challenges the data: engage genuinely, Wharton methodology is solid
-- If a vendor shows up: acknowledge without endorsing, steer back to strategy
-
-**Best Posting Time**: Tuesday 7:30-8:30 AM CET

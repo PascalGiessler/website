@@ -57,13 +57,3 @@ Modularität ist nicht nur ein Vendor-Wechsel-Mechanismus. Sie ist die einzige A
 ## Close
 
 Welche Vendor-API-Änderung der letzten 30 Tage hätte Ihre eigene Telemetrie eingefangen?
-
-## Notiz für die Serie
-
-Mit Post 04 ist der Test-Arc abgeschlossen (Wochen 1-4 pro `narrative-arc.md`):
-- 01: Kategorie-Setzung (Modularität + Exit-Fähigkeit)
-- 02: Technische Substanz (Modell-Router)
-- 03: Diagnostik (drei Anzeichen)
-- 04: Konsolidierung (Telemetrie als Souveränitäts-Pfeiler)
-
-**Post 05 (Manifest-Artikel) wird bewusst NICHT vor Wochen 5-6 generiert** — Codex-Pushback aus 2026-05-05: das Manifest soll Konsolidierung des Framings sein, das in 01-04 resoniert hat, nicht Vorab-These ohne Signal. Erst Reaktionen auf 01-04 lesen, dann Manifest mit dem Framing schreiben, das tatsächlich gezogen hat.

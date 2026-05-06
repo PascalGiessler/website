@@ -42,19 +42,3 @@ Governance doesn't slow you down. Rework slows you down. Pulled deployments slow
 ## CTA
 
 Honest question: does your org treat AI governance as something that happens before shipping or after something goes wrong?
-
-## Sources
-<!-- Internal reference — not part of the published post -->
-- #9 McKinsey — State of AI Trust 2026 (trust maturity model, 1/3 at level 3+)
-- #10 PwC — 2025 Responsible AI Survey (maturity score 2.3/5, 77% "working on" governance)
-
-## Engagement Strategy
-
-**First Comment**: "The McKinsey AI Trust Maturity Model evaluates orgs across 5 dimensions. The interesting pattern: companies at level 3+ deploy AI features 40% faster than those at level 1-2. Not despite the governance overhead — because of it. Fewer rollbacks, faster stakeholder sign-off, less rework."
-
-**Reply Framework**:
-- If someone shares a governance horror story: validate, ask what changed after
-- If compliance/legal folks engage: affirm their role, emphasize the engineering collaboration model
-- If someone says governance is overhead: point to deployment velocity correlation
-
-**Best Posting Time**: Wednesday 8:00-9:00 AM CET

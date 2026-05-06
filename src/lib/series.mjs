@@ -4,6 +4,8 @@ const STRIP_HEADINGS_EXACT = new Set([
   "Hashtags",
   "FIRST COMMENT",
   "ENGAGEMENT STRATEGY",
+  "Engagement Strategy",
+  "Sources",
   "Visual",
 ]);
 
@@ -13,7 +15,7 @@ const STRIP_HEADINGS_PREFIX = [
   "Visual ",
   "Self-audit",
   "Bridge note",
-  "Notizen",
+  "Notiz",
   "Pre-publish",
   "Risk flags",
 ];
@@ -129,5 +131,7 @@ export function parseAtomBody(md) {
     }
   }
   const join = (k) => (sections[k] ?? []).join("\n").trim();
-  return { hook: join("HOOK"), body: join("BODY"), cta: join("CTA") };
+  // DE atoms use "Close" as the CTA-equivalent; fall through if CTA is missing.
+  const cta = join("CTA") || join("CLOSE");
+  return { hook: join("HOOK"), body: join("BODY"), cta };
 }

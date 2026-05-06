@@ -40,21 +40,3 @@ They're the ones who spent the boring months designing coordination structures b
 ## CTA
 
 Building agentic systems right now? What's the coordination problem that's eating your lunch? Genuinely want to compare notes.
-
-## Sources
-<!-- Internal reference — not part of the published post -->
-- #13 Futuria — Top 10 Agentic AI Trends (40%+ projects fail by 2027)
-- #16 Deloitte TMT — AI Agent Orchestration (28% maturity, 80% basic automation)
-- #17 Google/InfoQ — Eight Essential Multi-Agent Design Patterns
-- #18 O'Reilly Radar — Designing Effective Multi-Agent Architectures ("prompting fallacy")
-
-## Engagement Strategy
-
-**First Comment**: "If you're evaluating agent frameworks right now — the Google 8-pattern paper from January is the single best resource I've found. Sequential pipeline, coordinator/dispatcher, hierarchical decomposition, and five more. Each fits different use cases. Worth printing out before your next architecture review."
-
-**Reply Framework**:
-- If someone shares a coordination problem: offer a specific pattern (supervisor, blackboard, peer-to-peer) and ask about their constraint
-- If someone mentions a framework (CrewAI, LangGraph): engage on architecture patterns without picking favorites
-- If someone pushes back on failure prediction: welcome the disagreement, point to the maturity gap data
-
-**Best Posting Time**: Thursday 8:00-9:00 AM CET
