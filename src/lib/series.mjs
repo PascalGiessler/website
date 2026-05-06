@@ -1,14 +1,33 @@
-const STRIP_HEADINGS = new Set([
+// Exact heading matches (case-sensitive) to strip
+const STRIP_HEADINGS_EXACT = new Set([
   "HASHTAGS",
+  "Hashtags",
   "FIRST COMMENT",
   "ENGAGEMENT STRATEGY",
   "Visual",
 ]);
 
+// Prefix matches: any H2 whose text starts with one of these strings is stripped
+const STRIP_HEADINGS_PREFIX = [
+  "Visual prompt",
+  "Visual ",
+  "Self-audit",
+  "Bridge note",
+  "Notizen",
+  "Pre-publish",
+  "Risk flags",
+];
+
+function shouldStripHeading(heading) {
+  if (STRIP_HEADINGS_EXACT.has(heading)) return true;
+  return STRIP_HEADINGS_PREFIX.some((p) => heading.startsWith(p));
+}
+
 /**
  * Strip LinkedIn-only sections from an atom's markdown.
- * Keeps frontmatter, HOOK, BODY, CTA. Removes everything from a stripped
- * heading through the next H2 or end-of-file.
+ * Keeps frontmatter, HOOK/Hook, BODY/Body, CTA, Close. Removes LinkedIn-only
+ * sections (hashtags, first comment, engagement strategy, visuals, self-audit,
+ * bridge notes, internal notes) for both EN and DE atom formats.
  */
 export function stripLinkedInSections(md) {
   const lines = md.split("\n");
@@ -27,7 +46,7 @@ export function stripLinkedInSections(md) {
       const h2 = line.match(/^##\s+(.+?)\s*$/);
       if (h2) {
         const heading = h2[1].trim();
-        skipping = STRIP_HEADINGS.has(heading);
+        skipping = shouldStripHeading(heading);
         if (skipping) continue;
       }
     }

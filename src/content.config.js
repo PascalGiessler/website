@@ -23,6 +23,7 @@ const seriesCollection = defineCollection({
 		atom_count: z.number().int().positive(),
 		thesis: z.string(),
 		synthesis_post: z.string().optional(),
+		force_publish: z.boolean().optional(),
 	}),
 });
 
