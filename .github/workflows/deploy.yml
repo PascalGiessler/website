@@ -24,6 +24,13 @@ jobs:
         uses: withastro/action@v3
         with:
           node-version: 22
+        env:
+          # Search Console verification tokens. Set as repo Variables
+          # (Settings → Secrets and variables → Actions → Variables);
+          # falls back to Secrets if you put them there instead.
+          # The site only renders the meta tag when the value is non-empty.
+          PUBLIC_GSC_VERIFY: ${{ vars.PUBLIC_GSC_VERIFY || secrets.PUBLIC_GSC_VERIFY }}
+          PUBLIC_BING_VERIFY: ${{ vars.PUBLIC_BING_VERIFY || secrets.PUBLIC_BING_VERIFY }}
 
   deploy:
     needs: build

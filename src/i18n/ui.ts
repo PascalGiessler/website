@@ -100,8 +100,31 @@ export function useTranslations(lang: Lang) {
 }
 
 /**
+ * Routes that exist only on the EN side (no `/de/...` mirror).
+ * Long-form posts and series atom pages are EN-only by design — the DE
+ * homepage and structural pages exist, but article-level content does not.
+ */
+const ROUTES_WITHOUT_DE_MIRROR: RegExp[] = [
+  /^\/post\//,
+  /^\/series\/[^/]+\/[^/]+/,
+];
+
+/**
+ * Whether the current path has a counterpart in the target language.
+ * Used by the layout to decide whether to emit `<link rel="alternate" hreflang="de">`.
+ */
+export function hasLocalizedMirror(currentPath: string, targetLang: Lang): boolean {
+  if (targetLang === defaultLang) return true;
+  const stripped = currentPath.replace(/^\/de(\/|$)/, '/');
+  const normalized = stripped === '' ? '/' : stripped;
+  return !ROUTES_WITHOUT_DE_MIRROR.some((p) => p.test(normalized));
+}
+
+/**
  * Returns the equivalent URL path in the target language.
- * `/about` ↔ `/de/about`, `/` ↔ `/de/`, `/post/foo` ↔ `/de/post/foo`.
+ * `/about` ↔ `/de/about`, `/` ↔ `/de/`.
+ * Caller should guard with `hasLocalizedMirror` for routes that are EN-only
+ * (otherwise this returns a path to a 404).
  */
 export function getLocalizedPath(currentPath: string, targetLang: Lang): string {
   const stripped = currentPath.replace(/^\/de(\/|$)/, '/');
