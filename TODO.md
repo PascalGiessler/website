@@ -6,11 +6,11 @@ Manual tasks that require your input, decisions, or external assets. Each item l
 
 ## Content & assets (need you)
 
-### 1. OG social card image
-- **What**: 1200×630 PNG at `public/assets/images/og-card.png`
-- **Why**: Currently link previews on LinkedIn/Twitter use `photo_pascal_branded.png` which crops badly into the 1.91:1 ratio.
-- **Wire-up after creation**: change the `ogImage` constant in `src/layouts/main.astro` line 11.
-- **Suggested layout**: dark background, gold accent rule, "Dr. Pascal Giessler" in Cormorant, tagline "AI Principal · Cloud Architect · PhD" in Outfit, small portrait on the right.
+### 1. OG social card image — ✅ shipped 2026-05-10
+- Source-of-truth: `scripts/og-card-template.svg` (1200×630, brand-correct: dark bg, gold rule, Cormorant title, gold-light italic accent, P|G monogram, domain stamp).
+- Rendered output: `public/assets/images/og-card.png` (regenerate via `pnpm og-card`, requires `brew install librsvg`).
+- Wired in: `src/layouts/main.astro:32` already updated.
+- Verify unfurls before launch: Twitter validator, LinkedIn post inspector, Facebook sharing debugger (URLs in `docs/seo-setup.md`).
 
 ### 2. Concrete outcome numbers in pillars and bio
 - **What**: Replace abstract pillar proofs with real numbers. Examples:
@@ -67,12 +67,19 @@ Drafts already published (file exists in `src/content/post/`) are skipped automa
 
 These are code/build tasks I can do whenever you want — listed here so they don't get lost.
 
-### Quick wins
-- **`prefers-reduced-motion`**: fade-up animations should be disabled for users with motion sensitivity. One CSS media query in `src/assets/css/main.css`.
+### Quick wins (still pending)
 - **Reading time on the `/posts` index**: currently only the post detail shows it. Show "X min read" alongside the date in `src/components/posts-loop.astro`.
-- **Article-specific OG type and dates**: post pages currently inherit `og:type=website`. Adding `og:type=article` and `article:published_time` improves LinkedIn unfurl quality.
-- **Custom 404 page**: `src/pages/404.astro` with brand styling — currently the Astro default 404 ships.
-- **Site RSS feed**: generate `/rss.xml` from `src/content/post/*` so readers can subscribe to the site directly (independent of Substack).
+- **Search Console + Bing verification + sitemap submit**: end-to-end procedure documented at `docs/seo-setup.md`. Set `PUBLIC_GSC_VERIFY` + `PUBLIC_BING_VERIFY` repo variables, redeploy, then verify and submit sitemap in each console.
+
+### Recently shipped (verified by codex audit 2026-05-10)
+- ✅ `prefers-reduced-motion` — global media query in `main.css:380-389`, plus canvas-skip in `hero-particles.astro:119-126`.
+- ✅ Article-specific OG type — `post.astro:41-45` passes `ogType="article"` + `articlePublishedTime`; `main.astro:78,86-91` renders.
+- ✅ Custom 404 — `src/pages/404.astro` and `src/pages/de/404.astro` already use brand layout.
+- ✅ Site RSS feed — `src/pages/rss.xml.js` exists; `/rss.xml` linked in head.
+- ✅ Route-aware hreflang — `i18n/ui.ts:hasLocalizedMirror` guards DE alternates so `/post/*` and `/series/[topic]/[atom]/` no longer emit invalid `/de/...` mirrors.
+- ✅ `:focus-visible` — gold-outlined keyboard focus styles in `main.css` BASE block.
+- ✅ Mobile menu `aria-expanded` — `main.js:openMobileMenu/closeMobileMenu` now toggles ARIA state; Escape-to-close added.
+- ✅ SYNDIKAT7 anonymized across all rendered pages, meta keywords, and `experiences.json` per the global no-past-employer-name rule.
 
 ### Medium effort
 - **Per-post Article schema with dates**: `src/layouts/post.astro` already emits article JSON-LD but lacks `datePublished`/`dateModified`. Pass `dateFormatted` through and convert.
