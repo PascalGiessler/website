@@ -49,7 +49,7 @@ See PRODUCT.md and DESIGN.md at the project root. Brand profile source of truth 
 - **Substack (Path to Scale)**: https://pathto.substack.com/ (coming soon)
 - **PhD**: Computer Science, KIT Karlsruhe (WASA group, 8+ years)
 - **Certifications**: Azure Solutions Architect Expert (Microsoft Certified)
-- **Former**: CTO at SYNDIKAT7 (9 years), Board Member at SYNDIKAT7 Ventures, Industry Fellow at 42 Wolfsburg
+- **Former**: 9-year CTO tenure at a DACH engineering services consultancy, board role in a venture-building environment (2017-2022), Industry Fellow at 42 Wolfsburg
 - **Education**: MIT Technology and Innovation (2023), Patrick Kua Technical Leadership Masterclass
 
 ## Common Tasks

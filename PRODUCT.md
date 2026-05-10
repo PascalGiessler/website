@@ -13,7 +13,7 @@ Portfolio website for Dr. Pascal Giessler — Principal AI & Cloud Architect, Ph
 - **Geography**: DACH region (Freiburg-centered) with broader German enterprise tech reach
 
 ## Brand
-- **Identity**: Dr. Pascal Giessler — AI Principal with PhD (KIT Karlsruhe), MIT Technology & Innovation, CTO trajectory at SYNDIKAT7 (9 years), Azure Certified, currently leading strategic AI at Haufe Akademie
+- **Identity**: Dr. Pascal Giessler — AI Principal with PhD (KIT Karlsruhe), MIT Technology & Innovation, 9-year CTO tenure at a DACH engineering services consultancy, Azure Certified, currently leading strategic AI at Haufe Akademie
 - **Tone**: Authoritative, mentor-like, authentic — technical credibility first, strategic implications second
 - **Color anchor**: Deep warm black with amber-gold accents (mirrors LinkedIn header: gold neural network on black)
 - **Anti-references**: Generic SaaS landing pages, purple-gradient AI startup aesthetic, white + teal "innovation" templates, hero-metric dashboards, identical card grids

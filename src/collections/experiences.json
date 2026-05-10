@@ -13,19 +13,19 @@
 	},
 	{
 		"dates": "2013 · 2022",
-		"company": "SYNDIKAT7",
+		"company": "DACH Engineering Services Consultancy",
 		"en": {
 			"role": "CTO",
-			"description": "Grew from Head of Development through Head of R&D to CTO over nine years. Owned the full technical vision: distributed systems, cloud infrastructure, and platform architecture across more than a dozen client industries. Built and scaled engineering teams through every stage of company growth."
+			"description": "Grew from Head of Development through Head of R&D to CTO over nine years at a DACH engineering services consultancy. Owned the full technical vision: distributed systems, cloud infrastructure, and platform architecture across more than a dozen client industries. Built and scaled engineering teams through every stage of company growth."
 		},
 		"de": {
 			"role": "CTO",
-			"description": "Vom Head of Development über Head of R&D zum CTO in neun Jahren. Verantwortlich für die gesamte technische Vision: verteilte Systeme, Cloud-Infrastruktur und Plattformarchitektur in über einem Dutzend Kundenbranchen. Aufbau und Skalierung von Engineering-Teams in jeder Wachstumsphase des Unternehmens."
+			"description": "Vom Head of Development über Head of R&D zum CTO in neun Jahren bei einer DACH-Engineering-Services-Beratung. Verantwortlich für die gesamte technische Vision: verteilte Systeme, Cloud-Infrastruktur und Plattformarchitektur in über einem Dutzend Kundenbranchen. Aufbau und Skalierung von Engineering-Teams in jeder Wachstumsphase des Unternehmens."
 		}
 	},
 	{
 		"dates": "2017 · 2022",
-		"company": "SYNDIKAT7 Ventures",
+		"company": "Venture-building Environment",
 		"en": {
 			"role": "Board Member",
 			"description": "Venture-level oversight for portfolio companies. Advised on technical architecture, engineering team structure, and growth strategy at the intersection of technology and business."
