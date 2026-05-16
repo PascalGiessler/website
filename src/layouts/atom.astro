@@ -41,9 +41,43 @@ const lastWord = words.pop() ?? "";
 const titleHead = words.join(" ");
 
 const linkedinUrl = atom.data.linkedin_url && atom.data.linkedin_url !== "TODO" ? atom.data.linkedin_url : null;
+
+const rawPublishedDate = atom.data.scheduled_date || series.data.published_at;
+const publishedISO = rawPublishedDate ? new Date(rawPublishedDate).toISOString() : undefined;
+const atomDescription = hookText.split("\n")[0] ?? atom.data.title;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": atom.data.title,
+  "description": atomDescription,
+  ...(publishedISO ? { "datePublished": publishedISO, "dateModified": publishedISO } : {}),
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Pascal Giessler",
+    "url": "https://pascal-giessler.de"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Dr. Pascal Giessler",
+    "url": "https://pascal-giessler.de"
+  },
+  "url": Astro.url.href,
+  "mainEntityOfPage": Astro.url.href,
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": series.data.title
+  }
+};
 ---
 
-<Layout title={atom.data.title} description={hookText.split("\n")[0] ?? atom.data.title}>
+<Layout
+  title={atom.data.title}
+  description={atomDescription}
+  ogType="article"
+  articlePublishedTime={publishedISO}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />
   <main class="relative z-30 max-w-3xl mx-auto pb-24" style="padding-top: 7rem;">
 
     <div class="px-6 pb-10 mb-10 border-b lg:px-0" style="border-color: var(--border);">

@@ -62,14 +62,27 @@ Sitemap is auto-generated at build time by `@astrojs/sitemap` (configured in `as
 - `dist/sitemap-index.xml` — index pointing at `dist/sitemap-0.xml`
 - `dist/sitemap-0.xml` — full URL list with i18n hreflang annotations
 
+Every rendered HTML page also advertises the sitemap via `<link rel="sitemap" type="application/xml" href="/sitemap-index.xml">` in `<head>` (emitted by `src/layouts/main.astro`). Not required for Google/Bing — `robots.txt` is the authoritative discovery channel — but a valid hint for third-party crawlers and SEO auditors.
+
 **Sanity check after build:**
 
 ```bash
 grep -c "<loc>" dist/sitemap-0.xml   # current count: 26
 grep -c "/de/post/" dist/sitemap-0.xml   # should be 0 — those routes don't exist
+grep -l 'rel="sitemap"' dist/index.html dist/series/*/*.html | wc -l  # every page
 ```
 
 The `i18n/ui.ts:hasLocalizedMirror` guard is what keeps `/de/post/...` and `/de/series/[topic]/[atom]/` out of the sitemap.
+
+## 3a. Structured data (JSON-LD)
+
+Three schema types ship in HTML, all rendered server-side:
+
+- **Person** — `main.astro:40-72`, present on every page. Identifies Pascal as the site's entity (jobTitle, worksFor, alumniOf, sameAs, knowsAbout, address).
+- **Article** — `post.astro:20-38`, on `/post/*`. Includes `datePublished` + `dateModified` from `dateFormatted` frontmatter.
+- **Article + isPartOf CreativeWorkSeries** — `atom.astro:49-71`, on `/series/<topic>/<atom>/`. Date comes from atom `scheduled_date` (fallback: series `published_at`). The `isPartOf` link tells crawlers each atom belongs to a coherent series.
+
+Validate after changes via Google's [Rich Results Test](https://search.google.com/test/rich-results) and [Schema Markup Validator](https://validator.schema.org/).
 
 ---
 

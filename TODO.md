@@ -71,6 +71,11 @@ These are code/build tasks I can do whenever you want — listed here so they do
 - **Reading time on the `/posts` index**: currently only the post detail shows it. Show "X min read" alongside the date in `src/components/posts-loop.astro`.
 - **Search Console + Bing verification + sitemap submit**: end-to-end procedure documented at `docs/seo-setup.md`. Set `PUBLIC_GSC_VERIFY` + `PUBLIC_BING_VERIFY` repo variables, redeploy, then verify and submit sitemap in each console.
 
+### Recently shipped (verified 2026-05-16)
+- ✅ Sitemap `<link>` in `<head>` — `main.astro` emits `<link rel="sitemap" type="application/xml" href="/sitemap-index.xml">` on every page alongside the RSS link.
+- ✅ Atom Article JSON-LD — `atom.astro` now emits full `Article` schema with `datePublished`/`dateModified` (from `scheduled_date || series.published_at`) plus `isPartOf` → `CreativeWorkSeries`; also passes `ogType="article"` + `articlePublishedTime` for atoms (9 URLs).
+- ✅ Per-post Article schema with dates — `post.astro:18-38` already passes `dateFormatted` through `isoFromDateFormatted` to populate both `datePublished` and `dateModified` (TODO entry below was stale and is removed).
+
 ### Recently shipped (verified by codex audit 2026-05-10)
 - ✅ `prefers-reduced-motion` — global media query in `main.css:380-389`, plus canvas-skip in `hero-particles.astro:119-126`.
 - ✅ Article-specific OG type — `post.astro:41-45` passes `ogType="article"` + `articlePublishedTime`; `main.astro:78,86-91` renders.
@@ -82,7 +87,6 @@ These are code/build tasks I can do whenever you want — listed here so they do
 - ✅ SYNDIKAT7 anonymized across all rendered pages, meta keywords, and `experiences.json` per the global no-past-employer-name rule.
 
 ### Medium effort
-- **Per-post Article schema with dates**: `src/layouts/post.astro` already emits article JSON-LD but lacks `datePublished`/`dateModified`. Pass `dateFormatted` through and convert.
 - **Lighthouse pass**: run lighthouse in production build, address any remaining LCP/CLS regressions.
 - **Image optimization**: `photo_pascal_branded.png` is preloaded but unoptimized. Convert to AVIF/WebP via `astro:assets` and serve responsive sizes.
 - **Newsletter inline form**: a one-line "subscribe to Principal Stack" inline form (Substack supports a lightweight embed) at the bottom of each article. Improves newsletter conversion vs the current "go visit Substack" link.
