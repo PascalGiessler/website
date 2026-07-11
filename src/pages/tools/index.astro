@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/main.astro";
+import { tools } from "../../data/tools";
+
+const sorted = [...tools].sort((a, b) => a.position - b.position);
+---
+
+<Layout
+  title="Tools — instruments against Cognitive Debt"
+  description="Open, sovereign AI tools built by Dr. Pascal Giessler. AI Radar, a self-hosted technology radar that computes its own map, and Idea Assessor, an instrument that forces judgment on ideas."
+  keywords="AI Radar, Idea Assessor, Pascal Giessler, sovereign AI, Cognitive Debt, agentic AI tools, self-hosted, open source, DACH"
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
+    <div class="mb-14">
+      <p class="section-label mb-4 fade-up delay-1">Tools</p>
+      <h1
+        class="fade-up delay-2"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
+      >
+        Instruments, not <em style="font-style: italic; color: var(--gold-light);">demos</em>
+      </h1>
+      <p class="fade-up delay-3 mt-5" style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7; max-width: 42rem;">
+        Two tools I built and use. Each one is proof of the same thesis: valuable AI forces a decision instead of deferring it. Both are sovereign by design, nachvollziehbar, unabhängig, resilient.
+      </p>
+    </div>
+
+    <div class="fade-up delay-3 grid grid-cols-1 gap-4">
+      {sorted.map((tool) => (
+        <a href={`/tools/${tool.slug}/`} class="writing-card" style="text-decoration: none;">
+          <p class="writing-card-label">{tool.en.status}</p>
+          <h3 class="writing-card-title">{tool.name}</h3>
+          <p class="writing-card-desc">{tool.en.tagline}</p>
+          <p class="mt-4" style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim);">
+            Read more →
+          </p>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,40 @@
+---
+import Layout from "../../../layouts/main.astro";
+import { tools } from "../../../data/tools";
+
+const sorted = [...tools].sort((a, b) => a.position - b.position);
+---
+
+<Layout
+  title="Werkzeuge — Instrumente gegen Cognitive Debt"
+  description="Offene, souveräne KI-Werkzeuge von Dr. Pascal Giessler. AI Radar, ein self-hosted Technologie-Radar, der seine Karte selbst berechnet, und Idea Assessor, ein Instrument, das ein Urteil über Ideen erzwingt."
+  keywords="AI Radar, Idea Assessor, Pascal Giessler, souveräne KI, Cognitive Debt, Agentic AI, self-hosted, Open Source, DACH"
+>
+  <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
+    <div class="mb-14">
+      <p class="section-label mb-4 fade-up delay-1">Werkzeuge</p>
+      <h1
+        class="fade-up delay-2"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
+      >
+        Instrumente, keine <em style="font-style: italic; color: var(--gold-light);">Demos</em>
+      </h1>
+      <p class="fade-up delay-3 mt-5" style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7; max-width: 42rem;">
+        Zwei Werkzeuge, die ich gebaut habe und nutze. Jedes ist der Beweis derselben These: Wertvolle KI erzwingt eine Entscheidung, statt sie zu vertagen. Beide sind souverän gebaut: nachvollziehbar, unabhängig, resilient.
+      </p>
+    </div>
+
+    <div class="fade-up delay-3 grid grid-cols-1 gap-4">
+      {sorted.map((tool) => (
+        <a href={`/de/tools/${tool.slug}/`} class="writing-card" style="text-decoration: none;">
+          <p class="writing-card-label">{tool.de.status}</p>
+          <h3 class="writing-card-title">{tool.name}</h3>
+          <p class="writing-card-desc">{tool.de.tagline}</p>
+          <p class="mt-4" style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim);">
+            Mehr lesen →
+          </p>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

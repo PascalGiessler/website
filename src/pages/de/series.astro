@@ -29,7 +29,7 @@ function synthesisLinkFor(seriesEntry: typeof sorted[number]) {
   const post = allPosts.find((p) => p.id.replace(/\.md$/, "") === slug);
   if (!post) return null;
   // /de/post/<slug> doesn't exist — fall back to /post/<slug> per the existing convention
-  return { href: `/post/${slug}`, title: post.data.title };
+  return { href: `/post/${slug}/`, title: post.data.title };
 }
 ---
 

@@ -24,7 +24,7 @@ const sortedPosts = allPosts
 const postsLoop = (count ? sortedPosts.slice(0, count) : sortedPosts).map((post) => ({
   ...(post.data || {}),
   readingTime: readingMinutes(post.body),
-  link: `/post/${post.id.replace(/\.md$/, '')}`,
+  link: `/post/${post.id.replace(/\.md$/, '')}/`,
   lang: post.data.lang || 'en',
 }));
 ---

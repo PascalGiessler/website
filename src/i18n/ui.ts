@@ -19,6 +19,8 @@ export const ui = {
     'nav.writing': 'Writing',
     'nav.publications': 'Publications',
     'nav.series': 'Series',
+    'nav.tools': 'Tools',
+    'nav.glossary': 'Glossary',
     'series.eyebrow': 'Series',
     'series.heroTitle': 'Three',
     'series.heroTitleAccent': 'arcs',
@@ -56,6 +58,8 @@ export const ui = {
     'nav.writing': 'Schreiben',
     'nav.publications': 'Publikationen',
     'nav.series': 'Serien',
+    'nav.tools': 'Werkzeuge',
+    'nav.glossary': 'Glossar',
     'series.eyebrow': 'Serien',
     'series.heroTitle': 'Drei',
     'series.heroTitleAccent': 'Bögen',
@@ -130,10 +134,12 @@ export function getLocalizedPath(currentPath: string, targetLang: Lang): string 
   const stripped = currentPath.replace(/^\/de(\/|$)/, '/');
   const normalized = stripped === '' ? '/' : stripped;
 
-  if (targetLang === defaultLang) {
-    return normalized;
-  }
+  const base = targetLang === defaultLang
+    ? normalized
+    : normalized === '/' ? '/de/' : `/de${normalized}`;
 
-  if (normalized === '/') return '/de/';
-  return `/de${normalized}`;
+  // Keep every generated link on the trailing-slash form (matches astro.config
+  // trailingSlash:'always'), so hreflang + the language switcher never point at a
+  // URL that GitHub Pages would 301-redirect.
+  return base.endsWith('/') ? base : `${base}/`;
 }

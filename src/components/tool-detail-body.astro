@@ -1,0 +1,101 @@
+---
+// Renders the body of a tool detail page (hero, sections, FAQ, links).
+// Layout props + JSON-LD are set by the wrapping page so this stays presentational.
+import type { Tool } from "../data/tools";
+
+interface Props {
+  tool: Tool;
+  lang: "en" | "de";
+}
+
+const { tool, lang } = Astro.props as Props;
+const c = tool[lang];
+const backHref = lang === "de" ? "/de/tools/" : "/tools/";
+const backLabel = lang === "de" ? "← Alle Werkzeuge" : "← All tools";
+const stackLabel = lang === "de" ? "Stack" : "Stack";
+const faqLabel = lang === "de" ? "Häufige Fragen" : "Questions";
+const repoLabel = lang === "de" ? "Code (MIT)" : "Code (MIT)";
+---
+
+<main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
+  <a
+    href={backHref}
+    class="fade-up delay-1"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--gold-dim); text-decoration: none;"
+  >
+    {backLabel}
+  </a>
+
+  <div class="mt-8 mb-12">
+    <p class="section-label mb-4 fade-up delay-1">{c.status}</p>
+    <h1
+      class="fade-up delay-2"
+      style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--text);"
+    >
+      {tool.name}
+    </h1>
+    <p
+      class="fade-up delay-3 mt-4"
+      style="font-family: 'Cormorant', Georgia, serif; font-style: italic; font-size: clamp(1.3rem, 3vw, 1.7rem); color: var(--gold-light); line-height: 1.3;"
+    >
+      {c.tagline}
+    </p>
+  </div>
+
+  <div class="fade-up delay-3">
+    <p style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7;">{c.intro}</p>
+
+    <blockquote
+      class="my-8 pl-5"
+      style="border-left: 2px solid var(--border-gold); color: var(--text); font-family: 'Cormorant', Georgia, serif; font-size: 1.35rem; font-style: italic; line-height: 1.45;"
+    >
+      {c.thesis}
+    </blockquote>
+
+    {c.sections.map((section) => (
+      <section class="mt-10">
+        <h2 class="section-label mb-3">{section.heading}</h2>
+        <p style="color: var(--text-2); font-size: 1.02rem; line-height: 1.7;">{section.body}</p>
+      </section>
+    ))}
+
+    <section class="mt-10">
+      <h2 class="section-label mb-4">{stackLabel}</h2>
+      <div class="flex flex-wrap gap-2">
+        {tool.stack.map((item) => (
+          <span class="credential">{item}</span>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12 flex flex-wrap gap-3">
+      {tool.demo && (
+        <a href={tool.demo} target="_blank" rel="noopener" class="btn-gold">
+          {c.visitLabel ?? "Visit"} ↗
+        </a>
+      )}
+      {tool.repo && (
+        <a href={tool.repo} target="_blank" rel="noopener" class="btn-outline">
+          {repoLabel} ↗
+        </a>
+      )}
+      {!tool.demo && !tool.repo && c.noLinkNote && (
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-3);">
+          {c.noLinkNote}
+        </p>
+      )}
+    </section>
+
+    <section class="mt-14">
+      <h2 class="section-label mb-5">{faqLabel}</h2>
+      <div class="grid grid-cols-1 gap-5">
+        {c.faq.map((f) => (
+          <div>
+            <h3 style="font-family: 'Cormorant', Georgia, serif; font-size: 1.35rem; color: var(--text); margin-bottom: 0.35rem;">{f.q}</h3>
+            <p style="color: var(--text-2); font-size: 1rem; line-height: 1.65;">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</main>

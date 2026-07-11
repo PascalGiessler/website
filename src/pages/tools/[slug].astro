@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/main.astro";
+import ToolDetailBody from "../../components/tool-detail-body.astro";
+import { tools, getTool, toolJsonLd } from "../../data/tools";
+
+export function getStaticPaths() {
+  return tools.map((tool) => ({ params: { slug: tool.slug } }));
+}
+
+const { slug } = Astro.params;
+const tool = getTool(slug)!;
+const c = tool.en;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const jsonLd = toolJsonLd(tool, "en", pageUrl);
+---
+
+<Layout
+  title={`${tool.name} — ${c.tagline}`}
+  description={c.intro}
+  keywords={`${tool.name}, ${tool.stack.join(", ")}, Pascal Giessler, Cognitive Debt, Sovereign AI, Agentic AI, DACH`}
+  jsonLd={jsonLd}
+>
+  <ToolDetailBody tool={tool} lang="en" />
+</Layout>

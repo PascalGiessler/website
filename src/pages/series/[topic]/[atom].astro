@@ -52,9 +52,9 @@ export async function getStaticPaths() {
         props: {
           atom: a,
           series,
-          prev: prev && prevSlug ? { href: `/series/${topic}/${prevSlug}`, title: prev.data.title, position: prev.data.position } : null,
-          next: next && nextSlug ? { href: `/series/${topic}/${nextSlug}`, title: next.data.title, position: next.data.position } : null,
-          synthesisHref: synthPost ? `/post/${synthSlug}` : null,
+          prev: prev && prevSlug ? { href: `/series/${topic}/${prevSlug}/`, title: prev.data.title, position: prev.data.position } : null,
+          next: next && nextSlug ? { href: `/series/${topic}/${nextSlug}/`, title: next.data.title, position: next.data.position } : null,
+          synthesisHref: synthPost ? `/post/${synthSlug}/` : null,
           synthesisTitle: synthPost ? synthPost.data.title : null,
         },
       });

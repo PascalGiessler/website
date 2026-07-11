@@ -22,7 +22,7 @@ const positionStr = String(entry.data.position).padStart(2, "0");
 const arrowText = entry.data.title.toUpperCase();
 ---
 
-<a class="series-tile" href={`/series/${topic}/${atomSlug}`}>
+<a class="series-tile" href={`/series/${topic}/${atomSlug}/`}>
   <span class="series-tile__pos">{positionStr}</span>
   <span class="series-tile__hook">{hook}</span>
   <span class="series-tile__arrow">{arrowText} →</span>

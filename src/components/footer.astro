@@ -3,7 +3,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/ui";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const impressumHref = lang === "de" ? "/de/impressum" : "/impressum";
+const impressumHref = lang === "de" ? "/de/impressum/" : "/impressum/";
 ---
 
 <footer

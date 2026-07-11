@@ -1,0 +1,17 @@
+---
+import Layout from "../../layouts/main.astro";
+import GlossaryBody from "../../components/glossary-body.astro";
+import { glossaryJsonLd } from "../../data/glossary";
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const jsonLd = glossaryJsonLd("en", pageUrl);
+---
+
+<Layout
+  title="Agentic AI & Harness Glossary"
+  description="A dry, precise glossary of agentic AI: harness, agents, tool use, MCP, RAG, GraphRAG, guardrails, evals, and the sovereignty terms (Cognitive Debt, sovereign AI, provenance) that decide who owns the system. By Dr. Pascal Giessler."
+  keywords="Agentic AI glossary, Harness, AI Agent, Tool Use, MCP, RAG, GraphRAG, Guardrails, Eval, Context Engineering, Cognitive Debt, Sovereign AI, Provenance, Vendor Lock-in, EU AI Act, Pascal Giessler, DACH"
+  jsonLd={jsonLd}
+>
+  <GlossaryBody lang="en" />
+</Layout>

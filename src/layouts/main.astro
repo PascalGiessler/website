@@ -18,8 +18,13 @@ import { getLangFromUrl, getLocalizedPath, hasLocalizedMirror, useTranslations }
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { title, description, keywords, ogType, articlePublishedTime } = Astro.props;
+const { title, description, keywords, ogType, articlePublishedTime, jsonLd } = Astro.props;
 const resolvedOgType = ogType || "website";
+
+// Page-specific structured data (SoftwareApplication, FAQPage, DefinedTermSet, …).
+// Pass a single object or an array; each becomes its own ld+json script in <head>,
+// alongside the global Person schema below.
+const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
 const metaTitle = title ? (title.includes("Pascal Giessler") ? title : `${title} | Pascal Giessler`) : t("meta.siteTitle");
 const metaDescription = description || t("meta.defaultDescription");
@@ -117,6 +122,9 @@ const personSchema = {
     <link rel="preload" as="image" href="/assets/images/photo_pascal_branded.png" />
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    {jsonLdBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
 
     <script is:inline>
       if (typeof Storage !== 'undefined') {

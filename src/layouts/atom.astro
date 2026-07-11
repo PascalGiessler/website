@@ -33,7 +33,7 @@ const positionStr = String(atom.data.position).padStart(2, "0");
 const totalStr = String(series.data.atom_count).padStart(2, "0");
 const ofLabel = lang === "de" ? "VON" : "OF";
 const atomLabel = "ATOM";
-const seriesIndexHref = lang === "de" ? "/de/series" : "/series";
+const seriesIndexHref = lang === "de" ? "/de/series/" : "/series/";
 
 // Italicize the last word of the title
 const words = atom.data.title.trim().split(/\s+/);

@@ -6,7 +6,7 @@ const { frontmatter, prev, next } = Astro.props;
 const shellLang = getLangFromUrl(Astro.url);
 const t = useTranslations(shellLang);
 const postLang = (frontmatter.lang || "en").toUpperCase();
-const allWritingHref = shellLang === "de" ? "/de/posts" : "/posts";
+const allWritingHref = shellLang === "de" ? "/de/posts/" : "/posts/";
 
 function isoFromDateFormatted(d) {
   if (!d) return undefined;
@@ -119,7 +119,7 @@ const articleSchema = {
         <div>
           {prev && (
             <a
-              href={`/post/${prev.slug}`}
+              href={`/post/${prev.slug}/`}
               class="group block"
               style="text-decoration: none;"
             >
@@ -134,7 +134,7 @@ const articleSchema = {
         <div class="text-right">
           {next && (
             <a
-              href={`/post/${next.slug}`}
+              href={`/post/${next.slug}/`}
               class="group block"
               style="text-decoration: none;"
             >

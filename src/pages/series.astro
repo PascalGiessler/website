@@ -30,7 +30,7 @@ function synthesisLinkFor(seriesEntry: typeof sorted[number]) {
   if (!slug || slug === "TODO") return null;
   const post = allPosts.find((p) => p.id.replace(/\.md$/, "") === slug);
   if (!post) return null;
-  return { href: `/post/${slug}`, title: post.data.title };
+  return { href: `/post/${slug}/`, title: post.data.title };
 }
 ---
 

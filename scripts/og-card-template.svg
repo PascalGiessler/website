@@ -1,34 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Dr. Pascal Giessler — AI Principal &amp; Cloud Architect">
+  <!--
+    Composition note: Google's SERP thumbnail center-crops this 1200x630 card to a
+    square (~x 285–915). All essential content is therefore centered and kept inside
+    that safe zone, so the title + monogram survive the crop while the full card still
+    reads well for LinkedIn / X / Facebook unfurls. Regenerate with `pnpm og-card`.
+  -->
+
   <!-- Background -->
   <rect width="1200" height="630" fill="#0e0b08"/>
 
-  <!-- Subtle grain via radial gradient highlight (top-left) -->
+  <!-- Soft centered warm glow -->
   <defs>
-    <radialGradient id="warm" cx="0" cy="0" r="900" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#1a120a" stop-opacity="0.6"/>
+    <radialGradient id="warm" cx="600" cy="300" r="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c1309" stop-opacity="0.85"/>
       <stop offset="1" stop-color="#0e0b08" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#warm)"/>
 
-  <!-- Eyebrow gold rule -->
-  <line x1="100" y1="140" x2="220" y2="140" stroke="#d49140" stroke-width="3" stroke-linecap="round"/>
+  <!-- P|G monogram, centered top (consistent with favicon + header logo) -->
+  <line x1="600" y1="86" x2="600" y2="168" stroke="#d49140" stroke-width="3" stroke-linecap="round"/>
+  <text x="570" y="151" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="66" font-weight="500" fill="#ede4d3" text-anchor="middle">P</text>
+  <text x="630" y="151" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="66" font-weight="500" fill="#ede4d3" text-anchor="middle">G</text>
 
   <!-- Eyebrow label -->
-  <text x="100" y="190" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="22" font-weight="500" fill="#d49140" letter-spacing="0.32em">DR. PASCAL GIESSLER</text>
+  <text x="600" y="238" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="22" font-weight="500" fill="#d49140" letter-spacing="0.3em" text-anchor="middle">DR. PASCAL GIESSLER</text>
 
-  <!-- Main title — two-line composition for vertical rhythm -->
-  <text x="100" y="350" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="96" font-weight="400" fill="#ede4d3">AI Principal &amp;</text>
-  <text x="100" y="450" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="96" font-weight="400" font-style="italic" fill="#d4b572">Cloud Architect</text>
+  <!-- Main title — two centered lines for vertical rhythm -->
+  <text x="600" y="360" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="80" font-weight="400" fill="#ede4d3" text-anchor="middle">AI Principal &amp;</text>
+  <text x="600" y="448" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="80" font-weight="400" font-style="italic" fill="#d4b572" text-anchor="middle">Cloud Architect</text>
+
+  <!-- Gold rule under the title -->
+  <line x1="552" y1="496" x2="648" y2="496" stroke="#d49140" stroke-width="2.5" stroke-linecap="round"/>
 
   <!-- Credential tagline -->
-  <text x="100" y="520" font-family="Outfit, 'Helvetica Neue', system-ui, sans-serif" font-size="28" font-weight="400" fill="#a39d8d">PhD · KIT Karlsruhe · MIT · Azure Solutions Architect Expert</text>
+  <text x="600" y="542" font-family="Outfit, 'Helvetica Neue', system-ui, sans-serif" font-size="24" font-weight="400" fill="#a39d8d" text-anchor="middle">PhD · KIT Karlsruhe · MIT · Azure Architect Expert</text>
 
-  <!-- Domain stamp bottom-left -->
-  <text x="100" y="585" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="18" font-weight="500" fill="#7d7567" letter-spacing="0.18em">PASCAL-GIESSLER.DE</text>
-
-  <!-- P|G monogram top-right (consistent with favicon + header logo) -->
-  <line x1="1050" y1="100" x2="1050" y2="190" stroke="#d49140" stroke-width="3" stroke-linecap="round"/>
-  <text x="1024" y="172" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="64" font-weight="500" fill="#ede4d3" text-anchor="middle">P</text>
-  <text x="1078" y="172" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="64" font-weight="500" fill="#ede4d3" text-anchor="middle">G</text>
+  <!-- Domain stamp -->
+  <text x="600" y="590" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="17" font-weight="500" fill="#7d7567" letter-spacing="0.22em" text-anchor="middle">PASCAL-GIESSLER.DE</text>
 </svg>
