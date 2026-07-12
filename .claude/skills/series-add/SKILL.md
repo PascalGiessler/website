@@ -15,7 +15,7 @@ Use this skill when Pascal says any of:
 ## Steps
 
 1. **Confirm the brand repo is configured.**
-   Check `scripts/series-config.json` exists. If not, ask Pascal for the path and create it. Default expected: `/Users/pascalgiessler/Developer/02_Personal/04_LinkedinBrand`.
+   Check `scripts/series-config.json` exists. If not, ask Pascal for the path and create it. Default expected: `/Users/pascalgiessler/Developer/02_Personal/07_Brand` (Brand-OS; series source lives in `07_content/topics/`, exposed via the root `topics/` symlink). The legacy `04_LinkedinBrand` repo is archived as of 2026-05-20.
 
 2. **List pending topics.**
    Run `pnpm series:list-pending` and report what's available. If Pascal already named a topic, validate it appears. If not, ask which one.
