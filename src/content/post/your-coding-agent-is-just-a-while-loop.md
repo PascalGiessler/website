@@ -5,7 +5,7 @@ dateFormatted: Jun 11th, 2026
 lang: en
 ---
 
-*Principal Stack, Issue 01 of Agentic Engineering Patterns. Originally published on [Substack](https://pascalgiessler.substack.com/).*
+*Issue 01 of Agentic Engineering Patterns. Originally published on [The Principal Stack](https://principalstack.substack.com/).*
 
 ![An abstract spiral of light, the loop at the centre of every coding agent](/assets/images/posts/agent-while-loop-header.webp)
 

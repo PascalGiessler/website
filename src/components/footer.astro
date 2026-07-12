@@ -1,9 +1,12 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/ui";
+import { SUBSTACK } from "../data/entity";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const impressumHref = lang === "de" ? "/de/impressum/" : "/impressum/";
+// Send readers to the publication written in their language.
+const substack = SUBSTACK[lang];
 ---
 
 <footer
@@ -39,9 +42,9 @@ const impressumHref = lang === "de" ? "/de/impressum/" : "/impressum/";
       </a>
 
       <a
-        href="https://principalstack.substack.com/"
+        href={substack.url}
         target="_blank"
-        aria-label="Substack"
+        aria-label={`Substack: ${substack.name}`}
         class="transition-colors duration-200"
         style="color: var(--text-3);"
         onmouseover="this.style.color='var(--gold)'"

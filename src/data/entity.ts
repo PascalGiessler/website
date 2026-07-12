@@ -34,6 +34,26 @@ export const KNOWS_ABOUT = [
   "Technical Leadership",
 ];
 
+/**
+ * The two Substack publications. Names verified against the publications
+ * themselves (2026-07-12). They are language-specific, not translations:
+ * send German readers to the German one, English readers to the English one.
+ * Getting this backwards leaks the DACH audience into an English newsletter.
+ */
+export const SUBSTACK = {
+  de: {
+    name: "Stack und Kalkül",
+    url: "https://pascalgiessler.substack.com/",
+    tagline: "Souveräne KI für DACH-Entscheider. Modular, exit-fähig, EU-compliant.",
+  },
+  en: {
+    name: "The Principal Stack",
+    url: "https://principalstack.substack.com/",
+    tagline:
+      "Deep technical writing on AI-native engineering and architecture. The decisions, trade-offs, and patterns that matter at scale.",
+  },
+} as const;
+
 /** Verified public profiles. More verified sameAs = stronger entity confidence. */
 export const SAME_AS = [
   "https://www.linkedin.com/in/pgiessler/",

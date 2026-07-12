@@ -68,9 +68,10 @@ Lokales PRODUCT.md + DESIGN.md beschreiben die Web-spezifische Implementierung; 
 - **Location**: Freiburg, Germany
 - **LinkedIn**: https://www.linkedin.com/in/pgiessler/
 - **GitHub**: https://github.com/PascalGiessler
-- **Substack DE ("Stack und Haltung")**: https://pascalgiessler.substack.com/ — canonical, primärer Sprint-Kanal (Cadence: Mi 08:00 CET)
-- **Substack EN ("Principal Stack")**: https://pathto.substack.com/ — monthly EN Field-Notes
-- _(deprecated 2026-05-18: "The Engineer's Library" / "Path to Scale" — SoT für Naming ist `07_Brand/03_channels/overview.md`)_
+- **Substack DE ("Stack und Kalkül")**: https://pascalgiessler.substack.com/ — deutsche Stories, primärer DACH-Kanal. Tagline: "Souveräne KI für DACH-Entscheider. Modular, exit-fähig, EU-compliant."
+- **Substack EN ("The Principal Stack")**: https://principalstack.substack.com/ — englische Stories (AI-native engineering, Architektur)
+- Beides ist in `src/data/entity.ts` als `SUBSTACK` hinterlegt. **Deutsche Seiten verlinken die deutsche Publikation, englische die englische** — sonst leitet man das DACH-Publikum in einen englischen Newsletter. (Namen am 2026-07-12 gegen die Publikationen selbst verifiziert.)
+- _(deprecated: "The Engineer's Library" / "Path to Scale" / "Stack und Haltung" / `pathto.substack.com` — allesamt veraltete Namen bzw. URLs)_
 - **PhD**: Computer Science, KIT Karlsruhe (WASA group, 8+ years)
 - **Certifications**: Azure Solutions Architect Expert (Microsoft Certified)
 - **Former**: 9-year CTO tenure at a DACH engineering services consultancy, board role in a venture-building environment (2017-2022), Industry Fellow at 42 Wolfsburg

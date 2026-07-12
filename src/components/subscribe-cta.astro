@@ -6,14 +6,15 @@
 // Language-aware: German pages point at "Stack und Kalkül" (the primary DACH
 // channel), English pages at "Principal Stack".
 import { getLangFromUrl } from "../i18n/ui";
+import { SUBSTACK } from "../data/entity";
 
 const lang = getLangFromUrl(Astro.url);
 
 const channel = lang === "de"
   ? {
-      url: "https://pascalgiessler.substack.com/",
-      action: "https://pascalgiessler.substack.com/api/v1/free?nojs=true",
-      eyebrow: "Stack und Kalkül · Newsletter",
+      url: SUBSTACK.de.url,
+      action: `${SUBSTACK.de.url}api/v1/free?nojs=true`,
+      eyebrow: `${SUBSTACK.de.name} · Newsletter`,
       heading: "Der nächste Essay in Ihr Postfach.",
       body: "Wöchentliche Tiefe für DACH-Entscheider: souveräne KI, Cognitive Debt und die Architektur-Entscheidungen, die altern wie guter Wein. Kein Füllstoff. Jederzeit abbestellbar.",
       submit: "Abonnieren",
@@ -24,9 +25,9 @@ const channel = lang === "de"
       srEmail: "E-Mail-Adresse",
     }
   : {
-      url: "https://principalstack.substack.com/",
-      action: "https://principalstack.substack.com/api/v1/free?nojs=true",
-      eyebrow: "The Principal Stack · Newsletter",
+      url: SUBSTACK.en.url,
+      action: `${SUBSTACK.en.url}api/v1/free?nojs=true`,
+      eyebrow: `${SUBSTACK.en.name} · Newsletter`,
       heading: "Get the next essay in your inbox.",
       body: "Weekly notes on AI engineering, technical leadership, and the architecture decisions that age well. No fluff. Unsubscribe anytime.",
       submit: "Subscribe",
