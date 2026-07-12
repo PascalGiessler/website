@@ -24,6 +24,17 @@ export interface ToolContent {
   noLinkNote?: string; // shown instead of links when nothing is public
 }
 
+// A tool shows either a still (screenshot) or a short looping clip, never both.
+export interface ToolMedia {
+  kind: "image" | "video";
+  src: string; // /assets/... path
+  poster?: string; // video only
+  width: number;
+  height: number;
+  alt: string; // image alt / video aria-label
+  caption: { en: string; de: string };
+}
+
 export interface Tool {
   slug: string;
   name: string;
@@ -34,6 +45,7 @@ export interface Tool {
   demo?: string;
   repo?: string;
   stack: string[];
+  media?: ToolMedia;
   en: ToolContent;
   de: ToolContent;
 }
@@ -49,6 +61,17 @@ export const tools: Tool[] = [
     demo: "https://pascal-giessler.github.io/ai-tech-radar/",
     repo: "https://github.com/pascal-giessler/ai-tech-radar",
     stack: ["Python 3.12", "FastAPI", "Postgres + pgvector", "UMAP", "HDBSCAN", "Next.js 16", "Docker"],
+    media: {
+      kind: "image",
+      src: "/assets/images/tools/ai-radar-scope.webp",
+      width: 1440,
+      height: 960,
+      alt: "AI Radar's live scope view: tool contacts plotted by category bearing and momentum, with emergent clusters listed in the sidebar",
+      caption: {
+        en: "The live scope. Every contact is a repository, placed by momentum and category bearing. The clusters in the sidebar, Harness, MCP server, Coding agent, were not defined by hand: they emerged from the embeddings.",
+        de: "Der Live-Scope. Jeder Kontakt ist ein Repository, platziert nach Momentum und Kategorie-Peilung. Die Cluster in der Seitenleiste, Harness, MCP-Server, Coding-Agent, wurden nicht von Hand definiert: Sie sind aus den Embeddings emergiert.",
+      },
+    },
     en: {
       status: "Live · Open Source (MIT)",
       tagline: "A technology radar that keeps itself current.",
@@ -137,6 +160,18 @@ export const tools: Tool[] = [
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web (self-hosted)",
     stack: ["SvelteKit", "Postgres", "Drizzle", "Node worker", "LISTEN/NOTIFY → SSE"],
+    media: {
+      kind: "video",
+      src: "/assets/video/idea-assessor-promo.mp4",
+      poster: "/assets/images/tools/idea-assessor-poster.webp",
+      width: 1080,
+      height: 1080,
+      alt: "Idea Assessor: five rounds, then a verdict. The rubric, the round budget, and the kill rule in motion.",
+      caption: {
+        en: "Five rounds, then a verdict. The round budget and the kill rule are not UX details, they are the product.",
+        de: "Fünf Runden, dann ein Urteil. Das Runden-Budget und die Kill-Regel sind keine UX-Details, sie sind das Produkt.",
+      },
+    },
     en: {
       status: "Built · Code on request",
       tagline: "An instrument that forces judgment on ideas.",
