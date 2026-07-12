@@ -1,0 +1,62 @@
+---
+/**
+ * OpenPanel web analytics, self-hosted.
+ *
+ * Both the script and the collector are Pascal's own instance
+ * (analytics.continental.extrain.io), not OpenPanel's cloud. No third-party
+ * processor, no data leaving the estate. `apiUrl` is REQUIRED: op1.js defaults
+ * to https://api.openpanel.dev, so omitting it would quietly ship every visit
+ * to the vendor, which is the exact failure mode this site argues against.
+ *
+ * The clientId is PUBLIC by design: it ships in the page and identifies the
+ * project to the collector, which authorises browser events by origin. The
+ * client SECRET is for server-side events only, has no use in a static site,
+ * and must never appear in this repo.
+ *
+ * Only included in production builds, so `astro dev` never tracks. A local
+ * `astro preview` does load it, but the collector authorises browser events by
+ * origin and rejects anything that is not pascal-giessler.de (verified: apex and
+ * www return 200, localhost and any other origin return 401), so local previews
+ * cannot pollute the numbers either.
+ */
+const OPENPANEL_ORIGIN = "https://analytics.continental.extrain.io";
+const CLIENT_ID = "bb564ccb-4886-4ee1-80b8-7c5ef0906104";
+const enabled = import.meta.env.PROD;
+---
+
+{enabled && (
+  <script
+    is:inline
+    define:vars={{ CLIENT_ID, API_URL: `${OPENPANEL_ORIGIN}/api`, SCRIPT_URL: `${OPENPANEL_ORIGIN}/op1.js` }}
+  >
+    // Honour Do Not Track / Global Privacy Control. Not legally required for
+    // cookieless analytics, but declining to measure someone who asked not to
+    // be measured is the whole point of the brand.
+    (() => {
+      const optedOut =
+        navigator.doNotTrack === "1" ||
+        window.doNotTrack === "1" ||
+        navigator.globalPrivacyControl === true;
+      if (optedOut) return;
+
+      window.op =
+        window.op ||
+        function () {
+          (window.op.q = window.op.q || []).push(arguments);
+        };
+      window.op("init", {
+        clientId: CLIENT_ID,
+        apiUrl: API_URL,
+        trackScreenViews: true,
+        trackOutgoingLinks: true,
+        trackAttributes: true,
+      });
+
+      const s = document.createElement("script");
+      s.src = SCRIPT_URL;
+      s.defer = true;
+      s.async = true;
+      document.head.appendChild(s);
+    })();
+  </script>
+)}
