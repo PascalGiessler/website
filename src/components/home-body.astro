@@ -1,0 +1,258 @@
+---
+import HeroParticles from "./hero-particles.astro";
+import PostsLoop from "./posts-loop.astro";
+import SubscribeCTA from "./subscribe-cta.astro";
+import { home } from "../data/home";
+import { tools } from "../data/tools";
+
+interface Props {
+  lang: "en" | "de";
+}
+const { lang } = Astro.props as Props;
+const c = home[lang];
+const de = lang === "de";
+const toolBase = de ? "/de/tools/" : "/tools/";
+const sorted = [...tools].sort((a, b) => a.position - b.position);
+---
+
+<main class="relative z-10">
+
+  <!-- ── HERO: the thesis is the headline; the name is the eyebrow ── -->
+  <section class="relative max-w-5xl mx-auto px-6 pt-28 pb-20 lg:pt-36 lg:pb-24">
+    <HeroParticles />
+    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-14 lg:gap-14 items-center">
+
+      <div>
+        <p class="hero-label fade-up delay-1 mb-6">{c.eyebrow}</p>
+
+        <h1
+          class="fade-up delay-2 mb-7"
+          style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.3rem, 4.6vw, 3.6rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.02em; color: var(--text); text-wrap: balance;"
+        >
+          {c.titleLead}<br />
+          <em style="font-style: italic; color: var(--gold-light);">{c.titleAccent}</em>
+        </h1>
+
+        <span class="gold-rule fade-up delay-3 mb-7"></span>
+
+        <p
+          class="fade-up delay-3 mb-8 text-base leading-relaxed"
+          style="color: var(--text-2); max-width: 52ch;"
+        >
+          {c.standfirst}
+        </p>
+
+        <div class="fade-up delay-4 flex flex-wrap gap-3 mb-9">
+          <a href={c.ctaPrimary.href} class="btn-gold">{c.ctaPrimary.label}</a>
+          <a href={c.ctaSecondary.href} class="btn-outline">{c.ctaSecondary.label}</a>
+        </div>
+
+        <div class="fade-up delay-5 flex flex-wrap gap-2">
+          {c.credentials.map((cr) => <span class="credential">{cr}</span>)}
+        </div>
+      </div>
+
+      <div class="fade-up delay-3 flex justify-center items-center order-first lg:order-last">
+        <div class="relative w-full max-w-[200px] lg:max-w-xs">
+          <div class="absolute -top-3 -left-3 w-7 h-7 pointer-events-none" style="border-top: 2px solid var(--gold); border-left: 2px solid var(--gold);"></div>
+          <div class="absolute -top-3 -right-3 w-7 h-7 pointer-events-none" style="border-top: 2px solid var(--gold); border-right: 2px solid var(--gold);"></div>
+          <div class="absolute -bottom-3 -left-3 w-7 h-7 pointer-events-none" style="border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold);"></div>
+          <div class="absolute -bottom-3 -right-3 w-7 h-7 pointer-events-none" style="border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold);"></div>
+          <img
+            src="/assets/images/photo_pascal_branded.png"
+            alt="Dr. Pascal Giessler"
+            loading="eager"
+            decoding="auto"
+            class="relative z-10 w-full"
+            style="box-shadow: 0 0 0 1px var(--border-gold); display: block;"
+          />
+          <div class="absolute bottom-0 left-0 right-0 h-28 z-20" style="background: linear-gradient(to top, var(--bg) 10%, transparent);"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── THE ENEMY ────────────────────────────────── -->
+  <section class="border-t" style="border-color: var(--border);">
+    <div class="max-w-5xl mx-auto px-6 py-20">
+      <p class="section-label mb-4">{c.enemyLabel}</p>
+      <h2
+        class="mb-5"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.12; color: var(--text);"
+      >
+        {c.enemyTitle} <em style="font-style: italic; color: var(--gold-light);">{c.enemyTitleAccent}</em>
+      </h2>
+      <p class="mb-12" style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7; max-width: 62ch;">
+        {c.enemyBody}
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        {c.enemyFaces.map((f) => (
+          <div style="border-top: 1px solid var(--border-gold); padding-top: 1rem;">
+            <h3 style="font-family: 'Outfit', system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem;">{f.name}</h3>
+            <p style="color: var(--text-2); font-size: 0.92rem; line-height: 1.6;">{f.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-10">
+        <a href={c.enemyCta.href} style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--gold-dim); text-decoration: none;">
+          {c.enemyCta.label}
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── THE MECHANISM: transformation, harness, sovereignty ── -->
+  <section class="border-t" style="border-color: var(--border);">
+    <div class="max-w-5xl mx-auto px-6 py-20">
+      <p class="section-label mb-4">{c.mechanismLabel}</p>
+      <p class="mb-12" style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7; max-width: 58ch;">
+        {c.mechanismIntro}
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-9">
+        {c.tiles.map((t) => (
+          <div class="pillar">
+            <p class="pillar-num">{t.num}</p>
+            <h3 class="pillar-title">{t.title}</h3>
+            <p class="pillar-body">{t.body}</p>
+            <div class="pillar-tags">
+              {t.tags.map((tag) => <span class="pillar-tag">{tag}</span>)}
+            </div>
+            <p class="pillar-proof">
+              <a href={t.href} style="color: var(--gold-dim); text-decoration: none;">{t.hrefLabel} →</a>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE PROOF: the tools, shown not claimed ── -->
+  <section class="border-t" style="border-color: var(--border);">
+    <div class="max-w-5xl mx-auto px-6 py-20">
+      <div class="flex items-end justify-between mb-4 gap-6">
+        <p class="section-label">{c.proofLabel}</p>
+        <a href={c.proofCta.href} style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim); text-decoration: none; white-space: nowrap;">
+          {c.proofCta.label}
+        </a>
+      </div>
+      <h2
+        class="mb-5"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.12; color: var(--text);"
+      >
+        {c.proofTitle} <em style="font-style: italic; color: var(--gold-light);">{c.proofTitleAccent}</em>
+      </h2>
+      <p class="mb-12" style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7; max-width: 60ch;">
+        {c.proofIntro}
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {sorted.map((tool) => (
+          <a href={`${toolBase}${tool.slug}/`} class="tool-proof" style="text-decoration: none;">
+            {tool.media && (
+              <div class="tool-proof__shot">
+                <img
+                  src={tool.media.kind === "video" ? (tool.media.poster ?? "") : tool.media.src}
+                  alt={tool.media.alt}
+                  width={tool.media.width}
+                  height={tool.media.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+            <p class="writing-card-label">{tool[lang].status}</p>
+            <h3 class="writing-card-title">{tool.name}</h3>
+            <p class="writing-card-desc">{tool[lang].tagline}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WRITING ─────────────────────────────────── -->
+  <section class="border-t" style="border-color: var(--border);">
+    <div class="max-w-5xl mx-auto px-6 py-20">
+      <div class="flex items-center justify-between mb-10 gap-6">
+        <p class="section-label">{c.writingLabel}</p>
+        <a
+          href={c.writingCta.href}
+          style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim); text-decoration: none; white-space: nowrap;"
+        >{c.writingCta.label}</a>
+      </div>
+
+      <PostsLoop count={3} />
+
+      <p class="mt-8 pt-6" style="border-top: 1px solid var(--border);">
+        <a href={c.glossaryCta.href} style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--gold-dim); text-decoration: none;">
+          {c.glossaryCta.label}
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── QUOTE: voice, not a claim ── -->
+  <section class="border-t" style="border-color: var(--border);">
+    <div class="max-w-5xl mx-auto px-6 py-16 text-center">
+      <blockquote
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.3rem, 2.5vw, 1.9rem); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text-2); max-width: 60ch; margin: 0 auto;"
+      >
+        "Ever tried. Ever failed. No matter. Try again. Fail again. Fail better."
+      </blockquote>
+      <p class="mt-5" style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dim);">
+        Samuel Beckett, Worstward Ho (1983)
+      </p>
+    </div>
+  </section>
+
+  <!-- ── NEWSLETTER (the hero's secondary CTA lands here) ── -->
+  <section id="newsletter" class="max-w-5xl mx-auto px-6 pb-24" style="scroll-margin-top: 6rem;">
+    <SubscribeCTA />
+  </section>
+
+</main>
+
+<style>
+  .tool-proof {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    padding: 0;
+    overflow: hidden;
+    transition: border-color 0.25s ease-out, transform 0.25s ease-out;
+  }
+  .tool-proof:hover {
+    border-color: var(--border-gold);
+    transform: translateY(-2px);
+  }
+  .tool-proof__shot {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    line-height: 0;
+  }
+  .tool-proof__shot img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .tool-proof :is(.writing-card-label, .writing-card-title, .writing-card-desc) {
+    padding-inline: 1.5rem;
+  }
+  .tool-proof .writing-card-label {
+    padding-top: 1.4rem;
+  }
+  .tool-proof .writing-card-desc {
+    padding-bottom: 1.6rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tool-proof:hover {
+      transform: none;
+    }
+  }
+</style>
