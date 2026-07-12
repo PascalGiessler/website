@@ -33,3 +33,8 @@ screenshot-*.png
 .superpowers/
 
 scripts/series-config.json
+
+# OpenPanel READ credentials for the analytics-review skill.
+# The client secret is a live credential: it never belongs in this repo.
+.claude/openpanel.local.json
+analytics-reports/
