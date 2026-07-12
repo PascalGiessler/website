@@ -1,4 +1,5 @@
 ---
+import { postPath } from "../../lib/posts.mjs";
 import Layout from "../../layouts/main.astro";
 import SeriesSection from "../../components/series-section.astro";
 import { getCollection } from "astro:content";
@@ -28,8 +29,7 @@ function synthesisLinkFor(seriesEntry: typeof sorted[number]) {
   if (!slug || slug === "TODO") return null;
   const post = allPosts.find((p) => p.id.replace(/\.md$/, "") === slug);
   if (!post) return null;
-  // /de/post/<slug> doesn't exist — fall back to /post/<slug> per the existing convention
-  return { href: `/post/${slug}/`, title: post.data.title };
+  return { href: postPath(post), title: post.data.title };
 }
 ---
 

@@ -1,0 +1,231 @@
+---
+import FaqSection from "./faq-section.astro";
+import SubscribeCTA from "./subscribe-cta.astro";
+import { pillar } from "../data/cognitive-debt";
+import { canonicalFaq } from "../data/entity";
+
+interface Props {
+  lang: "en" | "de";
+}
+const { lang } = Astro.props as Props;
+const c = pillar[lang];
+const faq = canonicalFaq[lang];
+const de = lang === "de";
+
+const glossaryHref = de ? "/de/glossary/" : "/glossary/";
+const toolsHref = de ? "/de/tools/" : "/tools/";
+
+// The essays that argue this framework. CDMM + Compliance are German; the
+// while-loop essay is English.
+const reading = [
+  {
+    href: "/de/post/das-cognitive-debt-maturity-model/",
+    title: "Das Cognitive Debt Maturity Model",
+    note: de
+      ? "Der Essay, der das Modell einführt, mit Quellen und Beispielen."
+      : "The essay that introduces the model, with sources and examples. In German.",
+  },
+  {
+    href: "/de/post/compliance-by-design-dora-nis2-ai-act/",
+    title: "Compliance by Design",
+    note: de
+      ? "DORA, NIS2 und der AI Act treffen dieselbe Schicht. Drei Entkopplungen beantworten sie gemeinsam."
+      : "DORA, NIS2 and the AI Act hit the same layer. Three decouplings answer all three. In German.",
+  },
+  {
+    href: "/post/your-coding-agent-is-just-a-while-loop/",
+    title: "Your Coding Agent Is Just a While-Loop",
+    note: de
+      ? "Wo die Urteilsfähigkeit im agentischen Engineering wirklich sitzt: Tools, Kontext, Terminierung."
+      : "Where judgment actually lives in agentic engineering: tools, context, termination.",
+  },
+];
+---
+
+<main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
+  <div class="mb-12">
+    <p class="section-label mb-4 fade-up delay-1">{c.eyebrow}</p>
+    <h1
+      class="fade-up delay-2"
+      style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--text);"
+    >
+      {c.titleLead} <em style="font-style: italic; color: var(--gold-light);">{c.titleAccent}</em>
+    </h1>
+    <p
+      class="fade-up delay-3 mt-5"
+      style="color: var(--text-2); font-size: 1.1rem; line-height: 1.65; max-width: 44rem;"
+    >
+      {c.standfirst}
+    </p>
+  </div>
+
+  <div class="fade-up delay-3">
+    <!-- Definition: the answer-first block an answer engine can lift verbatim -->
+    <section class="mb-12">
+      <h2 class="section-label mb-4">{c.definitionHeading}</h2>
+      <p
+        class="pl-5"
+        style="border-left: 2px solid var(--border-gold); color: var(--text); font-family: 'Cormorant', Georgia, serif; font-size: 1.5rem; font-style: italic; line-height: 1.4;"
+      >
+        {c.definition}
+      </p>
+    </section>
+
+    <section class="mb-14">
+      <h2 class="section-label mb-4">{c.vsTechDebtHeading}</h2>
+      <p style="color: var(--text-2); font-size: 1.02rem; line-height: 1.7;">{c.vsTechDebt}</p>
+    </section>
+
+    <!-- The model -->
+    <section class="mb-14">
+      <h2
+        class="mb-4"
+        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 300; line-height: 1.15; color: var(--text);"
+      >
+        {c.modelHeading}
+      </h2>
+      <p class="mb-9" style="color: var(--text-2); font-size: 1.02rem; line-height: 1.7;">{c.modelIntro}</p>
+
+      <ol class="cdmm">
+        {c.levels.map((l) => (
+          <li class="cdmm__level">
+            <p class="cdmm__num">{l.level}</p>
+            <h3 class="cdmm__name">{l.name}</h3>
+            <p class="cdmm__state">{l.state}</p>
+            <dl class="cdmm__facts">
+              <dt>{c.labels.symptom}</dt>
+              <dd>{l.symptom}</dd>
+              <dt>{c.labels.interest}</dt>
+              <dd>{l.interest}</dd>
+              <dt>{c.labels.next}</dt>
+              <dd>{l.next}</dd>
+            </dl>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- How to use it -->
+    <section class="mb-14">
+      <h2 class="section-label mb-4">{c.useHeading}</h2>
+      <p class="mb-6" style="color: var(--text-2); font-size: 1.02rem; line-height: 1.7;">{c.useIntro}</p>
+      <ol class="grid grid-cols-1 gap-5">
+        {c.steps.map((s, i) => (
+          <li style="display: flex; gap: 1rem;">
+            <span
+              style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--gold-dim); padding-top: 0.35rem; flex-shrink: 0;"
+            >
+              0{i + 1}
+            </span>
+            <div>
+              <h3 style="font-family: 'Outfit', system-ui, sans-serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem;">{s.name}</h3>
+              <p style="color: var(--text-2); font-size: 1rem; line-height: 1.6;">{s.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <FaqSection items={faq} heading={c.faqHeading} />
+
+    <!-- Reading + the tools that embody the thesis -->
+    <section class="mt-16">
+      <h2 class="section-label mb-5">{c.readHeading}</h2>
+      <div class="grid grid-cols-1 gap-4">
+        {reading.map((r) => (
+          <a href={r.href} class="writing-card" style="text-decoration: none;">
+            <h3 class="writing-card-title">{r.title}</h3>
+            <p class="writing-card-desc">{r.note}</p>
+          </a>
+        ))}
+      </div>
+      <p class="mt-6" style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; color: var(--text-3);">
+        <a href={glossaryHref} style="color: var(--gold-dim); text-decoration: none;">
+          {de ? "Glossar: das Vokabular →" : "Glossary: the vocabulary →"}
+        </a>
+        <span style="padding: 0 0.5rem;">·</span>
+        <a href={toolsHref} style="color: var(--gold-dim); text-decoration: none;">
+          {de ? "Werkzeuge: die These in Code →" : "Tools: the thesis, in code →"}
+        </a>
+      </p>
+    </section>
+
+    <SubscribeCTA />
+  </div>
+</main>
+
+<style>
+  .cdmm {
+    display: grid;
+    gap: 0;
+    border-left: 1px solid var(--border);
+  }
+  .cdmm__level {
+    position: relative;
+    padding: 0 0 2.25rem 1.75rem;
+  }
+  .cdmm__level:last-child {
+    padding-bottom: 0;
+  }
+  /* Gold node on the spine, echoing the experience timeline */
+  .cdmm__level::before {
+    content: "";
+    position: absolute;
+    left: -4.5px;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .cdmm__num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.3rem;
+  }
+  .cdmm__name {
+    font-family: "Cormorant", Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  .cdmm__state {
+    color: var(--text-2);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.9rem;
+  }
+  .cdmm__facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.35rem 1rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .cdmm__facts dt {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding-top: 0.28rem;
+  }
+  .cdmm__facts dd {
+    margin: 0;
+    color: var(--text-2);
+  }
+  @media (max-width: 640px) {
+    .cdmm__facts {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+    .cdmm__facts dd {
+      margin-bottom: 0.55rem;
+    }
+  }
+</style>

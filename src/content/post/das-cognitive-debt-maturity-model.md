@@ -77,6 +77,7 @@ AI-Architektur, die der Organisation gehört: nachvollziehbar, exit-fähig, EU-a
 ## Weiterführend
 
 - Begriffe aus diesem Text im [Glossar](/de/glossary/): [Cognitive Debt](/de/glossary/#cognitive-debt), [Cognitive Debt Maturity Model](/de/glossary/#cognitive-debt-maturity-model), [Souveräne AI](/de/glossary/#sovereign-ai), [Provenienz](/de/glossary/#provenance), [EU AI Act](/de/glossary/#eu-ai-act).
+- Das Framework als Übersichtsseite: [Cognitive Debt](/de/cognitive-debt/).
 - Werkzeuge, die dieselbe These tragen: [Idea Assessor](/de/tools/idea-assessor/) (erzwingt ein Urteil) und [AI Radar](/de/tools/ai-radar/) (hält die Tool-Landkarte selbst aktuell).
 
 ---

@@ -1,13 +1,13 @@
 ---
 import { getCollection, render } from "astro:content";
-import PostLayout from "../../layouts/post.astro";
-import { sortedPosts, slugOf } from "../../lib/posts.mjs";
+import PostLayout from "../../../layouts/post.astro";
+import { sortedPosts, slugOf } from "../../../lib/posts.mjs";
 
-// English essays only. German essays are served from /de/post/<slug>/ so their
-// URL matches the language they are written in (see src/lib/posts.mjs).
+// German essays only (see src/lib/posts.mjs). Prev/next stay inside the German
+// sequence, so a DE reader is never dropped into an English essay mid-flow.
 export async function getStaticPaths() {
   const all = await getCollection("post");
-  const sorted = sortedPosts(all).filter((p) => (p.data.lang ?? "en") === "en");
+  const sorted = sortedPosts(all).filter((p) => p.data.lang === "de");
 
   return sorted.map((entry, index) => ({
     params: { slug: slugOf(entry) },

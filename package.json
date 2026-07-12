@@ -13,7 +13,8 @@
 		"sync:substack": "node scripts/sync-substack.mjs",
 		"series:list-pending": "node scripts/sync-series.mjs list-pending",
 		"series:add": "node scripts/sync-series.mjs add",
-		"og-card": "rsvg-convert -w 1200 -h 630 scripts/og-card-template.svg -o public/assets/images/og-card.png"
+		"og-card": "rsvg-convert -w 1200 -h 630 scripts/og-card-template.svg -o public/assets/images/og-card.png",
+		"og-cards": "node scripts/og-cards.mjs"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.9",

@@ -1,6 +1,7 @@
 ---
 // Renders the body of a tool detail page (hero, sections, FAQ, links).
 // Layout props + JSON-LD are set by the wrapping page so this stays presentational.
+import SubscribeCTA from "./subscribe-cta.astro";
 import type { Tool } from "../data/tools";
 
 interface Props {
@@ -138,6 +139,8 @@ const repoLabel = lang === "de" ? "Code (MIT)" : "Code (MIT)";
         ))}
       </div>
     </section>
+
+    <SubscribeCTA />
   </div>
 </main>
 

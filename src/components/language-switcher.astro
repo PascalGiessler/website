@@ -1,9 +1,16 @@
 ---
-import { getLangFromUrl, getLocalizedPath, type Lang } from "../i18n/ui";
+import { getLangFromUrl, getLocalizedPath, isSingleLanguageRoute, type Lang } from "../i18n/ui";
 
 const currentLang = getLangFromUrl(Astro.url);
 const otherLang: Lang = currentLang === "en" ? "de" : "en";
-const alternatePath = getLocalizedPath(Astro.url.pathname, otherLang);
+
+// Essays and atoms exist in one language only. Switching language from such a
+// page has no counterpart to go to, so send the reader to that language's
+// writing index rather than to a 404.
+const alternatePath = isSingleLanguageRoute(Astro.url.pathname)
+  ? (otherLang === "de" ? "/de/posts/" : "/posts/")
+  : getLocalizedPath(Astro.url.pathname, otherLang);
+
 const otherLabel = otherLang.toUpperCase();
 const currentLabel = currentLang.toUpperCase();
 ---

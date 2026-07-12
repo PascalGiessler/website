@@ -1,0 +1,66 @@
+---
+import Layout from "../../../layouts/main.astro";
+import CognitiveDebtBody from "../../../components/cognitive-debt-body.astro";
+import { pillar } from "../../../data/cognitive-debt";
+import { SITE, canonicalFaq, faqSchema, breadcrumbSchema, personRef } from "../../../data/entity";
+
+const c = pillar.de;
+const faq = canonicalFaq.de;
+const pageUrl = `${SITE}/de/cognitive-debt/`;
+
+const termSchema = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "@id": `${pageUrl}#cognitive-debt`,
+  name: "Cognitive Debt",
+  description: c.definition,
+  url: pageUrl,
+  inLanguage: "de",
+  subjectOf: { "@type": "WebPage", url: pageUrl },
+};
+
+const frameworkSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": `${pageUrl}#cdmm`,
+  name: "Cognitive Debt Maturity Model (CDMM)",
+  alternateName: "CDMM",
+  description: c.modelIntro,
+  url: pageUrl,
+  inLanguage: "de",
+  creator: personRef,
+  about: { "@id": `${pageUrl}#cognitive-debt` },
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Cognitive Debt messen und abbauen",
+  description: c.useIntro,
+  inLanguage: "de",
+  step: c.steps.map((s, i) => ({
+    "@type": "HowToStep",
+    position: i + 1,
+    name: s.name,
+    text: s.text,
+  })),
+};
+
+const jsonLd = [
+  termSchema,
+  frameworkSchema,
+  howToSchema,
+  faqSchema(faq, "de"),
+  breadcrumbSchema([["Start", "/de/"], ["Cognitive Debt", "/de/cognitive-debt/"]]),
+];
+---
+
+<Layout
+  title="Cognitive Debt: die Zinsen auf KI, die niemand erklären kann"
+  description="Cognitive Debt ist die schleichende Erosion der Urteilsfähigkeit einer Organisation, wenn KI-Systeme Entscheidungen produzieren, die niemand mehr nachvollziehen kann. Die Definition, der Unterschied zur technischen Schuld, und das Cognitive Debt Maturity Model (CDMM), das sie messbar macht."
+  keywords="Cognitive Debt, Cognitive Debt Maturity Model, CDMM, was ist Cognitive Debt, souveräne KI, KI-Governance, EU AI Act, KI-Urteilsfähigkeit, technische Schuld, Pascal Giessler, DACH"
+  image="/assets/images/og/cognitive-debt.png"
+  jsonLd={jsonLd}
+>
+  <CognitiveDebtBody lang="de" />
+</Layout>

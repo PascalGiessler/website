@@ -90,7 +90,8 @@ Wenn morgen die nächste Regulierungs-Schlagzeile kommt, ist das in eurem Haus e
 ## Weiterführend
 
 - Begriffe aus diesem Text im [Glossar](/de/glossary/): [AI Gateway](/de/glossary/#ai-gateway), [Model Context Protocol (MCP)](/de/glossary/#mcp), [Souveräne AI](/de/glossary/#sovereign-ai), [Vendor Lock-in](/de/glossary/#vendor-lock-in), [EU AI Act](/de/glossary/#eu-ai-act), [Cognitive Debt](/de/glossary/#cognitive-debt).
-- Verwandter Essay: [Das Cognitive Debt Maturity Model](/post/das-cognitive-debt-maturity-model/), das misst, wie souverän eine AI-Architektur bereits ist.
+- Verwandter Essay: [Das Cognitive Debt Maturity Model](/de/post/das-cognitive-debt-maturity-model/), das misst, wie souverän eine AI-Architektur bereits ist.
+- Das Framework im Überblick: [Cognitive Debt](/de/cognitive-debt/).
 
 ## Quellen
 

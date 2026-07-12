@@ -1,6 +1,7 @@
 ---
 // Presentational body for /glossary and /de/glossary.
 // Layout props + DefinedTermSet JSON-LD are set by the wrapping page.
+import SubscribeCTA from "./subscribe-cta.astro";
 import {
   glossaryTerms,
   glossaryCategoryLabels,
@@ -25,8 +26,11 @@ const grouped = glossaryCategoryOrder.map((cat) => ({
 }));
 
 const relatedLabel = lang === "de" ? "Verwandt" : "Related";
+const readLabel = lang === "de" ? "Vertiefen" : "Read";
 const toolsLink = lang === "de" ? "/de/tools/" : "/tools/";
 const toolsCta = lang === "de" ? "Die These in Werkzeugen →" : "The thesis, in tools →";
+const pillarLink = lang === "de" ? "/de/cognitive-debt/" : "/cognitive-debt/";
+const pillarCta = lang === "de" ? "Cognitive Debt: das Framework →" : "Cognitive Debt: the framework →";
 ---
 
 <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
@@ -69,6 +73,17 @@ const toolsCta = lang === "de" ? "Die These in Werkzeugen →" : "The thesis, in
                   ))}
                 </p>
               )}
+              {t.reads && t.reads.length > 0 && (
+                <p class="mt-1.5" style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: var(--text-3);">
+                  {readLabel}:{" "}
+                  {t.reads.map((r, i) => (
+                    <>
+                      {i > 0 && <span style="color: var(--text-3);"> · </span>}
+                      <a href={r.href} style="color: var(--gold-light); text-decoration: none;">{r.label[lang]} →</a>
+                    </>
+                  ))}
+                </p>
+              )}
             </dd>
           </div>
         ))}
@@ -76,9 +91,14 @@ const toolsCta = lang === "de" ? "Die These in Werkzeugen →" : "The thesis, in
     </section>
   ))}
 
-  <div class="fade-up delay-3 pt-6" style="border-top: 1px solid var(--border);">
+  <div class="fade-up delay-3 pt-6 flex flex-wrap gap-x-6 gap-y-2" style="border-top: 1px solid var(--border);">
+    <a href={pillarLink} style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--gold-dim); text-decoration: none;">
+      {pillarCta}
+    </a>
     <a href={toolsLink} style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--gold-dim); text-decoration: none;">
       {toolsCta}
     </a>
   </div>
+
+  <SubscribeCTA />
 </main>

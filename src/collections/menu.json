@@ -1,18 +1,62 @@
 {
 	"en": [
-		{ "key": "about", "url": "/about/" },
-		{ "key": "writing", "url": "/posts/" },
-		{ "key": "series", "url": "/series/" },
-		{ "key": "tools", "url": "/tools/" },
-		{ "key": "glossary", "url": "/glossary/" },
-		{ "key": "publications", "url": "/links/" }
+		{
+			"key": "about",
+			"url": "/about/"
+		},
+		{
+			"key": "cognitiveDebt",
+			"url": "/cognitive-debt/"
+		},
+		{
+			"key": "writing",
+			"url": "/posts/"
+		},
+		{
+			"key": "series",
+			"url": "/series/"
+		},
+		{
+			"key": "tools",
+			"url": "/tools/"
+		},
+		{
+			"key": "glossary",
+			"url": "/glossary/"
+		},
+		{
+			"key": "publications",
+			"url": "/links/"
+		}
 	],
 	"de": [
-		{ "key": "about", "url": "/de/about/" },
-		{ "key": "writing", "url": "/de/posts/" },
-		{ "key": "series", "url": "/de/series/" },
-		{ "key": "tools", "url": "/de/tools/" },
-		{ "key": "glossary", "url": "/de/glossary/" },
-		{ "key": "publications", "url": "/de/links/" }
+		{
+			"key": "about",
+			"url": "/de/about/"
+		},
+		{
+			"key": "cognitiveDebt",
+			"url": "/de/cognitive-debt/"
+		},
+		{
+			"key": "writing",
+			"url": "/de/posts/"
+		},
+		{
+			"key": "series",
+			"url": "/de/series/"
+		},
+		{
+			"key": "tools",
+			"url": "/de/tools/"
+		},
+		{
+			"key": "glossary",
+			"url": "/de/glossary/"
+		},
+		{
+			"key": "publications",
+			"url": "/de/links/"
+		}
 	]
 }

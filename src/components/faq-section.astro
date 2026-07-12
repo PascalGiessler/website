@@ -1,0 +1,27 @@
+---
+// Visible FAQ block. Always render this alongside the FAQPage JSON-LD:
+// Google only grants FAQ rich results when the same Q&A is visible on the page.
+import type { Faq } from "../data/entity";
+
+interface Props {
+  items: Faq[];
+  heading: string;
+}
+const { items, heading } = Astro.props as Props;
+---
+
+<section class="mt-16">
+  <h2 class="section-label mb-6">{heading}</h2>
+  <div class="grid grid-cols-1 gap-6">
+    {items.map((f) => (
+      <div>
+        <h3
+          style="font-family: 'Cormorant', Georgia, serif; font-size: 1.45rem; font-weight: 500; color: var(--text); line-height: 1.2; margin-bottom: 0.4rem;"
+        >
+          {f.q}
+        </h3>
+        <p style="color: var(--text-2); font-size: 1rem; line-height: 1.65;">{f.a}</p>
+      </div>
+    ))}
+  </div>
+</section>

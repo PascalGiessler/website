@@ -21,6 +21,7 @@ export const ui = {
     'nav.series': 'Series',
     'nav.tools': 'Tools',
     'nav.glossary': 'Glossary',
+    'nav.cognitiveDebt': 'Cognitive Debt',
     'series.eyebrow': 'Series',
     'series.heroTitle': 'Three',
     'series.heroTitleAccent': 'arcs',
@@ -60,6 +61,7 @@ export const ui = {
     'nav.series': 'Serien',
     'nav.tools': 'Werkzeuge',
     'nav.glossary': 'Glossar',
+    'nav.cognitiveDebt': 'Cognitive Debt',
     'series.eyebrow': 'Serien',
     'series.heroTitle': 'Drei',
     'series.heroTitleAccent': 'Bögen',
@@ -104,24 +106,33 @@ export function useTranslations(lang: Lang) {
 }
 
 /**
- * Routes that exist only on the EN side (no `/de/...` mirror).
- * Long-form posts and series atom pages are EN-only by design — the DE
- * homepage and structural pages exist, but article-level content does not.
+ * Article-level routes that exist in exactly ONE language: each essay and each
+ * series atom is written once, in German or in English, and is not translated.
+ * A German essay lives at `/de/post/<slug>/`, an English one at `/post/<slug>/`.
+ *
+ * These pages therefore have no hreflang counterpart. Emitting one would point
+ * crawlers at a URL that does not exist, so the layout omits the alternates
+ * entirely and lets the canonical speak for itself.
  */
-const ROUTES_WITHOUT_DE_MIRROR: RegExp[] = [
+const SINGLE_LANGUAGE_ROUTES: RegExp[] = [
   /^\/post\//,
+  /^\/de\/post\//,
   /^\/series\/[^/]+\/[^/]+/,
 ];
+
+/** Whether this route exists in only one language (no translation pair). */
+export function isSingleLanguageRoute(currentPath: string): boolean {
+  return SINGLE_LANGUAGE_ROUTES.some((p) => p.test(currentPath));
+}
 
 /**
  * Whether the current path has a counterpart in the target language.
  * Used by the layout to decide whether to emit `<link rel="alternate" hreflang="de">`.
  */
 export function hasLocalizedMirror(currentPath: string, targetLang: Lang): boolean {
+  if (isSingleLanguageRoute(currentPath)) return false;
   if (targetLang === defaultLang) return true;
-  const stripped = currentPath.replace(/^\/de(\/|$)/, '/');
-  const normalized = stripped === '' ? '/' : stripped;
-  return !ROUTES_WITHOUT_DE_MIRROR.some((p) => p.test(normalized));
+  return true;
 }
 
 /**

@@ -1,0 +1,69 @@
+---
+import Layout from "../../layouts/main.astro";
+import CognitiveDebtBody from "../../components/cognitive-debt-body.astro";
+import { pillar } from "../../data/cognitive-debt";
+import { SITE, canonicalFaq, faqSchema, breadcrumbSchema, personRef } from "../../data/entity";
+
+const c = pillar.en;
+const faq = canonicalFaq.en;
+const pageUrl = `${SITE}/cognitive-debt/`;
+
+// The term itself, as a citable entity.
+const termSchema = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "@id": `${pageUrl}#cognitive-debt`,
+  name: "Cognitive Debt",
+  description: c.definition,
+  url: pageUrl,
+  inLanguage: "en",
+  subjectOf: { "@type": "WebPage", url: pageUrl },
+};
+
+// The CDMM as a named framework, credited to Pascal.
+const frameworkSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": `${pageUrl}#cdmm`,
+  name: "Cognitive Debt Maturity Model (CDMM)",
+  alternateName: "CDMM",
+  description: c.modelIntro,
+  url: pageUrl,
+  inLanguage: "en",
+  creator: personRef,
+  about: { "@id": `${pageUrl}#cognitive-debt` },
+};
+
+// How an organisation actually applies the model.
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "How to assess and reduce Cognitive Debt",
+  description: c.useIntro,
+  inLanguage: "en",
+  step: c.steps.map((s, i) => ({
+    "@type": "HowToStep",
+    position: i + 1,
+    name: s.name,
+    text: s.text,
+  })),
+};
+
+const jsonLd = [
+  termSchema,
+  frameworkSchema,
+  howToSchema,
+  faqSchema(faq, "en"),
+  breadcrumbSchema([["Home", "/"], ["Cognitive Debt", "/cognitive-debt/"]]),
+];
+---
+
+<Layout
+  title="Cognitive Debt: the interest on AI you cannot explain"
+  description="Cognitive Debt is the slow erosion of an organisation's judgment when AI systems produce decisions no one can explain or check. The definition, why it is not technical debt, and the Cognitive Debt Maturity Model (CDMM) that makes it measurable."
+  keywords="Cognitive Debt, Cognitive Debt Maturity Model, CDMM, what is cognitive debt, sovereign AI, AI governance, EU AI Act, AI judgment, technical debt vs cognitive debt, Pascal Giessler, DACH"
+  image="/assets/images/og/cognitive-debt.png"
+  jsonLd={jsonLd}
+>
+  <CognitiveDebtBody lang="en" />
+</Layout>

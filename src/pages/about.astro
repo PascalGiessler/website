@@ -1,13 +1,18 @@
 ---
 import experiences from "../collections/experiences.json";
 import AboutExperience from "../components/about-experience.astro";
+import FaqSection from "../components/faq-section.astro";
 import Layout from "../layouts/main.astro";
+import { canonicalFaq, faqSchema } from "../data/entity";
+
+const faq = canonicalFaq.en;
 ---
 
 <Layout
   title="About"
-  description="Dr. Pascal Giessler is a Principal AI & Cloud Architect, PhD and external lecturer at KIT Karlsruhe, and technical thought leader based in Freiburg, Germany."
-  keywords="Pascal Giessler, About, AI Principal, PhD, Cloud Architect, KIT, MIT, Haufe Akademie, CTO, Azure"
+  description="Dr. Pascal Giessler is the architect against Cognitive Debt. He builds sovereign AI for regulated and future-critical DACH organisations: auditable, exit-capable, resilient. AI Principal & Tech Lead, PhD (KIT Karlsruhe), based in Freiburg."
+  keywords="Pascal Giessler, About, Cognitive Debt, Sovereign AI, Agentic Engineering, AI Principal, PhD, KIT, MIT, Haufe Akademie, CTO, DACH"
+  jsonLd={faqSchema(faq, "en")}
 >
   <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
@@ -214,6 +219,8 @@ import Layout from "../layouts/main.astro";
         </svg>
       </a>
     </div>
+
+    <FaqSection items={faq} heading="Frequently asked" />
 
   </main>
 </Layout>

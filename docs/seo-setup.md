@@ -76,29 +76,56 @@ The `i18n/ui.ts:hasLocalizedMirror` guard is what keeps `/de/post/...` and `/de/
 
 ## 3a. Structured data (JSON-LD)
 
-Three schema types ship in HTML, all rendered server-side:
+All schema is rendered server-side. The canonical entity claims live in **`src/data/entity.ts`** and are mirrored from `08_Content_Strategy/_strategy/geo/entity-profile.md` + `geo/faq.md`. **Never let the two diverge**: entity confidence comes from asserting the same claims in the same words on every surface, and that consistency is exactly what answer engines extract.
 
-- **Person** — `main.astro:40-72`, present on every page. Identifies Pascal as the site's entity (jobTitle, worksFor, alumniOf, sameAs, knowsAbout, address).
-- **Article** — `post.astro:20-38`, on `/post/*`. Includes `datePublished` + `dateModified` from `dateFormatted` frontmatter.
-- **Article + isPartOf CreativeWorkSeries** — `atom.astro:49-71`, on `/series/<topic>/<atom>/`. Date comes from atom `scheduled_date` (fallback: series `published_at`). The `isPartOf` link tells crawlers each atom belongs to a coherent series.
+Pages pass page-specific schema via the layout's `jsonLd` prop (object or array).
+
+| Schema | Where | Notes |
+|---|---|---|
+| **Person** | every page (`main.astro` → `entity.ts:personSchema`) | Carries `@id` (`/#person`), the real `knowsAbout` anchors (Cognitive Debt, Sovereign AI, Agentic Engineering/Harness, Loop Engineering, Context Engineering, AI-Native Transformation, …) and the full `sameAs` chain. Articles reference it by `@id` instead of duplicating an author blob. |
+| **Article** | `/post/*`, `/de/post/*` (`post.astro`) | `datePublished`/`dateModified` + `inLanguage`. |
+| **Article + isPartOf** | `/series/<topic>/<atom>/` (`atom.astro`) | Links each atom to its `CreativeWorkSeries`. |
+| **DefinedTerm + CreativeWork + HowTo + FAQPage** | `/cognitive-debt/`, `/de/cognitive-debt/` | The pillar page. `DefinedTerm` = the term, `CreativeWork` = the CDMM framework (credited to Pascal), `HowTo` = the three application steps. |
+| **FAQPage** | `/about/`, `/de/about/`, pillar, tool pages | **Only ever emitted alongside the same Q&A visible on the page** — Google requires visible content for FAQ rich results. |
+| **DefinedTermSet + DefinedTerm ×30** | `/glossary/`, `/de/glossary/` | The agentic-AI vocabulary net. |
+| **SoftwareApplication (+ VideoObject)** | `/tools/<slug>/` | VideoObject only where a clip exists (Idea Assessor). |
+| **BreadcrumbList** | nested pages (tools, pillar) | |
 
 Validate after changes via Google's [Rich Results Test](https://search.google.com/test/rich-results) and [Schema Markup Validator](https://validator.schema.org/).
+
+## 3b. Wikidata entity (open, needs Pascal)
+
+The single strongest `sameAs` anchor is a Wikidata Q-ID. The procedure, **including an honest notability gate** (Wikidata deletes unsourced person items), is already written up at `08_Content_Strategy/_strategy/geo/wikidata-checklist.md`. Do not duplicate it here.
+
+Once the Q-ID exists: add `https://www.wikidata.org/wiki/Q…` to `SAME_AS` in `src/data/entity.ts` and to `geo/entity-profile.md`.
 
 ---
 
 ## 4. OG card regeneration
 
-The Open Graph card at `public/assets/images/og-card.png` is rendered from `scripts/og-card-template.svg` via:
+**Identity card** (default for every page without its own): `public/assets/images/og-card.png`, rendered from `scripts/og-card-template.svg`:
 
 ```bash
 pnpm og-card
 ```
 
-Requires `rsvg-convert` (`brew install librsvg`). Edit the template if you want to change layout, then re-run.
+**Per-page cards** (`/cognitive-debt`, `/glossary`, `/tools`, `/posts`): `public/assets/images/og/*.png`, rendered from the definitions in `scripts/og-cards.mjs`:
 
-The card is referenced from `src/layouts/main.astro:32` as `https://pascal-giessler.de/assets/images/og-card.png` and used for all Open Graph + Twitter Card unfurls.
+```bash
+pnpm og-cards
+```
+
+Both require `rsvg-convert` (`brew install librsvg`). Pages opt in via the layout's `image` prop; anything without it falls back to the identity card.
+
+**Composition rule:** Google center-crops the 1200×630 card to a square for its SERP thumbnail, while LinkedIn/X show the full landscape. Keep everything essential centered, inside roughly x 285–915, or it gets sliced. Check by cropping the middle square before shipping a new design.
 
 After regeneration, validate via:
 - Twitter card validator: `https://cards-dev.twitter.com/validator`
 - LinkedIn post inspector: `https://www.linkedin.com/post-inspector/`
 - Facebook sharing debugger: `https://developers.facebook.com/tools/debug/`
+
+## 5. URL space and hreflang
+
+- **`trailingSlash: 'always'`.** Every internal link must end in `/`, or GitHub Pages 301-redirects it and Search Console files it as "Page with redirect".
+- **Essays live in the language they are written in**: German at `/de/post/<slug>/`, English at `/post/<slug>/` (routed by frontmatter `lang`, see `src/lib/posts.mjs`). They are not translation pairs.
+- Because those pages exist in **one language only**, they emit **no `hreflang` alternates at all** (`isSingleLanguageRoute` in `src/i18n/ui.ts`). Pointing at a counterpart that does not exist is worse than pointing nowhere. Structural pages (home, about, posts, series, tools, glossary, cognitive-debt) are fully mirrored and do emit en/de/x-default.

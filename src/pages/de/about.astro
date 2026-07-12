@@ -1,13 +1,18 @@
 ---
 import experiences from "../../collections/experiences.json";
 import AboutExperience from "../../components/about-experience.astro";
+import FaqSection from "../../components/faq-section.astro";
 import Layout from "../../layouts/main.astro";
+import { canonicalFaq, faqSchema } from "../../data/entity";
+
+const faq = canonicalFaq.de;
 ---
 
 <Layout
   title="Über mich"
-  description="Dr. Pascal Giessler ist Principal AI & Cloud Architekt, promovierter Informatiker und externer Dozent am KIT Karlsruhe, technischer Vordenker aus Freiburg."
-  keywords="Pascal Giessler, Über mich, KI Principal, PhD, Cloud Architekt, KIT, MIT, Haufe Akademie, CTO, Azure"
+  description="Dr. Pascal Giessler ist der Architekt gegen Cognitive Debt. Er baut souveräne KI für regulierte und zukunftskritische DACH-Organisationen: nachvollziehbar, exit-fähig, resilient. AI Principal & Tech Lead, promovierter Informatiker (KIT Karlsruhe), aus Freiburg."
+  keywords="Pascal Giessler, Über mich, Cognitive Debt, souveräne KI, Agentic Engineering, KI Principal, PhD, KIT, MIT, Haufe Akademie, CTO, DACH"
+  jsonLd={faqSchema(faq, "de")}
 >
   <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
@@ -216,6 +221,8 @@ import Layout from "../../layouts/main.astro";
         </svg>
       </a>
     </div>
+
+    <FaqSection items={faq} heading="Häufige Fragen" />
 
   </main>
 </Layout>

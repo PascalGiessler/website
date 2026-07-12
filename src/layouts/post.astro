@@ -2,6 +2,7 @@
 import Layout from "./main.astro";
 import SubscribeCTA from "../components/subscribe-cta.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/ui";
+import { personRef } from "../data/entity";
 const { frontmatter, prev, next } = Astro.props;
 const shellLang = getLangFromUrl(Astro.url);
 const t = useTranslations(shellLang);
@@ -23,16 +24,9 @@ const articleSchema = {
   "headline": frontmatter.title,
   "description": frontmatter.description || frontmatter.title,
   ...(publishedISO ? { "datePublished": publishedISO, "dateModified": publishedISO } : {}),
-  "author": {
-    "@type": "Person",
-    "name": "Dr. Pascal Giessler",
-    "url": "https://pascal-giessler.de"
-  },
-  "publisher": {
-    "@type": "Person",
-    "name": "Dr. Pascal Giessler",
-    "url": "https://pascal-giessler.de"
-  },
+  "inLanguage": frontmatter.lang || "en",
+  "author": personRef,
+  "publisher": personRef,
   "url": Astro.url.href,
   "mainEntityOfPage": Astro.url.href
 };
@@ -119,7 +113,7 @@ const articleSchema = {
         <div>
           {prev && (
             <a
-              href={`/post/${prev.slug}/`}
+              href={prev.href}
               class="group block"
               style="text-decoration: none;"
             >
@@ -134,7 +128,7 @@ const articleSchema = {
         <div class="text-right">
           {next && (
             <a
-              href={`/post/${next.slug}/`}
+              href={next.href}
               class="group block"
               style="text-decoration: none;"
             >

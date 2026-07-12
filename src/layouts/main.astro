@@ -13,12 +13,13 @@ import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
 import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
-import { getLangFromUrl, getLocalizedPath, hasLocalizedMirror, useTranslations } from "../i18n/ui";
+import { getLangFromUrl, getLocalizedPath, isSingleLanguageRoute, useTranslations } from "../i18n/ui";
+import { personSchema } from "../data/entity";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { title, description, keywords, ogType, articlePublishedTime, jsonLd } = Astro.props;
+const { title, description, keywords, ogType, articlePublishedTime, jsonLd, image } = Astro.props;
 const resolvedOgType = ogType || "website";
 
 // Page-specific structured data (SoftwareApplication, FAQPage, DefinedTermSet, …).
@@ -28,13 +29,16 @@ const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
 const metaTitle = title ? (title.includes("Pascal Giessler") ? title : `${title} | Pascal Giessler`) : t("meta.siteTitle");
 const metaDescription = description || t("meta.defaultDescription");
-const metaKeywords = keywords || "Pascal Giessler, AI Principal, KI Principal, Cloud Architect, KI Architekt, Generative AI, Generative KI, KI Strategie, Machine Learning, PhD, KIT Karlsruhe, Haufe Akademie, Azure Solutions Architect, Enterprise Architecture, Unternehmensarchitektur, Technical Leadership, Technische Führung, Freiburg, Baden-Württemberg, Deutschland, Germany, AI Engineering, LLM, RAG, Distributed Systems, Principal Stack";
+const metaKeywords = keywords || "Pascal Giessler, Cognitive Debt, Cognitive Debt Maturity Model, souveräne KI, Sovereign AI, Agentic AI, Agentic Engineering, Agentic Harness, Loop Engineering, Context Engineering, AI-Native Transformation, AI Principal, KI Principal, EU AI Act, GraphRAG, RAG, MCP, KI Strategie, KIT Karlsruhe, Freiburg, DACH, Deutschland";
 const canonicalUrl = Astro.url.href;
 const siteOrigin = Astro.site ? Astro.site.origin : "https://pascal-giessler.de";
-const enHref = new URL(getLocalizedPath(Astro.url.pathname, "en"), siteOrigin).href;
-const hasDeMirror = hasLocalizedMirror(Astro.url.pathname, "de");
-const deHref = hasDeMirror ? new URL(getLocalizedPath(Astro.url.pathname, "de"), siteOrigin).href : null;
-const ogImage = "https://pascal-giessler.de/assets/images/og-card.png";
+// Essays and atoms exist in one language only, so they get no hreflang pair:
+// pointing at a counterpart that does not exist is worse than pointing nowhere.
+const singleLanguage = isSingleLanguageRoute(Astro.url.pathname);
+const enHref = singleLanguage ? null : new URL(getLocalizedPath(Astro.url.pathname, "en"), siteOrigin).href;
+const deHref = singleLanguage ? null : new URL(getLocalizedPath(Astro.url.pathname, "de"), siteOrigin).href;
+// Per-page OG card when the page supplies one, else the default identity card.
+const ogImage = new URL(image || "/assets/images/og-card.png", siteOrigin).href;
 
 // Search engine verification tokens. Set as build-time env vars
 // (PUBLIC_ prefix is required by Astro for client-rendered values).
@@ -42,39 +46,8 @@ const ogImage = "https://pascal-giessler.de/assets/images/og-card.png";
 const gscToken = import.meta.env.PUBLIC_GSC_VERIFY;
 const bingToken = import.meta.env.PUBLIC_BING_VERIFY;
 
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Dr. Pascal Giessler",
-  "url": "https://pascal-giessler.de",
-  "image": ogImage,
-  "sameAs": [
-    "https://www.linkedin.com/in/pgiessler/",
-    "https://principalstack.substack.com/",
-    "https://medium.com/@pmgiessler"
-  ],
-  "jobTitle": "AI Principal & Tech Lead",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Haufe Akademie"
-  },
-  "alumniOf": [
-    { "@type": "EducationalOrganization", "name": "Karlsruhe Institute of Technology (KIT)" }
-  ],
-  "hasCredential": [
-    { "@type": "EducationalOccupationalCredential", "name": "Technology & Innovation", "credentialCategory": "certificate", "recognizedBy": { "@type": "EducationalOrganization", "name": "Massachusetts Institute of Technology (MIT)" } },
-    { "@type": "EducationalOccupationalCredential", "name": "MBA", "credentialCategory": "degree", "recognizedBy": { "@type": "EducationalOrganization", "name": "PowerMBA" } },
-    { "@type": "EducationalOccupationalCredential", "name": "Azure Solutions Architect Expert", "credentialCategory": "certification", "recognizedBy": { "@type": "Organization", "name": "Microsoft" } }
-  ],
-  "description": "Dr. Pascal Giessler is a German AI Principal, cloud architect, PhD and external lecturer at KIT Karlsruhe, and technical thought leader based in Freiburg, Germany.",
-  "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Cloud Architecture", "Technical Leadership", "Distributed Systems", "LLMs", "Generative AI", "Azure", "AWS", "KI-Strategie", "Unternehmensarchitektur"],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Freiburg im Breisgau",
-    "addressRegion": "Baden-Württemberg",
-    "addressCountry": "DE"
-  }
-};
+// Canonical machine identity, shared with every other surface (see src/data/entity.ts).
+const person = personSchema(lang);
 ---
 
 <!doctype html>
@@ -111,9 +84,9 @@ const personSchema = {
     <meta property="twitter:image" content={ogImage} />
 
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="en" href={enHref} />
+    {enHref && <link rel="alternate" hreflang="en" href={enHref} />}
     {deHref && <link rel="alternate" hreflang="de" href={deHref} />}
-    <link rel="alternate" hreflang="x-default" href={enHref} />
+    {enHref && <link rel="alternate" hreflang="x-default" href={enHref} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2026-05-10" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2026-05-10" />
     <link rel="alternate" type="application/rss+xml" title="Dr. Pascal Giessler · Writing" href="/rss.xml" />
@@ -121,7 +94,7 @@ const personSchema = {
 
     <link rel="preload" as="image" href="/assets/images/photo_pascal_branded.png" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
     {jsonLdBlocks.map((block) => (
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}

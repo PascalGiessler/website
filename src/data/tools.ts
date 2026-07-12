@@ -1,3 +1,5 @@
+import { SITE, breadcrumbSchema } from "./entity";
+
 // Tool catalogue for /tools and /de/tools.
 // Each tool is fully bilingual (en/de). Facts verified against the live site +
 // repo README (AI Radar) and the launch material (Idea Assessor) on 2026-07-11.
@@ -259,10 +261,12 @@ export function getTool(slug: string): Tool | undefined {
   return tools.find((t) => t.slug === slug);
 }
 
-// SoftwareApplication + FAQPage structured data for a tool detail page.
+// SoftwareApplication (+ FAQPage, VideoObject, BreadcrumbList) for a tool page.
 // Returned as an array; pass straight to <Layout jsonLd={...}>.
 export function toolJsonLd(tool: Tool, lang: "en" | "de", pageUrl: string) {
   const c = tool[lang];
+  const de = lang === "de";
+  const base = de ? "/de/tools/" : "/tools/";
   const app: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -290,5 +294,30 @@ export function toolJsonLd(tool: Tool, lang: "en" | "de", pageUrl: string) {
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   };
-  return [app, faq];
+
+  const blocks: Record<string, unknown>[] = [app, faq];
+
+  // A promo clip is a citable media object in its own right.
+  if (tool.media?.kind === "video") {
+    blocks.push({
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      name: `${tool.name} — ${c.tagline}`,
+      description: tool.media.caption[lang],
+      contentUrl: `${SITE}${tool.media.src}`,
+      thumbnailUrl: tool.media.poster ? `${SITE}${tool.media.poster}` : undefined,
+      uploadDate: "2026-07-11",
+      duration: "PT18S",
+      inLanguage: lang,
+      creator: { "@type": "Person", name: "Dr. Pascal Giessler", url: SITE },
+    });
+  }
+
+  blocks.push(breadcrumbSchema([
+    [de ? "Start" : "Home", de ? "/de/" : "/"],
+    [de ? "Werkzeuge" : "Tools", base],
+    [tool.name, `${base}${tool.slug}/`],
+  ]));
+
+  return blocks;
 }
