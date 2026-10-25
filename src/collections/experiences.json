@@ -1,74 +1,74 @@
 [
-	{
-		"dates": "2024 · Present",
-		"company": "Haufe Akademie",
-		"en": {
-			"role": "AI Principal & Tech Lead",
-			"description": "Leading the organization's strategic AI transformation. Architecting generative AI systems, LLM pipelines, and cloud-native platforms for enterprise-scale deployment. Bridging deep technical architecture with executive AI strategy and ROI frameworks."
-		},
-		"de": {
-			"role": "KI Principal & Tech Lead",
-			"description": "Verantwortet die strategische KI-Transformation der Organisation. Konzipiert Generative-KI-Systeme, LLM-Pipelines und Cloud-native Plattformen für den Einsatz im Unternehmensmaßstab. Verbindet tiefe technische Architektur mit KI-Strategie und ROI-Frameworks auf Vorstandsebene."
-		}
-	},
-	{
-		"dates": "2013 · 2022",
-		"company": "DACH Engineering Services Consultancy",
-		"en": {
-			"role": "CTO",
-			"description": "Grew from Head of Development through Head of R&D to CTO over nine years at a DACH engineering services consultancy. Owned the full technical vision: distributed systems, cloud infrastructure, and platform architecture across more than a dozen client industries. Built and scaled engineering teams through every stage of company growth."
-		},
-		"de": {
-			"role": "CTO",
-			"description": "Vom Head of Development über Head of R&D zum CTO in neun Jahren bei einer DACH-Engineering-Services-Beratung. Verantwortlich für die gesamte technische Vision: verteilte Systeme, Cloud-Infrastruktur und Plattformarchitektur in über einem Dutzend Kundenbranchen. Aufbau und Skalierung von Engineering-Teams in jeder Wachstumsphase des Unternehmens."
-		}
-	},
-	{
-		"dates": "2017 · 2022",
-		"company": "Venture-building Environment",
-		"en": {
-			"role": "Board Member",
-			"description": "Venture-level oversight for portfolio companies. Advised on technical architecture, engineering team structure, and growth strategy at the intersection of technology and business."
-		},
-		"de": {
-			"role": "Beiratsmitglied",
-			"description": "Aufsicht auf Venture-Ebene für Portfoliogesellschaften. Beratung zu technischer Architektur, Engineering-Teamstruktur und Wachstumsstrategie an der Schnittstelle von Technologie und Geschäft."
-		}
-	},
-	{
-		"dates": "2015 · 2020",
-		"company": "Fabricks",
-		"en": {
-			"role": "Founder & CEO",
-			"description": "Founded and led Fabricks, which built atomic building components for Smart Factories. Products optimized warehouse logistics, supply chain processes, and internal digitalization for manufacturing clients. Full-stack responsibility from product vision to customer delivery."
-		},
-		"de": {
-			"role": "Gründer & CEO",
-			"description": "Gründung und Leitung von Fabricks, das atomare Bausteine für Smart Factories entwickelte. Die Produkte optimierten Lagerlogistik, Lieferketten und interne Digitalisierung für Industriekunden. End-to-end-Verantwortung von der Produktvision bis zur Auslieferung beim Kunden."
-		}
-	},
-	{
-		"dates": "2021 · Present",
-		"company": "42 Wolfsburg",
-		"en": {
-			"role": "Industry Fellow",
-			"description": "Mentoring the next generation of software engineers at the peer-to-peer programming school. Contributing real-world engineering leadership perspective to a community that learns by building."
-		},
-		"de": {
-			"role": "Industry Fellow",
-			"description": "Mentor für die nächste Generation von Softwareentwicklern an der Peer-to-Peer-Programmierschule. Beiträge aus der Praxis der Engineering-Führung für eine Community, die durchs Bauen lernt."
-		}
-	},
-	{
-		"dates": "2016 · Present",
-		"company": "Karlsruhe Institute of Technology (KIT)",
-		"en": {
-			"role": "PhD, External Lecturer",
-			"description": "External lecturer at the WASA research group. Eight years of academic research conducted alongside industry work, combining rigorous methodology with production engineering reality."
-		},
-		"de": {
-			"role": "Promovierter Informatiker, Externer Dozent",
-			"description": "Externer Dozent an der Forschungsgruppe WASA. Acht Jahre akademische Forschung parallel zur Industriearbeit, die methodische Strenge mit der Realität von Produktionssystemen verbindet."
-		}
-	}
+  {
+    "dates": "2024 · Present",
+    "company": "Haufe Akademie",
+    "en": {
+      "role": "Principal AI & AI Lead",
+      "description": "At Haufe Akademie, I lead organisational AI transformation, work closely with the CTO and support strategic initiatives. I connect technical decisions with the changes needed in how an organisation works."
+    },
+    "de": {
+      "role": "Principal AI & AI Lead",
+      "description": "Bei der Haufe Akademie verantworte ich die organisatorische AI-Transformation, arbeite eng mit dem CTO zusammen und betreue strategische Initiativen. Dabei verbinde ich technische Entscheidungen mit den Veränderungen in der Arbeitsweise der Organisation."
+    }
+  },
+  {
+    "dates": "2013 · 2022",
+    "company": "DACH Engineering Services Consultancy",
+    "en": {
+      "role": "CTO",
+      "description": "Grew from Head of Development through Head of R&D to CTO over nine years at a DACH engineering services consultancy. Owned the full technical vision: distributed systems, cloud infrastructure, and platform architecture across more than a dozen client industries. Built and scaled engineering teams through every stage of company growth."
+    },
+    "de": {
+      "role": "CTO",
+      "description": "Vom Head of Development über Head of R&D zum CTO in neun Jahren bei einer DACH-Engineering-Services-Beratung. Verantwortlich für die gesamte technische Vision: verteilte Systeme, Cloud-Infrastruktur und Plattformarchitektur in über einem Dutzend Kundenbranchen. Aufbau und Skalierung von Engineering-Teams in jeder Wachstumsphase des Unternehmens."
+    }
+  },
+  {
+    "dates": "2017 · 2022",
+    "company": "Venture-building Environment",
+    "en": {
+      "role": "Board Member",
+      "description": "Venture-level oversight for portfolio companies. Advised on technical architecture, engineering team structure, and growth strategy at the intersection of technology and business."
+    },
+    "de": {
+      "role": "Beiratsmitglied",
+      "description": "Aufsicht auf Venture-Ebene für Portfoliogesellschaften. Beratung zu technischer Architektur, Engineering-Teamstruktur und Wachstumsstrategie an der Schnittstelle von Technologie und Geschäft."
+    }
+  },
+  {
+    "dates": "2015 · 2020",
+    "company": "Fabricks",
+    "en": {
+      "role": "Founder & CEO",
+      "description": "Founded and led Fabricks, which built atomic building components for Smart Factories. Products optimized warehouse logistics, supply chain processes, and internal digitalization for manufacturing clients. Full-stack responsibility from product vision to customer delivery."
+    },
+    "de": {
+      "role": "Gründer & CEO",
+      "description": "Gründung und Leitung von Fabricks, das atomare Bausteine für Smart Factories entwickelte. Die Produkte optimierten Lagerlogistik, Lieferketten und interne Digitalisierung für Industriekunden. End-to-end-Verantwortung von der Produktvision bis zur Auslieferung beim Kunden."
+    }
+  },
+  {
+    "dates": "2021 · Present",
+    "company": "42 Wolfsburg",
+    "en": {
+      "role": "Industry Fellow",
+      "description": "Mentoring the next generation of software engineers at the peer-to-peer programming school. Contributing real-world engineering leadership perspective to a community that learns by building."
+    },
+    "de": {
+      "role": "Industry Fellow",
+      "description": "Mentor für die nächste Generation von Softwareentwicklern an der Peer-to-Peer-Programmierschule. Beiträge aus der Praxis der Engineering-Führung für eine Community, die durchs Bauen lernt."
+    }
+  },
+  {
+    "dates": "2016 · Present",
+    "company": "Karlsruhe Institute of Technology (KIT)",
+    "en": {
+      "role": "PhD, External Lecturer",
+      "description": "External lecturer at the WASA research group. Eight years of academic research conducted alongside industry work, combining rigorous methodology with production engineering reality."
+    },
+    "de": {
+      "role": "Promovierter Informatiker, Externer Dozent",
+      "description": "Externer Dozent an der Forschungsgruppe WASA. Acht Jahre akademische Forschung parallel zur Industriearbeit, die methodische Strenge mit der Realität von Produktionssystemen verbindet."
+    }
+  }
 ]

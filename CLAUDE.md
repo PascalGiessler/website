@@ -11,7 +11,7 @@ Brand-OS Source-of-Truth: `/Users/pascalgiessler/Developer/02_Personal/07_Brand/
 - Channel-Strategie + kanonische Substack-Namen: `07_Brand/03_channels/overview.md`
 - Year-End-OKR + Pillars + Red-Lines: `07_Brand/00_north-star/`
 
-Lokales PRODUCT.md + DESIGN.md beschreiben die Web-spezifische Implementierung; bei Konflikt gewinnt 07_Brand.
+Lokales PRODUCT.md + DESIGN.md beschreiben die Web-spezifische Implementierung; für visuelle Details gilt 07_Brand. Für Rolle, Verantwortung und aktuelle Positionierung gelten die am 25. Oktober 2026 bestätigten Angaben in `src/data/entity.ts` vorrangig vor älteren Brand-Bios.
 
 `04_LinkedinBrand/brand-profile.md` (alte SoT) ist seit 2026-05-18 deprecated und enthält jetzt nur noch via `make sync-personality`/`make sync-red-lines` aus 07 synchronisierte Inhalte.
 
@@ -64,7 +64,7 @@ Lokales PRODUCT.md + DESIGN.md beschreiben die Web-spezifische Implementierung; 
 
 ## Person Details (for copy)
 - **Name**: Dr. Pascal Giessler
-- **Role**: AI Principal & Tech Lead at Haufe Akademie
+- **Role**: Principal AI & AI Lead at Haufe Akademie. Verantwortlich für organisatorische AI-Transformation, enge Zusammenarbeit mit dem CTO und Betreuung strategischer Initiativen. Mentor und Strategic Advisor. Kein formaler Head-of-AI-Titel und keine unbestätigte Personal- oder Budgetverantwortung.
 - **Location**: Freiburg, Germany
 - **LinkedIn**: https://www.linkedin.com/in/pgiessler/
 - **GitHub**: https://github.com/PascalGiessler
@@ -74,7 +74,7 @@ Lokales PRODUCT.md + DESIGN.md beschreiben die Web-spezifische Implementierung; 
 - _(deprecated: "The Engineer's Library" / "Path to Scale" / "Stack und Haltung" / `pathto.substack.com` — allesamt veraltete Namen bzw. URLs)_
 - **PhD**: Computer Science, KIT Karlsruhe (WASA group, 8+ years)
 - **Certifications**: Azure Solutions Architect Expert (Microsoft Certified)
-- **Former**: 9-year CTO tenure at a DACH engineering services consultancy, board role in a venture-building environment (2017-2022), Industry Fellow at 42 Wolfsburg
+- **History**: Frühere Führungsrollen bleiben im Werdegang, nicht als „ehem. CTO“-Profilpositionierung. Keinen Bezug zu SYNDIKAT7 in neue Frontseiten-Bios aufnehmen. Industry Fellow bei 42 Wolfsburg.
 - **Education**: MIT Technology and Innovation (2023), Patrick Kua Technical Leadership Masterclass
 
 ## Common Tasks
@@ -86,3 +86,10 @@ Lokales PRODUCT.md + DESIGN.md beschreiben die Web-spezifische Implementierung; 
 - Build: `pnpm build` — output in `dist/`
 - Dev server: `pnpm dev` (port 4321 by default)
 - Tests: `pnpm test:scripts` (covers the sync script's pure functions only; no Astro component tests)
+
+## Consistent public profile
+
+- Use `PROFILE` and `ROLE` from `src/data/entity.ts` for identity, role, responsibility and SEO. Both About routes render `src/components/about-body.astro`; do not create separate biography copies.
+- Run the Humanizer skill for new or revised public prose: `/Users/pascalgiessler/.agents/skills/humanizer/SKILL.md`. Retain facts and never invent experiences, results or responsibilities.
+- Keep the language-specific Substack destinations, trailing slashes and single-language article routing.
+- `npm run build` validates the rendered identity across every page.

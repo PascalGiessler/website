@@ -82,7 +82,7 @@ AI-Architektur, die der Organisation gehört: nachvollziehbar, exit-fähig, EU-a
 
 ---
 
-**Über den Autor:** Dr. Pascal Giessler ist AI Principal & Tech Lead, PhD in Computer Science (KIT), mit CTO-Track in der DACH-Industrie. Er ist der Architekt gegen Cognitive Debt und baut souveräne AI für regulierte und zukunftskritische DACH-Organisationen: nachvollziehbar, exit-fähig, resilient.
+**Über den Autor:** Dr. Pascal Giessler ist Principal AI & AI Lead bei der Haufe Akademie. Er verantwortet die organisatorische AI-Transformation, arbeitet eng mit dem CTO zusammen und betreut strategische Initiativen. Mentor und strategischer Berater aus Freiburg.
 
 ## Quellen
 

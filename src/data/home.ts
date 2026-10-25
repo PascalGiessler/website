@@ -1,20 +1,4 @@
-// Homepage copy (EN + DE).
-//
-// The page follows the positioning ladder from 08_Content_Strategy/_strategy/
-// positioning.md, in this order and no other:
-//
-//   Feindbild   -> Cognitive Debt. AI-native transformation makes judgment cheap
-//                  to skip, and the organisation quietly stops being able to
-//                  explain its own decisions.
-//   Mechanismus -> Three levels of the same answer: transform the organisation
-//                  around judgment, engineer the agentic harness where judgment
-//                  actually lives (tools, context, termination), and own the
-//                  architecture (auditable, independent, resilient).
-//   Beweis      -> The tools. Shown, not claimed. Proof stays in the background;
-//                  it is never the message.
-//
-// The name is the eyebrow, not the headline: nobody searches for a person, they
-// search for the problem. Copy carries no em-dashes (Design Rule 3).
+import { PROFILE } from "./entity";
 
 export interface HomeTile {
   num: string;
@@ -57,167 +41,198 @@ export interface HomeContent {
 }
 
 export const home: Record<"en" | "de", HomeContent> = {
-  en: {
-    eyebrow: "Dr. Pascal Giessler · AI Principal · Freiburg",
-    titleLead: "The architect against",
-    titleAccent: "Cognitive Debt",
-    standfirst:
-      "AI-native transformation is making judgment cheap to skip. Organisations adopt agentic systems they cannot explain, and quietly lose the ability to assess their own decisions. I build sovereign AI for regulated and future-critical DACH organisations, where the harness keeps the judgment inside the house: auditable, exit-capable, resilient.",
-    ctaPrimary: { label: "What is Cognitive Debt?", href: "/cognitive-debt/" },
-    ctaSecondary: { label: "Subscribe", href: "#newsletter" },
-    credentials: [
+  "en": {
+    "eyebrow": PROFILE.en.roleLine,
+    "titleLead": "Leading AI transformation",
+    "titleAccent": "with technical depth.",
+    "standfirst": PROFILE.en.intro,
+    "ctaPrimary": {
+      "label": "About my work",
+      "href": "/about/"
+    },
+    "ctaSecondary": {
+      "label": "Contact me",
+      "href": "mailto:info@pascal-giessler.de"
+    },
+    "credentials": [
       "PhD · KIT",
-      "MIT · Innovation Management",
-      "MBA",
-      "Azure Solutions Architect Expert",
-      "Former CTO · DACH consultancy",
+      "MIT · Technology & Innovation",
+      "Azure Solutions Architect Expert"
     ],
-
-    enemyLabel: "The problem",
-    enemyTitle: "The interest comes due",
-    enemyTitleAccent: "later",
-    enemyBody:
-      "Cognitive Debt is the slow erosion of an organisation's judgment when AI systems produce decisions no one can any longer explain or check. Like technical debt it stays invisible, until the interest falls due.",
-    enemyFaces: [
+    "enemyLabel": "Evaluation",
+    "enemyTitle": "Keeping AI results",
+    "enemyTitleAccent": "open to scrutiny",
+    "enemyBody": "Teams using AI results still need the expertise to assess their quality. I use Cognitive Debt to describe what is lost when that ability weakens. In practice, this means choosing appropriate checks and deciding who acts when something goes wrong.",
+    "enemyFaces": [
       {
-        name: "Liability",
-        body: "In a regulated context you have to be able to justify every output. From August 2026 the EU AI Act makes traceability an obligation, not a comfort.",
+        "name": "Evaluation",
+        "body": "Each model variant needs its own measured results. A better final answer can hide unnecessary tool calls or new rule violations."
       },
       {
-        name: "Dependence",
-        body: "Hand your judgment to a black box and you cannot get it back. The vendor owns the model, the logic, and eventually the decision.",
+        "name": "API semantics",
+        "body": "Tools need clear preconditions, effects and error states. The receiving system must enforce its business rules even when calls arrive in an unexpected order."
       },
       {
-        name: "Fragility",
-        body: "One provider outage, one price change, one deprecated model, and the organisation's ability to decide goes with it.",
-      },
+        "name": "Responsibility",
+        "body": "A guardrail can report a failure. The next decision and the correction still need an agreed process and someone responsible for it."
+      }
     ],
-    enemyCta: { label: "The framework, and how to measure it →", href: "/cognitive-debt/" },
-
-    mechanismLabel: "The answer",
-    mechanismIntro:
-      "Three levels of the same move. Judgment is not a policy you write, it is a property you build in.",
-    tiles: [
+    "enemyCta": {
+      "label": "Cognitive Debt and the maturity model",
+      "href": "/cognitive-debt/"
+    },
+    "mechanismLabel": "Areas of work",
+    "mechanismIntro": "My work connects organisational change with the design and evaluation of AI systems.",
+    "tiles": [
       {
-        num: "01",
-        title: "AI-Native Transformation",
-        body:
-          "Rebuild how the organisation works around AI, rather than bolting AI onto how it already works. The tell is where the judgment sits: a bolted-on rollout buys tools and hopes for output. A native transformation redesigns the decision paths and the review that keeps those decisions explainable.",
-        tags: ["decision paths", "governance", "enablement", "review"],
-        href: "/glossary/#ai-native-transformation",
-        hrefLabel: "Definition",
+        "num": "01",
+        "title": "AI transformation",
+        "body": "I lead organisational AI transformation at Haufe Akademie. Working closely with the CTO, I support strategic initiatives and the technical and organisational decisions they involve.",
+        "tags": [
+          "AI Leadership",
+          "Strategy",
+          "Organisation"
+        ],
+        "href": "/about/",
+        "hrefLabel": "Role and responsibility"
       },
       {
-        num: "02",
-        title: "Agentic Engineering & the Harness",
-        body:
-          "An agent is a model in a loop calling tools. The loop is the trivial part. The reliability, and the judgment, live in the harness: the tools you expose, the context you assemble, and the condition on which the loop stops. That is where the engineering belongs, not in the prompt.",
-        tags: ["harness", "tool use", "context engineering", "evals", "termination"],
-        href: "/glossary/#agentic-harness",
-        hrefLabel: "Definition",
+        "num": "02",
+        "title": "Agentic Engineering",
+        "body": "Agents need suitable context, bounded tools and results that can be checked. I focus on agent architectures, API semantics and deciding where a deterministic workflow already solves the task.",
+        "tags": [
+          "Evals",
+          "APIs",
+          "Workflows"
+        ],
+        "href": "/posts/",
+        "hrefLabel": "Technical writing"
       },
       {
-        num: "03",
-        title: "Sovereign AI",
-        body:
-          "Architecture the organisation actually owns: auditable, so it holds up in front of a board and an auditor. Independent, so no vendor owns your exit. Resilient, so an outage or a deprecation does not take your decision-making with it. Not on-premise for its own sake, but control over model, data, logic, and liability.",
-        tags: ["auditable", "exit-capable", "resilient", "EU AI Act"],
-        href: "/glossary/#sovereign-ai",
-        hrefLabel: "Definition",
-      },
+        "num": "03",
+        "title": "Mentoring & strategic advisory",
+        "body": "As a mentor and strategic advisor, I help people work through technical and organisational decisions: what to pursue, which approach fits and how a team can assess the result.",
+        "tags": [
+          "Mentoring",
+          "Strategic Advisory"
+        ],
+        "href": "/about/#mentoring",
+        "hrefLabel": "Working together"
+      }
     ],
-
-    proofLabel: "Proof",
-    proofTitle: "Instruments, not",
-    proofTitleAccent: "demos",
-    proofIntro:
-      "Two tools I built and use. Each is the same thesis in running code: valuable AI forces a decision instead of deferring it.",
-    proofCta: { label: "All tools →", href: "/tools/" },
-
-    writingLabel: "Latest writing",
-    writingCta: { label: "All essays ↗", href: "/posts/" },
-    glossaryCta: { label: "The vocabulary: agentic AI, in plain terms →", href: "/glossary/" },
+    "proofLabel": "Projects",
+    "proofTitle": "Tools from",
+    "proofTitleAccent": "my own work",
+    "proofIntro": "AI Radar and Idea Assessor explore two practical questions: how to assess technical developments, and how evaluating an idea can lead to a decision.",
+    "proofCta": {
+      "label": "All tools",
+      "href": "/tools/"
+    },
+    "writingLabel": "Latest writing",
+    "writingCta": {
+      "label": "All writing",
+      "href": "/posts/"
+    },
+    "glossaryCta": {
+      "label": "Agentic AI terms in the glossary",
+      "href": "/glossary/"
+    }
   },
-
-  de: {
-    eyebrow: "Dr. Pascal Giessler · AI Principal · Freiburg",
-    titleLead: "Der Architekt gegen",
-    titleAccent: "Cognitive Debt",
-    standfirst:
-      "AI-native Transformation macht es billig, das Urteil zu überspringen. Organisationen führen agentische Systeme ein, die sie nicht erklären können, und verlieren still die Fähigkeit, ihre eigenen Entscheidungen zu beurteilen. Ich baue souveräne KI für regulierte und zukunftskritische DACH-Organisationen: Architektur, in der die Harness das Urteil im Haus hält, nachvollziehbar, exit-fähig, resilient.",
-    ctaPrimary: { label: "Was ist Cognitive Debt?", href: "/de/cognitive-debt/" },
-    ctaSecondary: { label: "Abonnieren", href: "#newsletter" },
-    credentials: [
+  "de": {
+    "eyebrow": PROFILE.de.roleLine,
+    "titleLead": "AI-Transformation",
+    "titleAccent": "technisch fundiert führen.",
+    "standfirst": PROFILE.de.intro,
+    "ctaPrimary": {
+      "label": "Über meine Arbeit",
+      "href": "/de/about/"
+    },
+    "ctaSecondary": {
+      "label": "Kontakt aufnehmen",
+      "href": "mailto:info@pascal-giessler.de"
+    },
+    "credentials": [
       "Promotion · KIT",
-      "MIT · Innovation Management",
-      "MBA",
-      "Azure Solutions Architect Expert",
-      "Ex-CTO · DACH-Beratung",
+      "MIT · Technology & Innovation",
+      "Azure Solutions Architect Expert"
     ],
-
-    enemyLabel: "Das Problem",
-    enemyTitle: "Die Zinsen werden",
-    enemyTitleAccent: "später fällig",
-    enemyBody:
-      "Cognitive Debt ist die schleichende Erosion der Urteilsfähigkeit einer Organisation, wenn KI-Systeme Entscheidungen produzieren, die niemand mehr nachvollziehen oder prüfen kann. Wie technische Schuld bleibt sie unsichtbar, bis die Zinsen fällig werden.",
-    enemyFaces: [
+    "enemyLabel": "Prüfbarkeit",
+    "enemyTitle": "KI-Ergebnisse",
+    "enemyTitleAccent": "überprüfbar halten",
+    "enemyBody": "Wenn ein Team KI-Ergebnisse übernimmt, muss es deren fachliche Güte weiterhin beurteilen können. Mit Cognitive Debt beschreibe ich, was verloren geht, wenn diese Fähigkeit nachlässt. Praktisch geht es um geeignete Prüfungen und darum, wer bei einem Fehler handelt.",
+    "enemyFaces": [
       {
-        name: "Haftung",
-        body: "In regulierten Kontexten müssen Sie jede Ausgabe begründen können. Ab August 2026 macht die EU-KI-Verordnung Nachvollziehbarkeit zur Pflicht, nicht zum Komfort.",
+        "name": "Evaluation",
+        "body": "Jede Modellvariante braucht eigene Messergebnisse. Eine bessere Endantwort kann zusätzliche Tool-Aufrufe oder neue Regelverstöße verdecken."
       },
       {
-        name: "Abhängigkeit",
-        body: "Wer sein Urteil an eine Black Box abgibt, bekommt es nicht zurück. Dem Anbieter gehören Modell, Logik und am Ende die Entscheidung.",
+        "name": "API-Semantik",
+        "body": "Tools müssen Vorbedingungen, Wirkungen und Fehlerzustände verständlich beschreiben. Das Zielsystem muss seine fachlichen Grenzen auch bei ungewöhnlichen Aufrufreihenfolgen halten."
       },
       {
-        name: "Fragilität",
-        body: "Ein Anbieter-Ausfall, eine Preisverdopplung, eine Modell-Abkündigung, und die Entscheidungsfähigkeit der Organisation geht mit.",
-      },
+        "name": "Verantwortung",
+        "body": "Ein Guardrail kann einen Fehler melden. Für die anschließende Entscheidung und die Korrektur braucht es einen festgelegten Ablauf und eine zuständige Person."
+      }
     ],
-    enemyCta: { label: "Das Framework, und wie man es misst →", href: "/de/cognitive-debt/" },
-
-    mechanismLabel: "Die Antwort",
-    mechanismIntro:
-      "Drei Ebenen derselben Bewegung. Urteilsfähigkeit ist keine Richtlinie, die man schreibt, sondern eine Eigenschaft, die man baut.",
-    tiles: [
+    "enemyCta": {
+      "label": "Cognitive Debt und das Reifegradmodell",
+      "href": "/de/cognitive-debt/"
+    },
+    "mechanismLabel": "Arbeitsfelder",
+    "mechanismIntro": "Meine Arbeit verbindet die Veränderung der Organisation mit dem technischen Entwurf und der Prüfung von AI-Systemen.",
+    "tiles": [
       {
-        num: "01",
-        title: "AI-Native Transformation",
-        body:
-          "Die Arbeitsweise der Organisation um KI herum neu bauen, statt KI an die bestehende Arbeitsweise anzuschrauben. Der Unterschied zeigt sich daran, wo das Urteil sitzt: Ein angeschraubter Rollout kauft Tools und hofft auf Output. Eine native Transformation gestaltet die Entscheidungspfade und die Prüfung neu, die diese Entscheidungen erklärbar halten.",
-        tags: ["Entscheidungspfade", "Governance", "Befähigung", "Prüfung"],
-        href: "/de/glossary/#ai-native-transformation",
-        hrefLabel: "Definition",
+        "num": "01",
+        "title": "AI-Transformation",
+        "body": "Ich verantworte die organisatorische AI-Transformation bei der Haufe Akademie. In enger Zusammenarbeit mit dem CTO betreue ich strategische Initiativen und die damit verbundenen technischen und organisatorischen Fragen.",
+        "tags": [
+          "AI Leadership",
+          "Strategie",
+          "Organisation"
+        ],
+        "href": "/de/about/",
+        "hrefLabel": "Rolle und Verantwortung"
       },
       {
-        num: "02",
-        title: "Agentic Engineering & die Harness",
-        body:
-          "Ein Agent ist ein Modell in einer Schleife, das Tools aufruft. Die Schleife ist der triviale Teil. Die Verlässlichkeit, und das Urteil, sitzen in der Harness: in den Tools, die man freigibt, im Kontext, den man zusammenstellt, und in der Bedingung, unter der die Schleife stoppt. Dorthin gehört das Engineering, nicht in den Prompt.",
-        tags: ["Harness", "Tool Use", "Context Engineering", "Evals", "Terminierung"],
-        href: "/de/glossary/#agentic-harness",
-        hrefLabel: "Definition",
+        "num": "02",
+        "title": "Agentic Engineering",
+        "body": "Agenten brauchen geeigneten Kontext, begrenzte Werkzeuge und überprüfbare Ergebnisse. Ich beschäftige mich mit Agent-Architekturen, semantisch beschriebenen APIs und der Frage, wo deterministische Abläufe die Aufgabe bereits lösen.",
+        "tags": [
+          "Evals",
+          "APIs",
+          "Workflows"
+        ],
+        "href": "/de/posts/",
+        "hrefLabel": "Technische Beiträge"
       },
       {
-        num: "03",
-        title: "Souveräne KI",
-        body:
-          "Architektur, die der Organisation wirklich gehört: nachvollziehbar, damit sie vor Vorstand und Prüfer hält. Unabhängig, damit kein Anbieter Ihren Exit besitzt. Resilient, damit ein Ausfall oder eine Abkündigung nicht die Entscheidungsfähigkeit mitnimmt. Nicht On-Premise als Selbstzweck, sondern Kontrolle über Modell, Daten, Logik und Haftung.",
-        tags: ["nachvollziehbar", "exit-fähig", "resilient", "EU AI Act"],
-        href: "/de/glossary/#sovereign-ai",
-        hrefLabel: "Definition",
-      },
+        "num": "03",
+        "title": "Mentoring & strategische Beratung",
+        "body": "Als Mentor und strategischer Berater begleite ich technische und organisatorische Entscheidungen. Dabei geht es um Ziele, die Auswahl geeigneter Ansätze und die Kriterien, an denen ein Team das Ergebnis beurteilen kann.",
+        "tags": [
+          "Mentoring",
+          "Strategic Advisory"
+        ],
+        "href": "/de/about/#mentoring",
+        "hrefLabel": "Zusammenarbeit"
+      }
     ],
-
-    proofLabel: "Beweis",
-    proofTitle: "Instrumente, keine",
-    proofTitleAccent: "Demos",
-    proofIntro:
-      "Zwei Werkzeuge, die ich gebaut habe und nutze. Jedes ist dieselbe These in laufendem Code: Wertvolle KI erzwingt eine Entscheidung, statt sie zu vertagen.",
-    proofCta: { label: "Alle Werkzeuge →", href: "/de/tools/" },
-
-    writingLabel: "Neueste Beiträge",
-    writingCta: { label: "Alle Essays ↗", href: "/de/posts/" },
-    glossaryCta: { label: "Das Vokabular: Agentic AI in Klartext →", href: "/de/glossary/" },
-  },
+    "proofLabel": "Eigene Projekte",
+    "proofTitle": "Werkzeuge aus",
+    "proofTitleAccent": "meiner Arbeit",
+    "proofIntro": "AI Radar und Idea Assessor machen zwei Fragestellungen praktisch untersuchbar: Wie lassen sich technische Entwicklungen einordnen, und wie kann die Bewertung einer Idee zu einer Entscheidung führen?",
+    "proofCta": {
+      "label": "Alle Werkzeuge",
+      "href": "/de/tools/"
+    },
+    "writingLabel": "Neueste Beiträge",
+    "writingCta": {
+      "label": "Alle Beiträge",
+      "href": "/de/posts/"
+    },
+    "glossaryCta": {
+      "label": "Begriffe zu Agentic AI im Glossar",
+      "href": "/de/glossary/"
+    }
+  }
 };

@@ -1,7 +1,13 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 import PostLayout from "../../../layouts/post.astro";
 import { sortedPosts, slugOf } from "../../../lib/posts.mjs";
+
+interface Props {
+  entry: CollectionEntry<"post">;
+  prev: { title: string; href: string } | null;
+  next: { title: string; href: string } | null;
+}
 
 // German essays only (see src/lib/posts.mjs). Prev/next stay inside the German
 // sequence, so a DE reader is never dropped into an English essay mid-flow.

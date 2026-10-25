@@ -1,13 +1,15 @@
 ---
+import { getLangFromUrl } from "../i18n/ui";
+const homeHref = getLangFromUrl(Astro.url) === "de" ? "/de/" : "/";
 ---
 
 <a
-  href="/"
+  href={homeHref}
   class="relative z-30 flex items-center gap-3 group"
   style="text-decoration: none;"
 >
   <!-- Brand mark: P|G typographic monogram with gold axis-line.
-       Family-resemblance with Stack und Haltung (S|H) and Principal Stack (P|S). -->
+       Family-resemblance with Stack und Kalkül and Principal Stack (P|S). -->
   <svg
     width="28"
     height="28"

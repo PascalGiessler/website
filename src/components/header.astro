@@ -25,16 +25,16 @@ const localizedMenu = menus[lang];
     >
     </div>
 
-    <div class="relative z-30 flex items-center justify-end w-full gap-3 sm:w-auto sm:gap-4">
+    <div class="relative z-30 flex items-center justify-end w-full gap-3 lg:w-auto lg:gap-4">
       <LanguageSwitcher />
       <nav
-        class="flex flex-row-reverse justify-start text-sm sm:justify-end sm:flex-row"
+        class="flex flex-row-reverse justify-start text-sm lg:justify-end lg:flex-row"
         style="color: var(--text-2);"
       >
       <button
         id="openMenu"
-        class="flex flex-col items-end justify-center w-6 h-6 ml-4 cursor-pointer sm:hidden"
-        aria-label="Open navigation menu"
+        class="flex flex-col items-end justify-center w-6 h-6 ml-4 cursor-pointer lg:hidden"
+        aria-label={lang === "de" ? "Navigation öffnen" : "Open navigation menu"}
         aria-expanded="false"
         aria-controls="menu"
       >
@@ -54,8 +54,8 @@ const localizedMenu = menus[lang];
 
       <button
         id="closeMenu"
-        class="flex flex-col items-end justify-center hidden w-6 h-6 ml-4 -translate-x-1 cursor-pointer sm:hidden"
-        aria-label="Close navigation menu"
+        class="flex flex-col items-end justify-center hidden w-6 h-6 ml-4 -translate-x-1 cursor-pointer lg:hidden"
+        aria-label={lang === "de" ? "Navigation schließen" : "Close navigation menu"}
         aria-expanded="true"
         aria-controls="menu"
       >
@@ -75,9 +75,9 @@ const localizedMenu = menus[lang];
 
       <div
         id="menu"
-        class="fixed top-[75px] ease-out duration-300 sm:top-0 w-full left-0 sm:py-0 pt-7 pb-4 left-0 z-40 flex-col items-end justify-start hidden w-full h-auto text-sm sm:text-base sm:h-auto sm:relative sm:flex-row sm:flex sm:text-sm sm:w-auto sm:pr-0 sm:pt-0"
+        class="fixed top-[75px] ease-out duration-300 lg:top-0 w-full left-0 lg:py-0 pt-7 pb-4 left-0 z-40 flex-col items-end justify-start hidden w-full h-auto text-sm lg:text-base lg:h-auto lg:relative lg:flex-row lg:flex lg:text-sm lg:w-auto lg:pr-0 lg:pt-0"
       >
-        <div class="absolute inset-0 top-0 right-0 block w-full h-full px-3 sm:hidden">
+        <div class="absolute inset-0 top-0 right-0 block w-full h-full px-3 lg:hidden">
           <div
             class="relative w-full h-full border border-dashed rounded-xl"
             style="background: var(--bg); border-color: var(--border);"
@@ -88,7 +88,7 @@ const localizedMenu = menus[lang];
           localizedMenu.map((menu) => (
             <a
               href={menu.url}
-              class="relative flex items-center justify-center w-full px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out sm:py-0 sm:mb-0 md:w-auto"
+              class="relative flex items-center justify-center w-full px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out lg:py-0 lg:mb-0 md:w-auto"
               style="color: var(--text-2); font-family: 'Outfit', system-ui, sans-serif; font-size: 0.875rem; letter-spacing: 0.02em;"
             >
               {t(`nav.${menu.key}` as UIKey)}

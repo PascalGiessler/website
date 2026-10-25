@@ -1,12 +1,13 @@
 ---
 import Layout from "../layouts/main.astro";
+import { PROFILE } from "../data/entity";
 import HomeBody from "../components/home-body.astro";
 ---
 
 <Layout
-  title="Dr. Pascal Giessler | The architect against Cognitive Debt"
-  description="Dr. Pascal Giessler builds sovereign AI for regulated and future-critical DACH organisations: auditable, exit-capable, resilient. On Cognitive Debt, AI-native transformation, and the agentic harness where judgment actually lives."
-  keywords="Pascal Giessler, Cognitive Debt, Sovereign AI, Agentic AI, Agentic Engineering, Agentic Harness, Loop Engineering, Context Engineering, AI-Native Transformation, AI Principal, EU AI Act, KIT Karlsruhe, Freiburg, DACH"
+  title={PROFILE.en.siteTitle}
+  description={PROFILE.en.description}
+  keywords="Pascal Giessler, Cognitive Debt, Sovereign AI, Agentic AI, Agentic Engineering, Agentic Harness, Loop Engineering, Context Engineering, AI-Native Transformation, AI Lead, AI Leadership, Strategic Advisor, Mentor, EU AI Act, KIT Karlsruhe, Freiburg, DACH"
 >
   <HomeBody lang="en" />
 </Layout>

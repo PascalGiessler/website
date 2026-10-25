@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/ui";
-import { SUBSTACK } from "../data/entity";
+import { PROFILE, SUBSTACK } from "../data/entity";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,11 +15,12 @@ const substack = SUBSTACK[lang];
 >
   <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
 
-    <div class="flex items-center gap-3">
+    <div class="flex flex-col gap-2">
       <span style="font-family: 'Cormorant', Georgia, serif; font-size: 1rem; font-weight: 400; color: var(--text-2); letter-spacing: 0.02em;">
         Dr. Pascal Giessler
       </span>
-      <span style="color: var(--border-gold);">·</span>
+      <span class="text-xs leading-relaxed" style="color: var(--text-2);">{PROFILE[lang].roleLine}</span>
+      <span class="text-xs leading-relaxed" style="color: var(--text-2);">{PROFILE[lang].entrepreneurialLine}</span>
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-3);">
         © {new Date().getFullYear()}
       </span>

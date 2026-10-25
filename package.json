@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "astro check && astro build",
+		"build": "astro check && astro build && node scripts/check-profile.mjs",
 		"preview": "astro preview",
 		"astro": "astro",
 		"check": "biome check --apply-unsafe .",
@@ -14,7 +14,8 @@
 		"series:list-pending": "node scripts/sync-series.mjs list-pending",
 		"series:add": "node scripts/sync-series.mjs add",
 		"og-card": "rsvg-convert -w 1200 -h 630 scripts/og-card-template.svg -o public/assets/images/og-card.png",
-		"og-cards": "node scripts/og-cards.mjs"
+		"og-cards": "node scripts/og-cards.mjs",
+		"check:profile": "node scripts/check-profile.mjs"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.9",

@@ -1,0 +1,93 @@
+---
+import experiences from "../collections/experiences.json";
+import AboutExperience from "./about-experience.astro";
+import FaqSection from "./faq-section.astro";
+import { PROFILE, SUBSTACK, canonicalFaq } from "../data/entity";
+import { home } from "../data/home";
+interface Props { lang: "en" | "de"; }
+const { lang } = Astro.props as Props;
+const de = lang === "de";
+const profile = PROFILE[lang];
+const publication = SUBSTACK[lang];
+---
+
+<main class="relative z-10 max-w-5xl mx-auto px-6 pt-20 pb-16 lg:pt-28">
+  <section class="grid md:grid-cols-[1fr_240px] gap-10 items-start mb-16">
+    <div>
+      <h1 class="mb-5" style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;">
+        Dr. Pascal <em style="color: var(--gold-light);">Giessler</em>
+      </h1>
+      <p class="mb-2 text-lg" style="color: var(--gold-light);">{profile.roleLine}</p>
+      <p class="mb-6 text-base leading-relaxed" style="color: var(--text-2);">{profile.entrepreneurialLine}</p>
+      <p class="text-base leading-relaxed" style="color: var(--text-2); max-width: 62ch;">{profile.intro}</p>
+    </div>
+    <img src="/assets/images/photo_pascal_branded.png" alt="Dr. Pascal Giessler" width="240" height="240" class="w-48 md:w-60" style="object-fit: cover; object-position: center 10%;" />
+  </section>
+
+  <section class="max-w-3xl mb-16">
+    <h2 class="about-heading">{de ? "Hintergrund" : "Background"}</h2>
+    <div class="space-y-4 text-base leading-relaxed" style="color: var(--text-2); max-width: 65ch;">
+      {profile.bio.map(paragraph => <p>{paragraph}</p>)}
+    </div>
+    <div class="flex flex-wrap gap-2 mt-7">
+      <span class="credential">PhD · KIT Karlsruhe</span>
+      <span class="credential">MIT · Technology &amp; Innovation</span>
+      <span class="credential">Azure Solutions Architect Expert</span>
+    </div>
+  </section>
+
+  <section class="mb-16" aria-labelledby="work-heading">
+    <h2 id="work-heading" class="about-heading">{de ? "Woran ich arbeite" : "What I work on"}</h2>
+    <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+      {home[lang].tiles.slice(0, 2).map(area => (
+        <div class="border-t pt-5" style="border-color: var(--border-gold);">
+          <h3 class="text-lg mb-3" style="color: var(--text);">{area.title}</h3>
+          <p class="text-base leading-relaxed" style="color: var(--text-2); max-width: 60ch;">{area.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="mentoring" class="max-w-3xl mb-16 scroll-mt-8">
+    <h2 class="about-heading">{de ? "Mentoring und strategische Beratung" : "Mentoring and strategic advisory"}</h2>
+    <p class="mb-5 text-base leading-relaxed" style="color: var(--text-2); max-width: 65ch;">{home[lang].tiles[2].body}</p>
+    <p class="text-base leading-relaxed" style="color: var(--text-2); max-width: 65ch;">
+      {de ? "Mögliche Themen für einen Austausch sind die Priorisierung von AI-Initiativen, überprüfbare Anforderungen an Agentensysteme und die Zuständigkeiten im Betrieb." : "Topics for a conversation include prioritising AI initiatives, defining verifiable requirements for agentic systems and assigning responsibility for their operation."}
+    </p>
+  </section>
+
+  <section class="max-w-3xl mb-16">
+    <h2 class="about-heading">{de ? "Werdegang" : "Experience"}</h2>
+    <div class="pl-2">
+      {experiences.map(exp => (
+        <AboutExperience dates={de ? exp.dates.replace("Present", "heute") : exp.dates} role={exp[lang].role} company={exp.company} description={exp[lang].description} />
+      ))}
+    </div>
+  </section>
+
+  <section class="max-w-3xl mb-16">
+    <h2 class="about-heading">{de ? "Texte und Publikationen" : "Writing and publications"}</h2>
+    <p class="text-base leading-relaxed" style="color: var(--text-2); max-width: 65ch;">
+      {de ? "Über AI-Transformation, agentische Systeme und technische Führungsentscheidungen schreibe ich in" : "I write about AI transformation, agentic systems and technical leadership in"}
+      <a href={publication.url} target="_blank" rel="noopener noreferrer" class="profile-link">{publication.name}</a>
+      {de ? "und auf" : "and on"}
+      <a href="https://www.linkedin.com/in/pgiessler/" target="_blank" rel="noopener noreferrer" class="profile-link">LinkedIn</a>.
+    </p>
+  </section>
+
+  <section class="max-w-3xl mb-16 border-t pt-10" style="border-color: var(--border-gold);">
+    <h2 class="about-heading">{profile.contactTitle}</h2>
+    <p class="mb-6 text-base leading-relaxed" style="color: var(--text-2); max-width: 65ch;">{profile.contactBody}</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="mailto:info@pascal-giessler.de" class="btn-gold">{profile.contactLabel}</a>
+      <a href="https://www.linkedin.com/in/pgiessler/" target="_blank" rel="noopener noreferrer" class="btn-outline">LinkedIn</a>
+    </div>
+  </section>
+
+  <FaqSection items={canonicalFaq[lang]} heading={de ? "Fragen zu meiner Arbeit" : "Questions about my work"} />
+</main>
+
+<style>
+  .about-heading { font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; line-height: 1.2; margin-bottom: 1.25rem; color: var(--text); }
+  .profile-link { color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; }
+</style>

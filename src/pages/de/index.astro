@@ -1,11 +1,12 @@
 ---
 import Layout from "../../layouts/main.astro";
+import { PROFILE } from "../../data/entity";
 import HomeBody from "../../components/home-body.astro";
 ---
 
 <Layout
-  title="Dr. Pascal Giessler | Der Architekt gegen Cognitive Debt"
-  description="Dr. Pascal Giessler baut souveräne KI für regulierte und zukunftskritische DACH-Organisationen: nachvollziehbar, exit-fähig, resilient. Über Cognitive Debt, AI-native Transformation und die agentische Harness, in der das Urteil tatsächlich sitzt."
+  title={PROFILE.de.siteTitle}
+  description={PROFILE.de.description}
   keywords="Pascal Giessler, Cognitive Debt, souveräne KI, Agentic AI, Agentic Engineering, Agentic Harness, Loop Engineering, Context Engineering, AI-Native Transformation, KI Principal, EU AI Act, KIT Karlsruhe, Freiburg, DACH"
 >
   <HomeBody lang="de" />

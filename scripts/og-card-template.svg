@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Dr. Pascal Giessler — AI Principal &amp; Cloud Architect">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Dr. Pascal Giessler: Principal AI &amp; AI Lead">
   <!--
     Composition note: Google's SERP thumbnail center-crops this 1200x630 card to a
     square (~x 285–915). All essential content is therefore centered and kept inside
@@ -27,14 +27,14 @@
   <text x="600" y="238" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="22" font-weight="500" fill="#d49140" letter-spacing="0.3em" text-anchor="middle">DR. PASCAL GIESSLER</text>
 
   <!-- Main title — two centered lines for vertical rhythm -->
-  <text x="600" y="360" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="80" font-weight="400" fill="#ede4d3" text-anchor="middle">AI Principal &amp;</text>
-  <text x="600" y="448" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="80" font-weight="400" font-style="italic" fill="#d4b572" text-anchor="middle">Cloud Architect</text>
+  <text x="600" y="360" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="80" font-weight="400" fill="#ede4d3" text-anchor="middle">Principal AI &amp;</text>
+  <text x="600" y="448" font-family="Cormorant, Georgia, 'Times New Roman', serif" font-size="80" font-weight="400" font-style="italic" fill="#d4b572" text-anchor="middle">AI Lead</text>
 
   <!-- Gold rule under the title -->
   <line x1="552" y1="496" x2="648" y2="496" stroke="#d49140" stroke-width="2.5" stroke-linecap="round"/>
 
   <!-- Credential tagline -->
-  <text x="600" y="542" font-family="Outfit, 'Helvetica Neue', system-ui, sans-serif" font-size="24" font-weight="400" fill="#a39d8d" text-anchor="middle">PhD · KIT Karlsruhe · MIT · Azure Architect Expert</text>
+  <text x="600" y="542" font-family="Outfit, 'Helvetica Neue', system-ui, sans-serif" font-size="24" font-weight="400" fill="#a39d8d" text-anchor="middle">Ex-CTO · Stealth CEO · Mentor · Strategic Advisor</text>
 
   <!-- Domain stamp -->
   <text x="600" y="590" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="17" font-weight="500" fill="#7d7567" letter-spacing="0.22em" text-anchor="middle">PASCAL-GIESSLER.DE</text>

@@ -1,3 +1,5 @@
+import { PROFILE } from "../data/entity";
+
 export const languages = {
   en: 'EN',
   de: 'DE',
@@ -9,8 +11,8 @@ export type Lang = keyof typeof languages;
 
 export const ui = {
   en: {
-    'meta.siteTitle': 'Pascal Giessler | AI Principal & Cloud Architect',
-    'meta.defaultDescription': "Dr. Pascal Giessler is a German AI Principal, cloud architect, PhD and external lecturer at KIT Karlsruhe, and technical thought leader based in Freiburg. Helping engineering leaders move from AI experimentation to production confidence.",
+    'meta.siteTitle': PROFILE.en.siteTitle,
+    'meta.defaultDescription': PROFILE.en.description,
     'meta.ogLocale': 'en_GB',
     'meta.ogLocaleAlternate': 'de_DE',
     'lang.htmlAttr': 'en',
@@ -49,8 +51,8 @@ export const ui = {
     'footer.impressum': 'Impressum',
   },
   de: {
-    'meta.siteTitle': 'Pascal Giessler | KI Principal & Cloud Architekt',
-    'meta.defaultDescription': "Dr. Pascal Giessler ist KI Principal, Cloud-Architekt, promovierter Informatiker und externer Dozent am KIT Karlsruhe, technischer Vordenker aus Freiburg. Begleitet Engineering-Leitungen von KI-Experimenten zur produktiven Reife.",
+    'meta.siteTitle': PROFILE.de.siteTitle,
+    'meta.defaultDescription': PROFILE.de.description,
     'meta.ogLocale': 'de_DE',
     'meta.ogLocaleAlternate': 'en_GB',
     'lang.htmlAttr': 'de',

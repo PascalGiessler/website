@@ -38,8 +38,8 @@ const CARDS = [
   {
     file: "posts",
     eyebrow: "WRITING",
-    lines: ["Essays on", "sovereign AI"],
-    tagline: "Cognitive Debt · Agentic Engineering · DACH",
+    lines: ["AI transformation", "& engineering"],
+    tagline: "Agent systems · Evaluation · Leadership",
   },
 ];
 

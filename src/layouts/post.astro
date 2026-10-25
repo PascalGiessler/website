@@ -1,4 +1,5 @@
 ---
+import { postDate, formatPostDate } from "../lib/posts.mjs";
 import Layout from "./main.astro";
 import SubscribeCTA from "../components/subscribe-cta.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/ui";
@@ -9,14 +10,8 @@ const t = useTranslations(shellLang);
 const postLang = (frontmatter.lang || "en").toUpperCase();
 const allWritingHref = shellLang === "de" ? "/de/posts/" : "/posts/";
 
-function isoFromDateFormatted(d) {
-  if (!d) return undefined;
-  const [month, day, year] = d.split(" ");
-  const dt = new Date(`${month} ${parseInt(day)}, ${year}`);
-  return isNaN(dt.getTime()) ? undefined : dt.toISOString();
-}
-
-const publishedISO = isoFromDateFormatted(frontmatter.dateFormatted);
+const publishedDate = postDate(frontmatter.dateFormatted);
+const publishedISO = Number.isFinite(publishedDate.getTime()) ? publishedDate.toISOString() : undefined;
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -51,11 +46,11 @@ const articleSchema = {
     >
       {frontmatter.dateFormatted && (
         <p
-          class="mb-4 flex items-center gap-4"
+          class="mb-4 flex flex-wrap items-center gap-4"
           style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim);"
         >
           <span class="post-lang-badge">{postLang}</span>
-          <span>{frontmatter.dateFormatted}</span>
+          <time datetime={publishedISO}>{formatPostDate(frontmatter.dateFormatted, shellLang)}</time>
           {frontmatter.readingTime && (
             <span style="color: var(--text-3);">·&nbsp;{frontmatter.readingTime} {t("post.minRead")}</span>
           )}
@@ -108,7 +103,7 @@ const articleSchema = {
       <nav
         class="px-6 lg:px-0 mt-16 pt-10 border-t grid grid-cols-2 gap-6"
         style="border-color: var(--border);"
-        aria-label="Article navigation"
+        aria-label={shellLang === "de" ? "Artikelnavigation" : "Article navigation"}
       >
         <div>
           {prev && (

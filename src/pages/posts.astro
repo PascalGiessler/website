@@ -1,29 +1,33 @@
 ---
+import LinkedInPosts from "../components/linkedin-posts.astro";
 import PostsLoop from "../components/posts-loop.astro";
 import Layout from "../layouts/main.astro";
 ---
 
 <Layout
   title="Writing"
-  description="Essays by Dr. Pascal Giessler on Cognitive Debt, sovereign AI, and agentic engineering. Written for engineering leaders in regulated and future-critical DACH organisations."
+  description="Articles by Dr. Pascal Giessler on AI transformation, agent systems and engineering leadership, with selected published LinkedIn posts."
   keywords="Pascal Giessler, essays, Cognitive Debt, sovereign AI, Agentic Engineering, AI-Native Transformation, EU AI Act, DACH"
   image="/assets/images/og/posts.png"
 >
   <main class="relative z-10 max-w-3xl mx-auto px-6 pt-28 pb-24 lg:pt-36">
 
     <div class="mb-12">
-      <p class="section-label mb-4 fade-up delay-1">Writing</p>
       <h1
         class="fade-up delay-2"
         style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);"
       >
         Articles &amp; <em style="font-style: italic; color: var(--gold-light);">essays</em>
       </h1>
+      <p class="mt-5 text-base leading-relaxed" style="color: var(--text-2); max-width: 62ch;">I write about building and running agent systems, and the decisions engineering teams and their leaders need to make.</p>
+      <a class="inline-block mt-4 text-sm underline underline-offset-4" style="color: var(--gold-light);" href="/de/posts/">Read articles in German</a>
     </div>
 
     <div class="fade-up delay-3">
       <PostsLoop />
     </div>
+
+    <div class="mt-20 pt-12 border-t" style="border-color: var(--border);"><LinkedInPosts /></div>
 
   </main>
 </Layout>
