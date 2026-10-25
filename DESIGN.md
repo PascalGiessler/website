@@ -48,3 +48,6 @@ Home is a Persuade surface with published work as evidence. The page sequence is
 Desktop navigation foregrounds About, Writing, Tools and Publications. All seven destinations remain in the mobile menu, while Cognitive Debt, Series and Glossary also appear in the footer. Controls have at least 44px hit areas; the menu traps keyboard focus while open, closes with Escape and restores focus. There is a skip link.
 
 Dates and reading time use readable tabular body text. Use one clear section heading, avoid repeated eyebrow labels and unrelated quotations. Backgrounds remain flat. The shared profile source and all confirmed roles are unchanged.
+
+## Editorial imagery
+The website remains visual. Use authored editorial imagery where it supports a technical idea, alongside Pascal’s portrait and real tool screenshots. A dark graphite and brushed-brass physical model accompanies the engineering principles on home. It is conceptual artwork, not an actual product or client installation. Preserve the visual subject on mobile, avoid text baked into images, and use responsive WebP variants with lazy loading for images below the fold. Do not replace useful imagery with a text-only treatment during routine maintenance.

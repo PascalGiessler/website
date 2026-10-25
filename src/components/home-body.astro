@@ -95,6 +95,21 @@ const sorted = [...tools].sort((a, b) => a.position - b.position);
       {c.enemyFaces.map(face => <div><h3>{face.name}</h3><p>{face.body}</p></div>)}
       <a class="text-link" href={c.glossaryCta.href}>{c.glossaryCta.label}</a>
     </div>
+    <figure class="engineering-visual">
+      <div class="engineering-visual__frame">
+        <img
+          src="/assets/images/editorial/agent-engineering-model-1440.webp"
+          srcset="/assets/images/editorial/agent-engineering-model-640.webp 640w, /assets/images/editorial/agent-engineering-model-960.webp 960w, /assets/images/editorial/agent-engineering-model-1440.webp 1440w, /assets/images/editorial/agent-engineering-model-1672.webp 1672w"
+          width="1672"
+          height="941"
+          alt={de ? "Illustration eines Architekturmodells aus Messingschienen und dunklen Rahmen mit geraden und verzweigten Pfaden." : "An illustrated architectural model of brass rails and graphite frames with straight and branching paths."}
+          sizes="(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1199px) calc(100vw - 3rem), 1152px"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <figcaption>{de ? "Agenten wählen Schritte innerhalb definierter Berechtigungen. Das Zielsystem muss fachliche Regeln durchsetzen." : "Agents choose steps within defined permissions. The receiving system must enforce business rules."}</figcaption>
+    </figure>
   </section>
 
   <section class="home-section page-width home-contact" aria-labelledby="contact-heading">
@@ -148,6 +163,10 @@ const sorted = [...tools].sort((a, b) => a.position - b.position);
   .home-tool__heading span { font-size: .75rem; color: var(--gold-light); }
   .home-tool > p { color: var(--text-2); font-size: 1rem; line-height: 1.6; margin-top: .5rem; }
   .engineering-principles > div + div { margin-top: 1.75rem; }
+  .engineering-visual { grid-column: 1 / -1; margin-top: .5rem; }
+  .engineering-visual__frame { aspect-ratio: 2.4 / 1; overflow: hidden; background: var(--surface); }
+  .engineering-visual__frame :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+  .engineering-visual figcaption { color: var(--text-2); font-size: .875rem; line-height: 1.65; max-width: 80ch; margin-top: 1rem; }
   .home-contact { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); }
   .home-contact .btn-gold { margin-top: 1.5rem; }
   #newsletter { scroll-margin-top: 6rem; }
@@ -161,6 +180,7 @@ const sorted = [...tools].sort((a, b) => a.position - b.position);
     .home-credentials { gap: .5rem 1rem; }
     .work-areas, .engineering-section, .home-writing, .home-contact { grid-template-columns: 1fr; }
     .home-essays { border-left: 0; border-top: 1px solid var(--border); padding: 2.5rem 0 0; }
+    .engineering-visual__frame { aspect-ratio: 16 / 10; }
     .home-tools { grid-template-columns: 1fr; gap: 2.5rem; }
     .section-head { display: block; }
   }
