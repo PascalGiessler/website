@@ -1,163 +1,35 @@
-window.darkMode = true;
-
-const stickyClasses = ["fixed", "h-14"];
-const unstickyClasses = ["absolute", "h-20"];
-const stickyClassesContainer = [
-	"border-b",
-	"backdrop-blur-xl",
-	"sticky-active",
-];
-const unstickyClassesContainer = ["border-transparent"];
-let headerElement = null;
-
-document.addEventListener("DOMContentLoaded", () => {
-	headerElement = document.getElementById("header");
-
-	const stored = localStorage.getItem("dark_mode");
-	if (stored === "false") {
-		window.darkMode = false;
-		showDay();
-	} else {
-		window.darkMode = true;
-		showNight();
-	}
-
-	stickyHeaderFuncionality();
-	applyMenuItemClasses();
-	evaluateHeaderPosition();
-	mobileMenuFunctionality();
-});
-
-window.stickyHeaderFuncionality = () => {
-	window.addEventListener("scroll", () => {
-		evaluateHeaderPosition();
-	});
-};
-
-window.evaluateHeaderPosition = () => {
-	if (window.scrollY > 16) {
-		headerElement.firstElementChild.classList.add(...stickyClassesContainer);
-		headerElement.firstElementChild.classList.remove(...unstickyClassesContainer);
-		headerElement.classList.add(...stickyClasses);
-		headerElement.classList.remove(...unstickyClasses);
-		document.getElementById("menu").classList.add("top-[56px]");
-		document.getElementById("menu").classList.remove("top-[75px]");
-	} else {
-		headerElement.firstElementChild.classList.remove(...stickyClassesContainer);
-		headerElement.firstElementChild.classList.add(...unstickyClassesContainer);
-		headerElement.classList.add(...unstickyClasses);
-		headerElement.classList.remove(...stickyClasses);
-		document.getElementById("menu").classList.remove("top-[56px]");
-		document.getElementById("menu").classList.add("top-[75px]");
-	}
-};
-
-document.getElementById("darkToggle").addEventListener("click", () => {
-	document.documentElement.classList.add("duration-300");
-
-	if (document.documentElement.classList.contains("dark")) {
-		localStorage.setItem("dark_mode", "false");
-		showDay(true);
-	} else {
-		localStorage.removeItem("dark_mode");
-		showNight(true);
-	}
-});
-
-function showDay(animate) {
-	document.getElementById("sun").classList.remove("setting");
-	document.getElementById("moon").classList.remove("rising");
-
-	let timeout = 0;
-	if (animate) {
-		timeout = 500;
-		document.getElementById("moon").classList.add("setting");
-	}
-
-	setTimeout(() => {
-		document.getElementById("moon").classList.add("hidden");
-		document.getElementById("sun").classList.remove("hidden");
-
-		if (animate) {
-			document.documentElement.classList.remove("dark");
-			document.getElementById("sun").classList.add("rising");
-		}
-	}, timeout);
+// The brand has one dark theme. Navigation works without stored theme settings.
+function initNavigation() {
+  const header = document.getElementById("header");
+  const toggle = document.getElementById("menuToggle");
+  const menu = document.getElementById("menu");
+  const backdrop = document.getElementById("mobileMenuBackground");
+  if (!header || !toggle || !menu || !backdrop) return;
+  const desktop = window.matchMedia("(min-width: 1024px)");
+  const background = document.querySelectorAll("main, footer, .skip-link");
+  function setOpen(open, restoreFocus = true) {
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? toggle.dataset.closeLabel : toggle.dataset.openLabel);
+    menu.classList.toggle("is-open", open);
+    backdrop.hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+    background.forEach(element => { element.inert = open; });
+    if (open) menu.querySelector("a")?.focus();
+    else if (restoreFocus) toggle.focus();
+  }
+  toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+  backdrop.addEventListener("click", () => setOpen(false));
+  desktop.addEventListener("change", event => { if (event.matches) setOpen(false, false); });
+  document.addEventListener("keydown", event => {
+    if (toggle.getAttribute("aria-expanded") !== "true") return;
+    if (event.key === "Escape") { event.preventDefault(); setOpen(false); }
+    if (event.key === "Tab") {
+      const focusable = [...header.querySelectorAll("a[href], button")].filter(element => element.getClientRects().length);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  });
 }
-
-function showNight(animate) {
-	document.getElementById("moon").classList.remove("setting");
-	document.getElementById("sun").classList.remove("rising");
-
-	let timeout = 0;
-	if (animate) {
-		timeout = 500;
-		document.getElementById("sun").classList.add("setting");
-	}
-
-	setTimeout(() => {
-		document.getElementById("sun").classList.add("hidden");
-		document.getElementById("moon").classList.remove("hidden");
-
-		if (animate) {
-			document.documentElement.classList.add("dark");
-			document.getElementById("moon").classList.add("rising");
-		}
-	}, timeout);
-}
-
-window.applyMenuItemClasses = () => {
-	const menuItems = document.querySelectorAll("#menu a");
-	for (let i = 0; i < menuItems.length; i++) {
-		if (menuItems[i].pathname === window.location.pathname) {
-			menuItems[i].style.color = "var(--gold-light)";
-		}
-	}
-};
-
-function mobileMenuFunctionality() {
-	document.getElementById("openMenu").addEventListener("click", () => {
-		openMobileMenu();
-	});
-	document.getElementById("closeMenu").addEventListener("click", () => {
-		closeMobileMenu();
-	});
-}
-
-window.openMobileMenu = () => {
-	const openBtn = document.getElementById("openMenu");
-	const closeBtn = document.getElementById("closeMenu");
-	openBtn.classList.add("hidden");
-	openBtn.setAttribute("aria-expanded", "true");
-	closeBtn.classList.remove("hidden");
-	closeBtn.setAttribute("aria-expanded", "true");
-	document.getElementById("menu").classList.remove("hidden");
-	document.getElementById("mobileMenuBackground").classList.add("opacity-0");
-	document.getElementById("mobileMenuBackground").classList.remove("hidden");
-
-	setTimeout(() => {
-		document.getElementById("mobileMenuBackground").classList.remove("opacity-0");
-	}, 1);
-};
-
-window.closeMobileMenu = () => {
-	const openBtn = document.getElementById("openMenu");
-	const closeBtn = document.getElementById("closeMenu");
-	closeBtn.classList.add("hidden");
-	closeBtn.setAttribute("aria-expanded", "false");
-	openBtn.classList.remove("hidden");
-	openBtn.setAttribute("aria-expanded", "false");
-	document.getElementById("menu").classList.add("hidden");
-	document.getElementById("mobileMenuBackground").classList.add("hidden");
-};
-
-// Escape-to-close mobile menu.
-document.addEventListener("keydown", (e) => {
-	if (e.key === "Escape") {
-		const menu = document.getElementById("menu");
-		if (menu && !menu.classList.contains("hidden")) {
-			window.closeMobileMenu();
-			document.getElementById("openMenu")?.focus();
-		}
-	}
-});
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initNavigation, { once: true });
+else initNavigation();

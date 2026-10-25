@@ -100,23 +100,14 @@ const person = personSchema(lang);
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}
 
-    <script is:inline>
-      if (typeof Storage !== 'undefined') {
-        const stored = localStorage.getItem('dark_mode');
-        if (stored === 'false') {
-          document.documentElement.classList.remove('dark');
-        } else {
-          document.documentElement.classList.add('dark');
-        }
-      }
-    </script>
 
     <slot name="head" />
     <Fragment set:html={import.meta.env.HEADER_INJECT} />
   </head>
   <body class="antialiased">
+    <a class="skip-link" href="#main-content">{lang === "de" ? "Zum Inhalt springen" : "Skip to content"}</a>
     <Header />
-    <slot />
+    <div id="main-content" tabindex="-1"><slot /></div>
     <Footer />
     <script src="../assets/js/main.js"></script>
     <Analytics />

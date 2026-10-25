@@ -1,5 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/ui";
+import menus from "../collections/menu.json";
+import { type UIKey } from "../i18n/ui";
 import { PROFILE, SUBSTACK } from "../data/entity";
 
 const lang = getLangFromUrl(Astro.url);
@@ -13,7 +15,10 @@ const substack = SUBSTACK[lang];
   class="relative z-10 mt-24 border-t"
   style="border-color: var(--border); background: var(--bg);"
 >
-  <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+  <nav class="page-width footer-explore" aria-label={lang === "de" ? "Weitere Themen" : "More topics"}>
+    {menus[lang].filter(menu => ["cognitiveDebt", "series", "glossary"].includes(menu.key)).map(menu => <a href={menu.url}>{t(`nav.${menu.key}` as UIKey)}</a>)}
+  </nav>
+  <div class="page-width py-10 flex flex-col sm:flex-row items-start justify-between gap-6">
 
     <div class="flex flex-col gap-2">
       <span style="font-family: 'Cormorant', Georgia, serif; font-size: 1rem; font-weight: 400; color: var(--text-2); letter-spacing: 0.02em;">
@@ -32,7 +37,7 @@ const substack = SUBSTACK[lang];
         href="https://www.linkedin.com/in/pgiessler/"
         target="_blank"
         aria-label="LinkedIn"
-        class="transition-colors duration-200"
+        class="inline-flex items-center justify-center min-w-11 min-h-11 transition-colors duration-200"
         style="color: var(--text-3);"
         onmouseover="this.style.color='var(--gold)'"
         onmouseout="this.style.color='var(--text-3)'"
@@ -46,7 +51,7 @@ const substack = SUBSTACK[lang];
         href={substack.url}
         target="_blank"
         aria-label={`Substack: ${substack.name}`}
-        class="transition-colors duration-200"
+        class="inline-flex items-center justify-center min-w-11 min-h-11 transition-colors duration-200"
         style="color: var(--text-3);"
         onmouseover="this.style.color='var(--gold)'"
         onmouseout="this.style.color='var(--text-3)'"
@@ -60,7 +65,8 @@ const substack = SUBSTACK[lang];
 
       <a
         href={impressumHref}
-        style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); text-decoration: none; transition: color 0.2s ease-out;"
+        class="inline-flex items-center min-h-11"
+        style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); text-decoration: none; transition: color 0.2s ease-out;"
         onmouseover="this.style.color='var(--text-2)'"
         onmouseout="this.style.color='var(--text-3)'"
       >
@@ -70,3 +76,9 @@ const substack = SUBSTACK[lang];
 
   </div>
 </footer>
+
+<style>
+  .footer-explore { display: flex; flex-wrap: wrap; gap: .5rem 2rem; padding-top: 1.5rem; }
+  .footer-explore a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-2); font-size: .9rem; text-decoration: underline; text-underline-offset: .3em; text-decoration-color: transparent; }
+  .footer-explore a:hover { text-decoration-color: var(--gold-light); color: var(--gold-light); }
+</style>

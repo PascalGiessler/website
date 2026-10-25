@@ -6,7 +6,8 @@ const postDateISO = (value: string) => postDate(value).toISOString().slice(0, 10
 const allPosts = await getCollection("post");
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { count } = Astro.props;
+interface Props { count?: number; heading?: "h2" | "h3"; }
+const { count, heading: Heading = "h2" } = Astro.props;
 const posts = sortedPosts(allPosts, { lang });
 const postsLoop = (count ? posts.slice(0, count) : posts).map((post) => ({
   ...post.data,
@@ -28,15 +29,15 @@ const postsLoop = (count ? posts.slice(0, count) : posts).map((post) => ({
     >
       <div class="flex items-start justify-between gap-4">
         <div>
-          <h2
+          <Heading
             class="mb-1.5 text-base font-medium leading-snug transition-colors duration-200"
             style="color: var(--text); font-family: 'Outfit', system-ui, sans-serif;"
           >
             {post.title}
-          </h2>
+          </Heading>
           <p
-            class="text-sm leading-relaxed"
-            style="color: var(--text-3); max-width: 60ch;"
+            class="text-[0.95rem] leading-relaxed"
+            style="color: var(--text-2); max-width: 60ch;"
           >
             {post.description}
           </p>
@@ -50,7 +51,7 @@ const postsLoop = (count ? posts.slice(0, count) : posts).map((post) => ({
       </div>
       <p
         class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1"
-        style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--text-3);"
+        style="font-size: 0.8rem; color: var(--text-3); font-variant-numeric: tabular-nums;"
       >
         <span class="post-lang-badge">{post.lang.toUpperCase()}</span>
         <time datetime={postDateISO(post.dateFormatted)}>{formatPostDate(post.dateFormatted, lang)}</time>

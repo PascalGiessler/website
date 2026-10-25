@@ -1,158 +1,57 @@
 ---
 import menus from "../collections/menu.json";
-import Logo from "../components/logo.astro";
-import LanguageSwitcher from "../components/language-switcher.astro";
+import Logo from "./logo.astro";
+import LanguageSwitcher from "./language-switcher.astro";
 import { getLangFromUrl, useTranslations, type UIKey } from "../i18n/ui";
-
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const localizedMenu = menus[lang];
+const primary = new Set(["about", "writing", "tools", "publications"]);
+const path = Astro.url.pathname;
+function current(menu: { key: string; url: string }): "page" | "location" | undefined {
+  if (path === menu.url) return "page";
+  if (path.startsWith(menu.url) || (menu.key === "writing" && path.startsWith(lang === "de" ? "/de/post/" : "/post/"))) return "location";
+  return undefined;
+}
 ---
-
-<div class="relative w-full h-20 opacity-0 pointer-events-none"></div>
-<header id="header" class="absolute top-0 z-50 w-full h-20">
-  <div
-    class="flex items-center justify-between h-full max-w-5xl pl-6 pr-4 mx-auto border-b border-l-0 border-r-0 border-transparent select-none lg:border-r lg:border-l lg:rounded-b-xl"
-    style="border-color: var(--border);"
-  >
+<div class="site-header-spacer" aria-hidden="true"></div>
+<header id="header" class="site-header">
+  <div class="site-header__inner page-width">
     <Logo />
-
-    <div
-      id="mobileMenuBackground"
-      onclick="closeMobileMenu()"
-      class="fixed inset-0 z-20 hidden w-screen h-screen duration-300 ease-out"
-      style="background: oklch(0.09 0.008 58 / 0.95);"
-    >
-    </div>
-
-    <div class="relative z-30 flex items-center justify-end w-full gap-3 lg:w-auto lg:gap-4">
+    <div id="mobileMenuBackground" class="menu-backdrop" hidden aria-hidden="true"></div>
+    <div class="site-header__controls">
       <LanguageSwitcher />
-      <nav
-        class="flex flex-row-reverse justify-start text-sm lg:justify-end lg:flex-row"
-        style="color: var(--text-2);"
-      >
-      <button
-        id="openMenu"
-        class="flex flex-col items-end justify-center w-6 h-6 ml-4 cursor-pointer lg:hidden"
-        aria-label={lang === "de" ? "Navigation öffnen" : "Open navigation menu"}
-        aria-expanded="false"
-        aria-controls="menu"
-      >
-        <svg
-          class="w-8 h-8"
-          style="color: var(--text);"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M4 8h16M4 16h16"></path>
-        </svg>
+      <button id="menuToggle" class="menu-toggle" type="button" aria-label={lang === "de" ? "Navigation öffnen" : "Open navigation menu"} data-open-label={lang === "de" ? "Navigation öffnen" : "Open navigation menu"} data-close-label={lang === "de" ? "Navigation schließen" : "Close navigation menu"} aria-expanded="false" aria-controls="menu">
+        <span>{lang === "de" ? "Menü" : "Menu"}</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path class="menu-open-icon" d="M4 8h16M4 16h16"/><path class="menu-close-icon" d="m6 6 12 12M6 18 18 6"/></svg>
       </button>
-
-      <button
-        id="closeMenu"
-        class="flex flex-col items-end justify-center hidden w-6 h-6 ml-4 -translate-x-1 cursor-pointer lg:hidden"
-        aria-label={lang === "de" ? "Navigation schließen" : "Close navigation menu"}
-        aria-expanded="true"
-        aria-controls="menu"
-      >
-        <svg
-          class="w-6 h-6"
-          style="color: var(--text);"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-
-      <div
-        id="menu"
-        class="fixed top-[75px] ease-out duration-300 lg:top-0 w-full left-0 lg:py-0 pt-7 pb-4 left-0 z-40 flex-col items-end justify-start hidden w-full h-auto text-sm lg:text-base lg:h-auto lg:relative lg:flex-row lg:flex lg:text-sm lg:w-auto lg:pr-0 lg:pt-0"
-      >
-        <div class="absolute inset-0 top-0 right-0 block w-full h-full px-3 lg:hidden">
-          <div
-            class="relative w-full h-full border border-dashed rounded-xl"
-            style="background: var(--bg); border-color: var(--border);"
-          ></div>
-        </div>
-
-        {
-          localizedMenu.map((menu) => (
-            <a
-              href={menu.url}
-              class="relative flex items-center justify-center w-full px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out lg:py-0 lg:mb-0 md:w-auto"
-              style="color: var(--text-2); font-family: 'Outfit', system-ui, sans-serif; font-size: 0.875rem; letter-spacing: 0.02em;"
-            >
-              {t(`nav.${menu.key}` as UIKey)}
-            </a>
-          ))
-        }
-      </div>
-
-      <div
-        id="darkToggle"
-        class="relative flex items-center pl-6 ml-4 font-medium tracking-wide cursor-pointer group hidden"
-        style="color: var(--text-2);"
-      >
-        <div
-          class="absolute left-0 flex items-center justify-center w-6 h-6 overflow-hidden border-b border-transparent horizon group-hover:border-current"
-        >
-          <svg
-            class="absolute w-5 h-5 transition duration-700 transform ease"
-            id="sun"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-          </svg>
-          <svg
-            class="absolute hidden w-5 h-5 transition duration-700 transform ease"
-            id="moon"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-          </svg>
-        </div>
-      </div>
+      <nav id="menu" aria-label={lang === "de" ? "Hauptnavigation" : "Main navigation"}>
+        {menus[lang].map(menu => <a href={menu.url} class:list={["site-nav-link", {"site-nav-link--secondary": !primary.has(menu.key)}]} aria-current={current(menu)}>{t(`nav.${menu.key}` as UIKey)}</a>)}
       </nav>
     </div>
   </div>
 </header>
-
 <style>
-  #menu a:hover {
-    color: var(--text);
-  }
-  #menu a.active {
-    color: var(--gold-light);
+  .site-header-spacer { height: 5rem; }
+  .site-header { position: fixed; inset: 0 0 auto; height: 5rem; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); }
+  .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 100%; }
+  .site-header__controls { display: flex; align-items: center; gap: 1.5rem; }
+  #menu { display: flex; align-items: center; gap: 1.6rem; }
+  .site-nav-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-2); font-size: .9rem; text-decoration: none; text-underline-offset: .5em; text-decoration-thickness: 1px; transition: color .2s; }
+  .site-nav-link:hover { color: var(--text); text-decoration: underline; }
+  .site-nav-link[aria-current] { color: var(--gold-light); text-decoration: underline; }
+  .site-nav-link--secondary { display: none; }
+  .menu-toggle { display: none; }
+  .menu-backdrop { position: fixed; inset: 5rem 0 0; background: oklch(.1 .008 58 / .8); z-index: -1; }
+  @media (max-width: 480px) { .menu-toggle > span { display: none; } .site-header__controls { gap: .4rem; } }
+  @media (max-width: 1023px) {
+    .site-header__controls { gap: .75rem; }
+    .menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-width: 44px; min-height: 44px; background: none; border: 0; color: var(--text); cursor: pointer; font-size: .9rem; }
+    .menu-toggle svg { width: 24px; height: 24px; }
+    .menu-close-icon { display: none; }
+    .menu-toggle[aria-expanded="true"] .menu-close-icon { display: block; }
+    .menu-toggle[aria-expanded="true"] .menu-open-icon { display: none; }
+    #menu { display: none; position: fixed; top: 5rem; left: 0; right: 0; padding: 1rem 1.5rem 1.5rem; border-bottom: 1px solid var(--border-gold); background: var(--bg); max-height: calc(100dvh - 5rem); overflow-y: auto; }
+    #menu.is-open { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+    .site-nav-link, .site-nav-link--secondary { display: flex; min-height: 52px; border-bottom: 1px solid var(--border); font-size: 1.1rem; }
   }
 </style>
-
-<script is:inline>
-  (function () {
-    var path = window.location.pathname.replace(/\/$/, '') || '/';
-    document.querySelectorAll('#menu a').forEach(function (a) {
-      var href = a.getAttribute('href').replace(/\/$/, '') || '/';
-      if (href === '/' ? path === '/' : path === href || path.startsWith(href + '/')) {
-        a.classList.add('active');
-      }
-    });
-  })();
-</script>

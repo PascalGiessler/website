@@ -15,10 +15,10 @@ const otherLabel = otherLang.toUpperCase();
 const currentLabel = currentLang.toUpperCase();
 ---
 
-<div class="lang-switcher" aria-label="Language">
+<div class="lang-switcher" aria-label={currentLang === "de" ? "Sprache" : "Language"}>
   <span class="lang-current" aria-current="true">{currentLabel}</span>
   <span class="lang-divider" aria-hidden="true">/</span>
-  <a href={alternatePath} class="lang-other" hreflang={otherLang} aria-label={`Switch to ${otherLang === "de" ? "Deutsch" : "English"}`}>
+  <a href={alternatePath} class="lang-other" hreflang={otherLang} aria-label={currentLang === "de" ? "Zu Englisch wechseln" : "Switch to German"}>
     {otherLabel}
   </a>
 </div>
@@ -28,10 +28,10 @@ const currentLabel = currentLang.toUpperCase();
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    margin-left: 0.75rem;
+    margin-left: 0;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
   }
   .lang-current {
     color: var(--gold-light);
@@ -40,6 +40,11 @@ const currentLabel = currentLang.toUpperCase();
     color: var(--border-gold);
   }
   .lang-other {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
     color: var(--text-3);
     text-decoration: none;
     transition: color 0.2s ease-out;
@@ -47,4 +52,5 @@ const currentLabel = currentLang.toUpperCase();
   .lang-other:hover {
     color: var(--gold-light);
   }
+  @media (max-width: 480px) { .lang-current, .lang-divider { display: none; } .lang-switcher { gap: 0; } }
 </style>

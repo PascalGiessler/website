@@ -2,12 +2,14 @@
 import { linkedinPosts } from "../data/linkedin";
 import { getLangFromUrl } from "../i18n/ui";
 import { formatPostDate, postDate } from "../lib/posts.mjs";
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const de = lang === "de";
 const posts = linkedinPosts.filter((post) => postDate(post.published) <= new Date());
 ---
 
-<section class="linkedin-posts" aria-labelledby="linkedin-heading">
+<section class:list={["linkedin-posts", {"linkedin-posts--compact": compact}]} aria-labelledby="linkedin-heading">
   <div class="mb-7">
     <h2 id="linkedin-heading" style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.12; color: var(--text);">
       {de ? "Auf LinkedIn" : "On LinkedIn"}
@@ -24,7 +26,7 @@ const posts = linkedinPosts.filter((post) => postDate(post.published) <= new Dat
           <div>
             <h3>{post[lang].title}</h3>
             <p>{post[lang].summary}</p>
-            <span class="linkedin-post__cta">{de ? "Beitrag auf LinkedIn lesen" : "Read on LinkedIn · German"}<span aria-hidden="true"> ↗</span></span>
+            <span class="linkedin-post__cta">{de ? "Beitrag auf LinkedIn lesen" : "Read on LinkedIn · German"}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
           </div>
         </a>
       </li>
@@ -37,8 +39,10 @@ const posts = linkedinPosts.filter((post) => postDate(post.published) <= new Dat
   .linkedin-post time { font-size: .8rem; color: var(--text-3); font-variant-numeric: tabular-nums; padding-top: .2rem; }
   .linkedin-post h3 { font-size: 1.05rem; font-weight: 500; color: var(--text); line-height: 1.45; }
   .linkedin-post p { color: var(--text-2); font-size: .95rem; line-height: 1.65; margin-top: .5rem; max-width: 65ch; }
-  .linkedin-post__cta { display: inline-block; color: var(--gold-light); font-size: .85rem; margin-top: .75rem; text-decoration: underline; text-underline-offset: .25em; text-decoration-color: transparent; transition: text-decoration-color .2s; }
+  .linkedin-post__cta { display: inline-flex; align-items: center; gap: .3rem; min-height: 32px; color: var(--gold-light); font-size: .85rem; margin-top: .75rem; text-decoration: underline; text-underline-offset: .25em; text-decoration-color: transparent; transition: text-decoration-color .2s; }
   .linkedin-post:hover .linkedin-post__cta { text-decoration-color: currentColor; }
   .linkedin-post:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 5px; border-radius: 2px; }
+  .linkedin-post__cta svg { width: 16px; height: 16px; }
+  .linkedin-posts--compact .linkedin-post { grid-template-columns: 1fr; gap: .5rem; }
   @media (max-width: 640px) { .linkedin-post { grid-template-columns: 1fr; gap: .5rem; } }
 </style>

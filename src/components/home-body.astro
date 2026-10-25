@@ -1,15 +1,11 @@
 ---
-import HeroParticles from "./hero-particles.astro";
 import PostsLoop from "./posts-loop.astro";
 import LinkedInPosts from "./linkedin-posts.astro";
 import SubscribeCTA from "./subscribe-cta.astro";
 import { PROFILE } from "../data/entity";
 import { home } from "../data/home";
 import { tools } from "../data/tools";
-
-interface Props {
-  lang: "en" | "de";
-}
+interface Props { lang: "en" | "de"; }
 const { lang } = Astro.props as Props;
 const c = home[lang];
 const de = lang === "de";
@@ -17,248 +13,155 @@ const toolBase = de ? "/de/tools/" : "/tools/";
 const sorted = [...tools].sort((a, b) => a.position - b.position);
 ---
 
-<main class="relative z-10">
+<main class="home-page">
+  <section class="home-hero page-width">
+    <div class="home-hero__copy">
+      <h1>{c.titleLead} <em>{c.titleAccent}</em></h1>
+      <div class="home-hero__roles">
+        <p>{c.eyebrow}</p>
+        <p>{PROFILE[lang].entrepreneurialLine}</p>
+      </div>
+      <p class="home-hero__intro">{c.standfirst}</p>
+      <div class="home-hero__actions">
+        <a href={c.ctaPrimary.href} class="btn-gold">{c.ctaPrimary.label}</a>
+        <a href={c.ctaSecondary.href} class="btn-outline">{c.ctaSecondary.label}</a>
+      </div>
+    </div>
+    <figure class="home-portrait">
+      <div class="home-portrait__image">
+        <img src="/assets/images/photo_pascal_branded.png" alt="Dr. Pascal Giessler" loading="eager" decoding="async" width="600" height="600" />
+      </div>
+      <figcaption>
+        <p>Dr. Pascal Giessler</p>
+        <span>{de ? "Freiburg im Breisgau" : "Freiburg, Germany"}</span>
+      </figcaption>
+    </figure>
+    <ul class="home-credentials" aria-label={de ? "Qualifikationen" : "Qualifications"}>
+      {c.credentials.map(credential => <li>{credential}</li>)}
+    </ul>
+  </section>
 
-  <!-- ── HERO: the thesis is the headline; the name is the eyebrow ── -->
-  <section class="relative max-w-5xl mx-auto px-6 pt-28 pb-20 lg:pt-36 lg:pb-24">
-    <HeroParticles />
-    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-14 lg:gap-14 items-center">
-
-      <div>
-
-        <h1
-          class="fade-up delay-2 mb-7"
-          style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.3rem, 4.6vw, 3.6rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.02em; color: var(--text); text-wrap: balance;"
-        >
-          {c.titleLead}<br />
-          <em style="font-style: italic; color: var(--gold-light);">{c.titleAccent}</em>
-        </h1>
-
-        <p class="mb-2 text-base leading-relaxed" style="color: var(--gold-light);">{c.eyebrow}</p>
-        <p class="mb-6 text-sm leading-relaxed" style="color: var(--text-2);">{PROFILE[lang].entrepreneurialLine}</p>
-
-        <span class="gold-rule fade-up delay-3 mb-7"></span>
-
-        <p
-          class="fade-up delay-3 mb-8 text-base leading-relaxed"
-          style="color: var(--text-2); max-width: 52ch;"
-        >
-          {c.standfirst}
-        </p>
-
-        <div class="fade-up delay-4 flex flex-wrap gap-3 mb-9">
-          <a href={c.ctaPrimary.href} class="btn-gold">{c.ctaPrimary.label}</a>
-          <a href={c.ctaSecondary.href} class="btn-outline">{c.ctaSecondary.label}</a>
+  <section class="home-section page-width work-areas" aria-labelledby="work-heading">
+    <div class="section-intro">
+      <h2 id="work-heading">{c.mechanismLabel}</h2>
+      <p>{c.mechanismIntro}</p>
+    </div>
+    <div class="work-areas__list">
+      {c.tiles.map(area => (
+        <div class="work-area">
+          <h3>{area.title}</h3>
+          <p>{area.body}</p>
+          <a class="text-link" href={area.href}>{area.hrefLabel}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
         </div>
-
-        <div class="fade-up delay-5 flex flex-wrap gap-2">
-          {c.credentials.map((cr) => <span class="credential">{cr}</span>)}
-        </div>
-      </div>
-
-      <div class="fade-up delay-3 flex justify-center items-center ">
-        <div class="relative w-full max-w-[200px] lg:max-w-xs">
-          <div class="absolute -top-3 -left-3 w-7 h-7 pointer-events-none" style="border-top: 2px solid var(--gold); border-left: 2px solid var(--gold);"></div>
-          <div class="absolute -top-3 -right-3 w-7 h-7 pointer-events-none" style="border-top: 2px solid var(--gold); border-right: 2px solid var(--gold);"></div>
-          <div class="absolute -bottom-3 -left-3 w-7 h-7 pointer-events-none" style="border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold);"></div>
-          <div class="absolute -bottom-3 -right-3 w-7 h-7 pointer-events-none" style="border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold);"></div>
-          <img
-            src="/assets/images/photo_pascal_branded.png"
-            alt="Dr. Pascal Giessler"
-            loading="eager"
-            decoding="auto"
-            width="600"
-            height="600"
-            class="relative z-10 w-full"
-            style="box-shadow: 0 0 0 1px var(--border-gold); display: block;"
-          />
-          <div class="absolute bottom-0 left-0 right-0 h-28 z-20" style="background: linear-gradient(to top, var(--bg) 10%, transparent);"></div>
-        </div>
-      </div>
-
+      ))}
     </div>
   </section>
 
-  <!-- ── THE MECHANISM: transformation, harness, sovereignty ── -->
-  <section class="border-t" style="border-color: var(--border);">
-    <div class="max-w-5xl mx-auto px-6 py-20">
-      <h2 class="mb-5" style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.12;">{c.mechanismLabel}</h2>
-      <p class="mb-12" style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7; max-width: 58ch;">
-        {c.mechanismIntro}
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-9">
-        {c.tiles.map((t) => (
-          <div class="pillar">
-            <h3 class="pillar-title">{t.title}</h3>
-            <p class="pillar-body">{t.body}</p>
-            <div class="pillar-tags">
-              {t.tags.map((tag) => <span class="pillar-tag">{tag}</span>)}
-            </div>
-            <p class="pillar-proof">
-              <a href={t.href} style="color: var(--gold-dim); text-decoration: none;">{t.hrefLabel} →</a>
-            </p>
-          </div>
-        ))}
-      </div>
+  <section class="home-section page-width home-writing" aria-label={de ? "Veröffentlichte Texte" : "Published writing"}>
+    <LinkedInPosts compact />
+    <div class="home-essays">
+      <h2>{de ? "Artikel & Essays" : "Articles & essays"}</h2>
+      <PostsLoop count={3} heading="h3" />
+      <a class="text-link mt-6" href={c.writingCta.href}>{c.writingCta.label}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
     </div>
   </section>
 
-  <!-- ── THE ENEMY ────────────────────────────────── -->
-  <section class="border-t" style="border-color: var(--border);">
-    <div class="max-w-5xl mx-auto px-6 py-20">
-      <h2
-        class="mb-5"
-        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.12; color: var(--text);"
-      >
-        {c.enemyTitle} <em style="font-style: italic; color: var(--gold-light);">{c.enemyTitleAccent}</em>
-      </h2>
-      <p class="mb-12" style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7; max-width: 62ch;">
-        {c.enemyBody}
-      </p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        {c.enemyFaces.map((f) => (
-          <div style="border-top: 1px solid var(--border-gold); padding-top: 1rem;">
-            <h3 style="font-family: 'Outfit', system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem;">{f.name}</h3>
-            <p style="color: var(--text-2); font-size: 0.92rem; line-height: 1.6;">{f.body}</p>
-          </div>
-        ))}
+  <section class="home-section page-width" aria-labelledby="tools-heading">
+    <div class="section-head">
+      <div class="section-intro">
+        <h2 id="tools-heading">{c.proofTitle} <em>{c.proofTitleAccent}</em></h2>
+        <p>{c.proofIntro}</p>
       </div>
-
-      <p class="mt-10">
-        <a href={c.enemyCta.href} style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--gold-dim); text-decoration: none;">
-          {c.enemyCta.label}
+      <a class="text-link" href={c.proofCta.href}>{c.proofCta.label}</a>
+    </div>
+    <div class="home-tools">
+      {sorted.map(tool => (
+        <a href={`${toolBase}${tool.slug}/`} class="home-tool">
+          {tool.media && <div class="home-tool__image"><img src={tool.media.kind === "video" ? (tool.media.poster ?? "") : tool.media.src} alt={tool.media.alt} width={tool.media.width} height={tool.media.height} loading="lazy" decoding="async" /></div>}
+          <div class="home-tool__heading"><h3>{tool.name}</h3><span>{tool[lang].status}</span></div>
+          <p>{tool[lang].tagline}</p>
         </a>
-      </p>
+      ))}
     </div>
   </section>
 
-  <!-- ── THE PROOF: the tools, shown not claimed ── -->
-  <section class="border-t" style="border-color: var(--border);">
-    <div class="max-w-5xl mx-auto px-6 py-20">
-      <div class="flex items-end justify-between mb-4 gap-6">
-        <span></span>
-        <a href={c.proofCta.href} style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim); text-decoration: none; white-space: nowrap;">
-          {c.proofCta.label}
-        </a>
-      </div>
-      <h2
-        class="mb-5"
-        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.12; color: var(--text);"
-      >
-        {c.proofTitle} <em style="font-style: italic; color: var(--gold-light);">{c.proofTitleAccent}</em>
-      </h2>
-      <p class="mb-12" style="color: var(--text-2); font-size: 1.05rem; line-height: 1.7; max-width: 60ch;">
-        {c.proofIntro}
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {sorted.map((tool) => (
-          <a href={`${toolBase}${tool.slug}/`} class="tool-proof" style="text-decoration: none;">
-            {tool.media && (
-              <div class="tool-proof__shot">
-                <img
-                  src={tool.media.kind === "video" ? (tool.media.poster ?? "") : tool.media.src}
-                  alt={tool.media.alt}
-                  width={tool.media.width}
-                  height={tool.media.height}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            )}
-            <p class="writing-card-label">{tool[lang].status}</p>
-            <h3 class="writing-card-title">{tool.name}</h3>
-            <p class="writing-card-desc">{tool[lang].tagline}</p>
-          </a>
-        ))}
-      </div>
+  <section class="home-section page-width engineering-section" aria-labelledby="engineering-heading">
+    <div class="section-intro">
+      <h2 id="engineering-heading">{c.enemyTitle} <em>{c.enemyTitleAccent}</em></h2>
+      <p>{c.enemyBody}</p>
+      <a class="text-link" href={c.enemyCta.href}>{c.enemyCta.label}</a>
+    </div>
+    <div class="engineering-principles">
+      {c.enemyFaces.map(face => <div><h3>{face.name}</h3><p>{face.body}</p></div>)}
+      <a class="text-link" href={c.glossaryCta.href}>{c.glossaryCta.label}</a>
     </div>
   </section>
 
-  <!-- ── WRITING ─────────────────────────────────── -->
-  <section class="border-t" style="border-color: var(--border);">
-    <div class="max-w-5xl mx-auto px-6 py-20">
-      <div class="flex items-center justify-between mb-10 gap-6">
-        <p class="section-label">{c.writingLabel}</p>
-        <a
-          href={c.writingCta.href}
-          style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold-dim); text-decoration: none; white-space: nowrap;"
-        >{c.writingCta.label}</a>
-      </div>
-
-      <PostsLoop count={3} />
-
-      <p class="mt-8 pt-6" style="border-top: 1px solid var(--border);">
-        <a href={c.glossaryCta.href} style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--gold-dim); text-decoration: none;">
-          {c.glossaryCta.label}
-        </a>
-      </p>
+  <section class="home-section page-width home-contact" aria-labelledby="contact-heading">
+    <div class="section-intro">
+      <h2 id="contact-heading">{PROFILE[lang].contactTitle}</h2>
+      <p>{PROFILE[lang].contactBody}</p>
+      <a class="btn-gold" href="mailto:info@pascal-giessler.de">{PROFILE[lang].contactLabel}</a>
     </div>
+    <div id="newsletter"><SubscribeCTA /></div>
   </section>
-
-  <div class="border-t" style="border-color: var(--border);"><div class="max-w-5xl mx-auto px-6 py-20"><LinkedInPosts /></div></div>
-
-  <!-- ── QUOTE: voice, not a claim ── -->
-  <section class="border-t" style="border-color: var(--border);">
-    <div class="max-w-5xl mx-auto px-6 py-16 text-center">
-      <blockquote
-        style="font-family: 'Cormorant', Georgia, serif; font-size: clamp(1.3rem, 2.5vw, 1.9rem); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text-2); max-width: 60ch; margin: 0 auto;"
-      >
-        "Ever tried. Ever failed. No matter. Try again. Fail again. Fail better."
-      </blockquote>
-      <p class="mt-5" style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dim);">
-        Samuel Beckett, Worstward Ho (1983)
-      </p>
-    </div>
-  </section>
-
-  <!-- ── NEWSLETTER (the hero's secondary CTA lands here) ── -->
-  <section id="newsletter" class="max-w-5xl mx-auto px-6 pb-24" style="scroll-margin-top: 6rem;">
-    <SubscribeCTA />
-  </section>
-
 </main>
 
 <style>
-  .tool-proof {
-    display: block;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    background: var(--surface);
-    padding: 0;
-    overflow: hidden;
-    transition: border-color 0.25s ease-out, transform 0.25s ease-out;
-  }
-  .tool-proof:hover {
-    border-color: var(--border-gold);
-    transform: translateY(-2px);
-  }
-  .tool-proof__shot {
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-    line-height: 0;
-  }
-  .tool-proof__shot img {
-    display: block;
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    object-position: center top;
-  }
-  .tool-proof :is(.writing-card-label, .writing-card-title, .writing-card-desc) {
-    padding-inline: 1.5rem;
-  }
-  .tool-proof .writing-card-label {
-    padding-top: 1.4rem;
-  }
-  .tool-proof .writing-card-desc {
-    padding-bottom: 1.6rem;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .tool-proof:hover {
-      transform: none;
-    }
+  .home-hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .8fr); column-gap: clamp(2rem, 6vw, 5rem); row-gap: 3rem; align-items: center; padding-block: clamp(3rem, 6vw, 5.5rem) 3rem; }
+  .home-hero h1 { font-family: 'Cormorant', Georgia, serif; font-size: clamp(2.7rem, 4.8vw, 4.4rem); font-weight: 400; line-height: 1.04; letter-spacing: -.025em; text-wrap: balance; }
+  .home-hero h1 em { display: block; color: var(--gold-light); font-weight: 300; }
+  .home-hero__roles { margin-top: 1.75rem; font-size: .95rem; line-height: 1.6; color: var(--gold-light); }
+  .home-hero__roles p + p { color: var(--text-2); margin-top: .3rem; font-size: .875rem; }
+  .home-hero__intro { color: var(--text-2); font-size: 1.08rem; line-height: 1.75; max-width: 55ch; margin-top: 1.5rem; }
+  .home-hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+  .home-portrait { width: 100%; max-width: 350px; justify-self: end; }
+  .home-portrait__image { overflow: hidden; background: var(--surface); border: 1px solid var(--border-gold); }
+  .home-portrait img { width: 100%; height: auto; display: block; }
+  .home-portrait figcaption { margin-top: 1rem; display: flex; justify-content: space-between; gap: .5rem 1rem; flex-wrap: wrap; align-items: baseline; }
+  .home-portrait figcaption p { color: var(--text); font-size: .95rem; }
+  .home-portrait figcaption span { color: var(--text-3); font-size: .8rem; }
+  .home-credentials { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .75rem 2rem; padding: 1.25rem 0 0; margin: 0; border-top: 1px solid var(--border); list-style: none; color: var(--text-3); font-size: .8rem; }
+  .home-section { padding-block: clamp(3.5rem, 7vw, 6rem); border-top: 1px solid var(--border); }
+  .home-section h2 { font-family: 'Cormorant', Georgia, serif; font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 400; line-height: 1.12; letter-spacing: -.02em; text-wrap: balance; }
+  .home-section h2 em { color: var(--gold-light); font-weight: 300; }
+  .section-intro > p { color: var(--text-2); font-size: 1rem; line-height: 1.75; max-width: 60ch; margin-top: 1.25rem; }
+  .work-areas, .engineering-section { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.35fr); gap: 2rem clamp(2rem, 6vw, 5rem); }
+  .work-area + .work-area { border-top: 1px solid var(--border); padding-top: 1.75rem; margin-top: 1.75rem; }
+  .work-area h3, .engineering-principles h3 { font-size: 1.2rem; line-height: 1.4; font-weight: 500; }
+  .work-area p, .engineering-principles p { color: var(--text-2); line-height: 1.75; font-size: 1rem; margin-top: .6rem; }
+  .text-link { margin-top: 1rem; }
+  .home-writing { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); }
+  .home-essays { padding-left: clamp(1.5rem, 3vw, 2.5rem); border-left: 1px solid var(--border); }
+  .home-essays > h2 { margin-bottom: 1.25rem; }
+  .section-head { display: flex; align-items: start; justify-content: space-between; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .section-head > .section-intro { max-width: 65ch; }
+  .section-head > a { flex-shrink: 0; }
+  .home-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .home-tool { display: block; text-decoration: none; }
+  .home-tool__image { aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--border); background: var(--surface); transition: border-color .2s; }
+  .home-tool__image img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .3s ease-out; }
+  .home-tool:hover .home-tool__image { border-color: var(--gold); }
+  .home-tool:hover img { transform: scale(1.015); }
+  .home-tool__heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1rem; margin-top: 1rem; }
+  .home-tool h3 { font-family: 'Cormorant', Georgia, serif; font-size: 2rem; line-height: 1.2; }
+  .home-tool__heading span { font-size: .75rem; color: var(--gold-light); }
+  .home-tool > p { color: var(--text-2); font-size: 1rem; line-height: 1.6; margin-top: .5rem; }
+  .engineering-principles > div + div { margin-top: 1.75rem; }
+  .home-contact { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); }
+  .home-contact .btn-gold { margin-top: 1.5rem; }
+  #newsletter { scroll-margin-top: 6rem; }
+  #newsletter :global(aside) { margin-top: 0; }
+  @media (max-width: 767px) {
+    .home-hero { grid-template-columns: 1fr; padding-top: 2.5rem; row-gap: 2.5rem; }
+    .home-hero__actions { display: grid; grid-template-columns: 1fr; }
+    .home-hero__actions a { justify-content: center; }
+    .home-hero h1 { font-size: clamp(2.8rem, 9vw, 4rem); }
+    .home-portrait { justify-self: start; max-width: 280px; }
+    .home-credentials { gap: .5rem 1rem; }
+    .work-areas, .engineering-section, .home-writing, .home-contact { grid-template-columns: 1fr; }
+    .home-essays { border-left: 0; border-top: 1px solid var(--border); padding: 2.5rem 0 0; }
+    .home-tools { grid-template-columns: 1fr; gap: 2.5rem; }
+    .section-head { display: block; }
   }
 </style>
