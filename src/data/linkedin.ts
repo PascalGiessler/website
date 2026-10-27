@@ -1,6 +1,19 @@
 /** Published posts only. Dates and URLs checked against Buffer and LinkedIn. */
 export const linkedinPosts = [
   {
+    published: "2026-10-27",
+    url: "https://www.linkedin.com/posts/pgiessler_agentengineering-softwarearchitektur-share-7520718550966145024-MbYn/",
+    language: "de",
+    de: {
+      title: "Die Integration mehrerer Coding-Agenten prüfen",
+      summary: "Filter und Navigation bestehen ihre Einzeltests, zusammen verliert die Suche ihren Zustand. Eine Prüfung nach dem Merge muss den gemeinsamen Ablauf abdecken.",
+    },
+    en: {
+      title: "Testing changes from multiple coding agents",
+      summary: "Filter and navigation changes pass their separate tests, but together they break the search state. The merged version needs a test of the complete user flow.",
+    },
+  },
+  {
     published: "2026-10-22",
     url: "https://www.linkedin.com/feed/update/urn:li:share:7518891546155393024",
     language: "de",
