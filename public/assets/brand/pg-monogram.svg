@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 146" role="img" aria-label="Verbundene Initialen p und g">
+  <defs>
+    <clipPath id="pg-copper"><path d="M-10-10 H103 V57 L87 49 V160 H-10Z"/></clipPath>
+    <clipPath id="pg-ivory"><path d="M103-10 H200 V160 H87 V53 L103 61Z"/></clipPath>
+  </defs>
+  <g fill="none" stroke-width="16" stroke-linecap="butt" stroke-linejoin="round">
+    <path d="M15 55 A40 40 0 0 1 95 55 A40 40 0 0 0 175 55" stroke="#D19360" clip-path="url(#pg-copper)"/>
+    <path d="M15 55 A40 40 0 0 1 95 55 A40 40 0 0 0 175 55" stroke="#EEE9E0" clip-path="url(#pg-ivory)"/>
+    <path d="M15 55 A40 40 0 0 0 77.943057 87.766082" stroke="#D19360"/>
+    <path d="M112.056943 22.233918 A40 40 0 0 1 175 55 V90 A40 40 0 0 1 112.056943 122.766082" stroke="#EEE9E0"/>
+  </g>
+  <path fill="#D19360" d="M7 7 H23 V138 H7 Z"/>
+</svg>

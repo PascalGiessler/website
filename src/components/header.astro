@@ -42,9 +42,9 @@ function current(menu: { key: string; url: string }): "page" | "location" | unde
   .site-nav-link--secondary { display: none; }
   .menu-toggle { display: none; }
   .menu-backdrop { position: fixed; inset: 5rem 0 0; background: oklch(.1 .008 58 / .8); z-index: -1; }
-  @media (max-width: 480px) { .menu-toggle > span { display: none; } .site-header__controls { gap: .4rem; } }
+  @media (max-width: 480px) { .menu-toggle > span { display: none; } .site-header__inner { gap: .5rem; } }
   @media (max-width: 1023px) {
-    .site-header__controls { gap: .75rem; }
+    .site-header__controls { gap: .5rem; }
     .menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-width: 44px; min-height: 44px; background: none; border: 0; color: var(--text); cursor: pointer; font-size: .9rem; }
     .menu-toggle svg { width: 24px; height: 24px; }
     .menu-close-icon { display: none; }

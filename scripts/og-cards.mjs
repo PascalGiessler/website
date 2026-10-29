@@ -9,8 +9,14 @@
  * Usage: pnpm og-cards   (requires rsvg-convert: brew install librsvg)
  */
 import { execFileSync } from "node:child_process";
-import { mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdirSync, writeFileSync, rmSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+
+const brandMaster = readFileSync(new URL("../public/assets/brand/pg-monogram.svg", import.meta.url), "utf8").trim();
+const brandViewBox = brandMaster.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+if (!brandViewBox) throw new Error("Logo master needs a zero-origin viewBox");
+const brandHeight = 100 * Number(brandViewBox[2]) / Number(brandViewBox[1]);
+const brandMark = brandMaster.replace("<svg ", `<svg x="550" y="70" width="100" height="${brandHeight}" `);
 
 const OUT_DIR = "public/assets/images/og";
 const TMP = join(process.env.TMPDIR ?? "/tmp", "og-cards");
@@ -58,10 +64,7 @@ function svg({ eyebrow, lines, tagline }) {
   </defs>
   <rect width="1200" height="630" fill="url(#warm)"/>
 
-  <!-- P|G monogram, centered top -->
-  <line x1="600" y1="70" x2="600" y2="140" stroke="#d49140" stroke-width="3" stroke-linecap="round"/>
-  <text x="574" y="127" font-family="Cormorant, Georgia, serif" font-size="56" font-weight="500" fill="#ede4d3" text-anchor="middle">P</text>
-  <text x="626" y="127" font-family="Cormorant, Georgia, serif" font-size="56" font-weight="500" fill="#ede4d3" text-anchor="middle">G</text>
+  ${brandMark}
 
   <text x="600" y="200" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="20" font-weight="500" fill="#d49140" letter-spacing="0.3em" text-anchor="middle">${esc(eyebrow)}</text>
 
